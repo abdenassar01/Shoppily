@@ -4,26 +4,34 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table
+@Table(name = "order_info")
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "order_id")
     private Long id;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
+    
     private String address;
     private String city;
     private String status;
     private Integer zip;
+    
     @Column(name = "date_created")
     private Date dateCreated;
+    
     @Column(name = "price_X_quantity")
     private Double priceXqte;
+    
     @Column(name = "quantity")
     private Integer qte;
-    @OneToOne
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     private Product product;
 
     public Order(User user, String address, String city, String status, Integer zip, Double priceXqte, Integer qte, Product product) {

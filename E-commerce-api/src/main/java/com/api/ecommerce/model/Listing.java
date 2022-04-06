@@ -1,6 +1,7 @@
 package com.api.ecommerce.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,16 +12,22 @@ public class Listing {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "listing_id")
     private Long id;
+    
     @Column(name = "listing_discription")
     private String discription;
+    
     @Column(name = "listing_rating")
     private Double rating;
-    @OneToOne
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "store_id", referencedColumnName = "store_id")
     private Store store;
-    @OneToMany
-    private List<Feedback> feedbacks;
-    @OneToMany
-    private List<Product> products;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Feedback> feedbacks = new ArrayList<>();
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Product> products = new ArrayList<>();
 
     public Listing(String discription, Double rating, Store store, List<Feedback> feedbacks, List<Product> products) {
         this.discription = discription;
@@ -31,9 +38,7 @@ public class Listing {
     }
 
 
-    public Listing() {
-        
-    }
+    public Listing() {}
 
     public Long getId() {
         return id;

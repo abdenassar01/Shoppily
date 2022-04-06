@@ -13,14 +13,18 @@ public class User implements UserDetails {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "user_id")
     private Long id;
     
     @Column(name = "username", unique = true)
     private String username;
+    
     @Column(name = "first_name", nullable = false)
     private String firstname;
+    
     @Column(name = "last_name")
     private String lastname;
+   
     @Column(name = "password")
     private String password;
     
@@ -28,15 +32,22 @@ public class User implements UserDetails {
     @Column(name = "authorities")
     private List<GrantedAuthority> authorities;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "country_id", referencedColumnName = "country_id")
     private Country country;
-    @Column
+
+    @OneToOne(mappedBy = "user")
+    private Feedback feedback;
+    
+    @OneToOne(mappedBy = "user")
+    private Store store;
+    
     private boolean isAccountNonExpired;
-    @Column
+    
     private boolean isAccountNonLocked;
-    @Column
+    
     private boolean isCredentialsNonExpired;
-    @Column
+
     private boolean isEnabled;
 
     public User(String username, String password, List<GrantedAuthority> authorities) {
@@ -49,12 +60,13 @@ public class User implements UserDetails {
         this.isEnabled = true;
     }
 
-    public User(String username, String firstname, String lastname, String password, Country country, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
+    public User(String username, String firstname, String lastname, String password, Country country, Store store, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
         this.password = password;
         this.country = country;
+        this.store = store;
         this.isAccountNonExpired = isAccountNonExpired;
         this.isAccountNonLocked = isAccountNonLocked;
         this.isCredentialsNonExpired = isCredentialsNonExpired;
@@ -129,5 +141,13 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return isEnabled;
+    }
+
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
     }
 }

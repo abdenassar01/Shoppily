@@ -8,9 +8,14 @@ public class Country {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "country_id")
     private Long id;
+    
     @Column(name = "label")
     private String label;
+    
+    @OneToOne(mappedBy = "country")
+    private User user;
 
     public Country(String label) {
         this.label = label;

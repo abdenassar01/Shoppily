@@ -1,6 +1,7 @@
 package com.api.ecommerce.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,26 +11,42 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "product_id")
     private Long id;
+    
     @Column(name = "product_title")
     private String title;
+    
     @Column(name = "product_price")
     private Double price;
+    
     @Column(name = "product_discription")
     private String discription;
-    @OneToOne
-    private Gategory gategory;
-    @OneToOne
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+    private com.api.ecommerce.model.Category category;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "store_id", referencedColumnName = "store_id")
     private Store store; 
+    
+    @OneToOne(mappedBy = "product")
+    private Order order;
+    
+    @ManyToOne
+    @JoinColumn(name = "listing_id")
+    private Listing listing;
+    
     @Column(name = "quantity_available")
     private Integer availableQte;
+    
     @ElementCollection
-    List<String> images;
+    private List<String> images = new ArrayList<>();
 
-    public Product(String title, Double price, String discription, Gategory gategory, Store store, Integer availableQte, List<String> images) {
+    public Product(String title, Double price, String discription, com.api.ecommerce.model.Category category, Store store, Integer availableQte, List<String> images) {
         this.title = title;
         this.price = price;
         this.discription = discription;
-        this.gategory = gategory;
+        this.category = category;
         this.store = store;
         this.availableQte = availableQte;
         this.images = images;
@@ -67,12 +84,12 @@ public class Product {
         this.discription = discription;
     }
 
-    public Gategory getGategory() {
-        return gategory;
+    public com.api.ecommerce.model.Category getGategory() {
+        return category;
     }
 
-    public void setGategory(Gategory gategory) {
-        this.gategory = gategory;
+    public void setGategory(com.api.ecommerce.model.Category category) {
+        this.category = category;
     }
 
     public Store getStore() {
