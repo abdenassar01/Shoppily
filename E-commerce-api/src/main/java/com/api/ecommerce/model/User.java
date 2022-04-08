@@ -41,7 +41,7 @@ public class User implements UserDetails {
     
     @OneToOne(mappedBy = "user")
     private Store store;
-    
+
     private boolean isAccountNonExpired;
     
     private boolean isAccountNonLocked;
@@ -60,13 +60,12 @@ public class User implements UserDetails {
         this.isEnabled = true;
     }
 
-    public User(String username, String firstname, String lastname, String password, Country country, Store store, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
+    public User(String username, String firstname, String lastname, String password, Country country, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
         this.password = password;
         this.country = country;
-        this.store = store;
         this.isAccountNonExpired = isAccountNonExpired;
         this.isAccountNonLocked = isAccountNonLocked;
         this.isCredentialsNonExpired = isCredentialsNonExpired;

@@ -16,6 +16,9 @@ public class Listing {
     @Column(name = "listing_discription")
     private String discription;
     
+    @Column(name = "listing_Title")
+    private String title;
+    
     @Column(name = "listing_rating")
     private Double rating;
     
