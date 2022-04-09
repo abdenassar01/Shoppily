@@ -4,11 +4,9 @@ import com.api.ecommerce.model.Store;
 import com.api.ecommerce.repository.StoreRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class StoreService {
@@ -22,7 +20,6 @@ public class StoreService {
     
     public Page<Store> getPageOfStores(int pageSize){
         Pageable page = PageRequest.ofSize(pageSize);
-        
         return repository.findAll(page);
     }
 
@@ -41,6 +38,14 @@ public class StoreService {
         Store seller = repository.findByName(store.getName());
         repository.delete(store);
         return seller;
+    }
+    
+    public Store getStore(String name){
+        return repository.findByName(name);
+    }
+    
+    public boolean exist(Store store){
+        return repository.exists(Example.of(store));
     }
     
     public Store updateStore(@NotNull Store store){

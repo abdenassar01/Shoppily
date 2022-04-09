@@ -46,12 +46,11 @@ public class UserService {
     }
     
     
-    public User deleteUser(User user){
-        User userTmp = getUser(user);
+    public boolean deleteUser(User user){
         if (getUser(user) != null){
             repository.delete(user);
-            return userTmp;
+            return true;
         }
-        return null;
+        return false;
     }
 }
