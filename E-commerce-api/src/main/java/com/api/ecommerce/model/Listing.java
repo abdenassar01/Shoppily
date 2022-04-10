@@ -31,18 +31,7 @@ public class Listing {
     
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Product> products = new ArrayList<>();
-
-    public Listing(String discription, Double rating, Store store, List<Feedback> feedbacks, List<Product> products) {
-        this.discription = discription;
-        this.rating = rating;
-        this.store = store;
-        this.feedbacks = feedbacks;
-        this.products = products;
-    }
-
-
-    public Listing() {}
-
+    
     public Long getId() {
         return id;
     }

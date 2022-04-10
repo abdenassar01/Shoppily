@@ -49,32 +49,7 @@ public class User implements UserDetails {
     private boolean isCredentialsNonExpired;
 
     private boolean isEnabled;
-
-    public User(String username, String password, List<GrantedAuthority> authorities) {
-        this.username = username;
-        this.password = password;
-        this.authorities = authorities;
-        this.isAccountNonExpired = true;
-        this.isAccountNonLocked = true;
-        this.isCredentialsNonExpired = true;
-        this.isEnabled = true;
-    }
-
-    public User(String username, String firstname, String lastname, String password, Country country, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
-        this.username = username;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.password = password;
-        this.country = country;
-        this.isAccountNonExpired = isAccountNonExpired;
-        this.isAccountNonLocked = isAccountNonLocked;
-        this.isCredentialsNonExpired = isCredentialsNonExpired;
-        this.isEnabled = isEnabled;
-    }
-
-    public User() {
-    }
-
+    
     public void setUsername(String username) {
         this.username = username;
     }

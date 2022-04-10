@@ -25,16 +25,7 @@ public class Feedback {
     @ManyToOne
     @JoinColumn(name = "listing_id")
     private Listing listing;
-
-    public Feedback(String content, User user) {
-        this.content = content;
-        this.user = user;
-        this.dateCreated = new Date();
-    }
-
-    public Feedback() {
-        
-    }
+    
 
     public Long getId() {
         return id;

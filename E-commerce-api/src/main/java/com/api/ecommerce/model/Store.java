@@ -36,25 +36,6 @@ public class Store {
     @OneToOne(mappedBy = "store")
     private Listing listing;
 
-    public Store(String name, User user, Double rating, Integer successfulSells) {
-        this.name = name;
-        this.user = user;
-        this.rating = rating;
-        this.successfulSells = successfulSells;
-    }
-
-    public Store(String name, User user) {
-        this.name = name;
-        this.user = user;
-        this.rating = 0.0;
-        this.successfulSells = 0;
-    }
-
-    public Store() {
-        
-    }
-
-
     public String getName() {
         return name;
     }

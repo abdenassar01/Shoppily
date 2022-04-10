@@ -16,13 +16,6 @@ public class Country {
     
     @OneToOne(mappedBy = "country")
     private User user;
-
-    public Country(String label) {
-        this.label = label;
-    }
-
-    public Country() {
-    }
     
     public String getLabel() {
         return label;
