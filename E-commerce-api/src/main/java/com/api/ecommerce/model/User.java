@@ -1,11 +1,12 @@
 package com.api.ecommerce.model;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -19,7 +20,7 @@ public class User implements UserDetails {
     @Column(name = "username", unique = true)
     private String username;
     
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name")
     private String firstname;
     
     @Column(name = "last_name")
@@ -27,20 +28,46 @@ public class User implements UserDetails {
    
     @Column(name = "password")
     private String password;
-    
+
+
     @ElementCollection
     @Column(name = "authorities")
-    private List<GrantedAuthority> authorities;
-    
+    private Set<SimpleGrantedAuthority> authorities;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "country_id", referencedColumnName = "country_id")
     private Country country;
 
     @OneToOne(mappedBy = "user")
     private Feedback feedback;
-    
+
     @OneToOne(mappedBy = "user")
     private Store store;
+
+    public User(String username, String firstname, String lastname, String password, Set<SimpleGrantedAuthority> authorities, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
+        this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.password = password;
+        this.authorities = authorities;
+        this.isAccountNonExpired = isAccountNonExpired;
+        this.isAccountNonLocked = isAccountNonLocked;
+        this.isCredentialsNonExpired = isCredentialsNonExpired;
+        this.isEnabled = isEnabled;
+    }
+
+    public User(String firstname, String username, String password, Set<SimpleGrantedAuthority> authorities) {
+        this.username = username;
+        this.password = password;
+        this.firstname = firstname;
+        this.authorities = authorities;
+        this.isAccountNonExpired = true;
+        this.isAccountNonLocked = true;
+        this.isCredentialsNonExpired = true;
+        this.isEnabled = true;
+    }
+ 
+   
 
     private boolean isAccountNonExpired;
     
@@ -49,7 +76,11 @@ public class User implements UserDetails {
     private boolean isCredentialsNonExpired;
 
     private boolean isEnabled;
-    
+
+    public User() {}
+
+
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -74,7 +105,7 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public void setAuthorities(List<GrantedAuthority> authorities) {
+    public void setAuthorities(Set<SimpleGrantedAuthority> authorities) {
         this.authorities = authorities;
     }
 
@@ -123,5 +154,41 @@ public class User implements UserDetails {
 
     public void setStore(Store store) {
         this.store = store;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public Feedback getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(Feedback feedback) {
+        this.feedback = feedback;
+    }
+
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        isAccountNonExpired = accountNonExpired;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        isAccountNonLocked = accountNonLocked;
+    }
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        isCredentialsNonExpired = credentialsNonExpired;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
     }
 }
