@@ -5,7 +5,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
+
+import static com.api.ecommerce.security.roles.UserRoles.*;
 
 @Entity
 @Table(name = "user")
@@ -19,7 +20,7 @@ public class User implements UserDetails {
     @Column(name = "username", unique = true)
     private String username;
     
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name")
     private String firstname;
     
     @Column(name = "last_name")
@@ -28,20 +29,46 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
     
-    @ElementCollection
-    @Column(name = "authorities")
-    private List<GrantedAuthority> authorities;
-    
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "country_id", referencedColumnName = "country_id")
-    private Country country;
+    @Column(name = "role", nullable = false)
+    private String role;
 
     @OneToOne(mappedBy = "user")
     private Feedback feedback;
-    
+
     @OneToOne(mappedBy = "user")
     private Store store;
-    
+
+    public User(String username, String firstname, String lastname, String password, String role, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
+        this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.password = password;
+        this.role = role;
+        this.isAccountNonExpired = isAccountNonExpired;
+        this.isAccountNonLocked = isAccountNonLocked;
+        this.isCredentialsNonExpired = isCredentialsNonExpired;
+        this.isEnabled = isEnabled;
+    }
+
+    public User(String firstname, String username, String password, String role) {
+        this.username = username;
+        this.password = password;
+        this.firstname = firstname;
+        this.role = role;
+        this.isAccountNonExpired = true;
+        this.isAccountNonLocked = true;
+        this.isCredentialsNonExpired = true;
+        this.isEnabled = true;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     private boolean isAccountNonExpired;
     
     private boolean isAccountNonLocked;
@@ -50,31 +77,9 @@ public class User implements UserDetails {
 
     private boolean isEnabled;
 
-    public User(String username, String password, List<GrantedAuthority> authorities) {
-        this.username = username;
-        this.password = password;
-        this.authorities = authorities;
-        this.isAccountNonExpired = true;
-        this.isAccountNonLocked = true;
-        this.isCredentialsNonExpired = true;
-        this.isEnabled = true;
-    }
+    public User() {}
 
-    public User(String username, String firstname, String lastname, String password, Country country, Store store, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
-        this.username = username;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.password = password;
-        this.country = country;
-        this.store = store;
-        this.isAccountNonExpired = isAccountNonExpired;
-        this.isAccountNonLocked = isAccountNonLocked;
-        this.isCredentialsNonExpired = isCredentialsNonExpired;
-        this.isEnabled = isEnabled;
-    }
 
-    public User() {
-    }
 
     public void setUsername(String username) {
         this.username = username;
@@ -99,18 +104,21 @@ public class User implements UserDetails {
     public void setPassword(String password) {
         this.password = password;
     }
+    
 
-    public void setAuthorities(List<GrantedAuthority> authorities) {
-        this.authorities = authorities;
+    public Long getId() {
+        return id;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
-    }
-
-    public Long getId() {
-        return id;
+         if (getRole().equalsIgnoreCase("Admin")){
+             return ADMIN.getGrantedAuthorities();
+        }
+        else if(getRole().equalsIgnoreCase("Seller")) {
+            return SELLER.getGrantedAuthorities();
+        }  
+        return USER.getGrantedAuthorities();
     }
 
     @Override
@@ -149,5 +157,34 @@ public class User implements UserDetails {
 
     public void setStore(Store store) {
         this.store = store;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+
+    public Feedback getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(Feedback feedback) {
+        this.feedback = feedback;
+    }
+
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        isAccountNonExpired = accountNonExpired;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        isAccountNonLocked = accountNonLocked;
+    }
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        isCredentialsNonExpired = credentialsNonExpired;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
     }
 }

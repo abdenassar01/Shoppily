@@ -41,21 +41,7 @@ public class Product {
     
     @ElementCollection
     private List<String> images = new ArrayList<>();
-
-    public Product(String title, Double price, String discription, com.api.ecommerce.model.Category category, Store store, Integer availableQte, List<String> images) {
-        this.title = title;
-        this.price = price;
-        this.discription = discription;
-        this.category = category;
-        this.store = store;
-        this.availableQte = availableQte;
-        this.images = images;
-    }
-
-    public Product() {
-        
-    }
-
+    
     public Long getId() {
         return id;
     }

@@ -33,35 +33,7 @@ public class Order {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     private Product product;
-
-    public Order(User user, String address, String city, String status, Integer zip, Double priceXqte, Integer qte, Product product) {
-        this.id = id;
-        this.user = user;
-        this.address = address;
-        this.city = city;
-        this.status = status;
-        this.zip = zip;
-        this.dateCreated = new Date();
-        this.priceXqte = priceXqte;
-        this.qte = qte;
-        this.product = product;
-    }
-
-    public Order(User user, String address, String city, String status, Integer zip, Date dateCreated, Double priceXqte, Integer qte, Product product) {
-        this.user = user;
-        this.address = address;
-        this.city = city;
-        this.status = status;
-        this.zip = zip;
-        this.dateCreated = dateCreated;
-        this.priceXqte = priceXqte;
-        this.qte = qte;
-        this.product = product;
-    }
-
-    public Order() {
-        
-    }
+    
 
     public Long getId() {
         return id;

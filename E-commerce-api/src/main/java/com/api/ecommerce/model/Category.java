@@ -19,14 +19,6 @@ public class Category {
     @PrimaryKeyJoinColumn
     private Product product;
 
-    public Category(String label) {
-        this.label = label;
-    }
-
-    public Category() {
-        
-    }
-
     public Long getId() {
         return id;
     }
