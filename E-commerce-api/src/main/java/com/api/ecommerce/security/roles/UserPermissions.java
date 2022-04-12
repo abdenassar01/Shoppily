@@ -2,10 +2,18 @@ package com.api.ecommerce.security.roles;
 
 public enum UserPermissions {
 
-    STUDENT_READ("student:read"),
-    STUDENT_WRITE("student:write"),
-    COURSE_READ("course:read"),
-    COURSE_WRITE("course:write");
+    PRODUCT_READ("product:read"),
+    PRODUCT_WRITE("product:write"),
+    USER_READ("user:read"),
+    USER_WRITE("user:write");
+//    STORE_READ("store:read");
+//    STORE_WRITE("store:write");
+//    ORDER_READ("order:read");
+//    ORDER_WRITE("order:write");
+//    FEEDBACK_READ("feedback:read");
+//    FEEDBACK_WRITE("feedback:write");
+//    LISTING_READ("listing:read");
+//    LISTING_WRITE("listing:write");
 
     public String getPermission() {
         return permission;

@@ -10,9 +10,9 @@ import static com.api.ecommerce.security.roles.UserPermissions.*;
 
 public enum UserRoles {
     
-    ADMIN(Sets.newHashSet(STUDENT_READ, STUDENT_WRITE, COURSE_WRITE, COURSE_READ)),
-    USER(Sets.newHashSet()),
-    SELLER(Sets.newHashSet(STUDENT_READ, COURSE_READ));
+    ADMIN(Sets.newHashSet(USER_READ, USER_WRITE )),
+    USER(Sets.newHashSet(PRODUCT_READ)),
+    SELLER(Sets.newHashSet(PRODUCT_READ, PRODUCT_WRITE));
 
     private final Set<UserPermissions> permissions;
 

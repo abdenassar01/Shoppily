@@ -80,6 +80,7 @@ public class UserService implements UserDetailsService {
         newUser.setAccountNonLocked(true);
         newUser.setCredentialsNonExpired(true);
         newUser.setEnabled(true);
+        newUser.setRole(user.getRole());
         return repository.save(newUser);
     }
 }

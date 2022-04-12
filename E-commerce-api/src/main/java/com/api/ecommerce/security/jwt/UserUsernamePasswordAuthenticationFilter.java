@@ -44,13 +44,15 @@ public class UserUsernamePasswordAuthenticationFilter extends UsernamePasswordAu
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         String secretKey = "supersucretkeythatnoonecangesssupersucretkeythatnoonecangesssupersucretkeythatnoonecangesssupersucretkeythatnoonecangess";
+       
         String token = Jwts.builder()
                 .setSubject(authResult.getName())
                 .claim("authorities", authResult.getAuthorities())
                 .setIssuedAt(new Date())
-                .setExpiration(java.sql.Date.valueOf(LocalDate.now().plusWeeks(2)))
+                .setExpiration(java.sql.Date.valueOf(LocalDate.now().plusWeeks(1)))
                 .signWith(Keys.hmacShaKeyFor(secretKey.getBytes()))
                 .compact();
+        
         response.addHeader("Authorization", "Bearer " + token);
     }
 }
