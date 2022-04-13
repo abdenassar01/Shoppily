@@ -56,6 +56,14 @@ public class UserService implements UserDetailsService {
         }
         return false;
     }
+    
+    public boolean deleteUserById(Long id){
+        if (getUserById(id) != null){
+            repository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -70,8 +78,9 @@ public class UserService implements UserDetailsService {
         );
     }
     
-    public User save(User user){
+    public User save(@NotNull User user){
         User newUser = new User();
+        System.out.println("password : " + user.getPassword() + "UserName: " + user.getUsername());
         newUser.setUsername(user.getUsername());
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
         newUser.setFirstname(user.getFirstname());
@@ -81,6 +90,7 @@ public class UserService implements UserDetailsService {
         newUser.setCredentialsNonExpired(true);
         newUser.setEnabled(true);
         newUser.setRole(user.getRole());
+        
         return repository.save(newUser);
     }
 }

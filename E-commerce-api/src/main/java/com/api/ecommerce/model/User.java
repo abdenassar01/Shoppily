@@ -1,5 +1,7 @@
 package com.api.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -18,25 +20,47 @@ public class User implements UserDetails {
     private Long id;
     
     @Column(name = "username", unique = true)
+    @JsonProperty
     private String username;
     
     @Column(name = "first_name")
+    @JsonProperty
     private String firstname;
     
     @Column(name = "last_name")
+    @JsonProperty
     private String lastname;
    
     @Column(name = "password")
+    @JsonProperty
+    @JsonIgnore
     private String password;
     
     @Column(name = "role", nullable = false)
+    @JsonProperty
     private String role;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "user")
     private Feedback feedback;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "user")
     private Store store;
+
+    @JsonIgnore
+    private boolean isAccountNonExpired;
+    
+    @JsonIgnore
+    private boolean isAccountNonLocked;
+    
+    @JsonIgnore
+    private boolean isCredentialsNonExpired;
+
+    @JsonIgnore
+    private boolean isEnabled;
+
+    public User() {}
 
     public User(String username, String firstname, String lastname, String password, String role, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
         this.username = username;
@@ -50,9 +74,10 @@ public class User implements UserDetails {
         this.isEnabled = isEnabled;
     }
 
-    public User(String firstname, String username, String password, String role) {
+    public User(String firstname, String lastname, String  username, String password, String role) {
         this.username = username;
         this.password = password;
+        this.lastname = lastname;
         this.firstname = firstname;
         this.role = role;
         this.isAccountNonExpired = true;
@@ -68,17 +93,6 @@ public class User implements UserDetails {
     public void setRole(String role) {
         this.role = role;
     }
-
-    private boolean isAccountNonExpired;
-    
-    private boolean isAccountNonLocked;
-    
-    private boolean isCredentialsNonExpired;
-
-    private boolean isEnabled;
-
-    public User() {}
-
 
 
     public void setUsername(String username) {
@@ -110,6 +124,7 @@ public class User implements UserDetails {
         return id;
     }
 
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
          if (getRole().equalsIgnoreCase("Admin")){
@@ -131,21 +146,25 @@ public class User implements UserDetails {
         return username;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
         return isAccountNonExpired;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
         return isAccountNonLocked;
     }
 
+    @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
         return isCredentialsNonExpired;
     }
 
+    @JsonIgnore
     @Override
     public boolean isEnabled() {
         return isEnabled;
