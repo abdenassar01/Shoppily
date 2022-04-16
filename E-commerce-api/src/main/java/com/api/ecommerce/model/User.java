@@ -32,8 +32,6 @@ public class User implements UserDetails {
     private String lastname;
    
     @Column(name = "password")
-    @JsonProperty
-    @JsonIgnore
     private String password;
     
     @Column(name = "role", nullable = false)
@@ -94,7 +92,7 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-
+    
     public void setUsername(String username) {
         this.username = username;
     }
@@ -115,6 +113,7 @@ public class User implements UserDetails {
         this.lastname = lastname;
     }
 
+    @JsonProperty(value = "password")
     public void setPassword(String password) {
         this.password = password;
     }
@@ -137,6 +136,7 @@ public class User implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public String getPassword() {
         return password;
     }

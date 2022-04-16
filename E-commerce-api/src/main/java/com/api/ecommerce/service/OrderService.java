@@ -16,23 +16,41 @@ import java.util.List;
 public class OrderService {
     
     private final OrderRepository repository;
+    private final UserService userService;
 
     @Autowired
-    public OrderService(OrderRepository repository) {
+    public OrderService(OrderRepository repository, UserService userService) {
         this.repository = repository;
+        this.userService = userService;
     }
     
-    public Order createOrder(Order order){
+    public Order createOrder(Order ord){
         // TODO: Implements Payment Logique
+         
+        Order order = new Order();
+        order.setAddress(ord.getAddress());
+        order.setDateCreated(ord.getDateCreated());
+        order.setCity(ord.getCity());
+        order.setProduct(ord.getProduct());
+        order.setQte(ord.getQte());
+        order.setPriceXqte(ord.getPriceXqte());
+        order.setUser(ord.getUser());
+        order.setStatus(ord.getStatus());
+        System.out.println(order.toString());
         return repository.save(order);
+    }
+    
+    public Order getOrderById(Long id){
+        return repository.getById(id);
     }
     
     public List<Order> getOrdersByUser(User user){
         return repository.findAllByUser(user);
     }
 
-    public Page<Order> getPageOfOrdersByUser(User user){
-        Pageable page = PageRequest.of(1, 5, Sort.by("date_created"));
+    public Page<Order> getPageOfOrdersByUser(Long id){
+        Pageable page = PageRequest.of(1, 5, Sort.by("dateCreated"));
+        User user = userService.getUserById(id);
         return repository.findAllByUser(user, page);
     }
     
