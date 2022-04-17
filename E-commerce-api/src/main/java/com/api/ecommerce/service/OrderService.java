@@ -3,11 +3,8 @@ package com.api.ecommerce.service;
 import com.api.ecommerce.model.Order;
 import com.api.ecommerce.model.User;
 import com.api.ecommerce.repository.OrderRepository;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,19 +21,19 @@ public class OrderService {
         this.userService = userService;
     }
     
-    public Order createOrder(Order ord){
+    public Order createOrder(@NotNull Order ord){
         // TODO: Implements Payment Logique
          
         Order order = new Order();
+        User user = userService.getUserById(ord.getUser().getId());
         order.setAddress(ord.getAddress());
         order.setDateCreated(ord.getDateCreated());
         order.setCity(ord.getCity());
         order.setProduct(ord.getProduct());
         order.setQte(ord.getQte());
         order.setPriceXqte(ord.getPriceXqte());
-        order.setUser(ord.getUser());
+        order.setUser(user);
         order.setStatus(ord.getStatus());
-        System.out.println(order.toString());
         return repository.save(order);
     }
     
@@ -48,10 +45,8 @@ public class OrderService {
         return repository.findAllByUser(user);
     }
 
-    public Page<Order> getPageOfOrdersByUser(Long id){
-        Pageable page = PageRequest.of(1, 5, Sort.by("dateCreated"));
-        User user = userService.getUserById(id);
-        return repository.findAllByUser(user, page);
+    public List<Order> getPageOfOrdersByUser(Long id){
+        return repository.findAllByUser(id);
     }
     
 }

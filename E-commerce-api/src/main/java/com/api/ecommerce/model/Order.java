@@ -17,7 +17,6 @@ public class Order {
     
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    @JsonProperty("user_id")
     private User user;
     private String address;
     private String city;
@@ -37,7 +36,7 @@ public class Order {
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     private Product product;
 
-//    @JsonProperty("id")
+    @JsonProperty("id")
     public Long getId() {
         return id;
     }
@@ -52,82 +51,82 @@ public class Order {
         this.user = user;
     }
 
-//    @JsonProperty(value = "address")
+    @JsonProperty(value = "address")
     public String getAddress() {
         return address;
     }
 
-//    @JsonProperty(value = "address")
+    @JsonProperty(value = "address")
     public void setAddress(String address) {
         this.address = address;
     }
 
-//    @JsonProperty(value = "city")
+    @JsonProperty(value = "city")
     public String getCity() {
         return city;
     }
     
-//    @JsonProperty(value = "city")
+    @JsonProperty(value = "city")
     public void setCity(String city) {
         this.city = city;
     }
 
-//    @JsonProperty(value = "order_status")
+    @JsonProperty(value = "order_status")
     public String getStatus() {
         return status;
     }
 
-//    @JsonProperty(value = "order_status")
+    @JsonProperty(value = "order_status")
     public void setStatus(String status) {
         this.status = status;
     }
 
-//    @JsonProperty(value = "zip_code")
+    @JsonProperty(value = "zip_code")
     public Integer getZip() {
         return zip;
     }
     
-//    @JsonProperty(value = "zip_code")
+    @JsonProperty(value = "zip_code")
     public void setZip(Integer zip) {
         this.zip = zip;
     }
    
-//    @JsonProperty(value = "date_created")
+    @JsonProperty(value = "date_created")
     public Date getDateCreated() {
         return dateCreated;
     }
 
-//    @JsonProperty(value = "date_created")
+    @JsonProperty(value = "date_created")
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
 
-//    @JsonProperty(value = "price_x_qte")
+    @JsonProperty(value = "price_x_qte")
     public Double getPriceXqte() {
         return priceXqte;
     }
 
-//    @JsonProperty(value = "price_x_qte")
+    @JsonProperty(value = "price_x_qte")
     public void setPriceXqte(Double priceXqte) {
         this.priceXqte = priceXqte;
     }
 
-//    @JsonProperty(value = "quantity")
+    @JsonProperty(value = "quantity")
     public Integer getQte() {
         return qte;
     }
 
-//    @JsonProperty(value = "quantity")
+    @JsonProperty(value = "quantity")
     public void setQte(Integer qte) {
         this.qte = qte;
     }
 
-//    @JsonProperty(value = "product_id")
+    @JsonProperty(value = "product_id")
     public Product getProduct() {
         return product;
     }
 
-//    @JsonProperty(value = "product_id")
+    @JsonProperty(value = "product_id")
     public void setProduct(Product product) {
         this.product = product;
     }
