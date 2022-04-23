@@ -36,12 +36,12 @@ public class UserControllerManagement {
     }
 
     @PutMapping("/new")
-    public User addNewUser(User user){
+    public User addNewUser(@RequestBody User user){
         return service.save(user);
     }
     
     @PostMapping("/{id}/update")
-    public User updateUser(@PathVariable Long id, User user){
+    public User updateUser(@PathVariable Long id,@RequestBody User user){
         return service.updateUser(id, user);
     }
 }

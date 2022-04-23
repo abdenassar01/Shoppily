@@ -92,7 +92,7 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-    
+    @JsonProperty(value = "username")
     public void setUsername(String username) {
         this.username = username;
     }
@@ -137,11 +137,13 @@ public class User implements UserDetails {
 
     @Override
     @JsonIgnore
+//    @JsonProperty(value = "password")
     public String getPassword() {
         return password;
     }
 
     @Override
+    @JsonProperty(value = "username")
     public String getUsername() {
         return username;
     }
