@@ -17,6 +17,7 @@ public class FeedbackService {
     
     private final FeedbackRepository repository;
     private final UserRepository userRepository;
+//    private finale Lis
     
     @Autowired
     public FeedbackService(FeedbackRepository repository, UserRepository userRepository) {
@@ -29,6 +30,7 @@ public class FeedbackService {
         newFeedback.setDateCreated(feedback.getDateCreated());
         newFeedback.setContent(feedback.getContent());
         newFeedback.setUser(userRepository.getById(feedback.getId()));
+//        newFeedback.setListing();
         //TODO: make it like the user and inject the listing repository
         newFeedback.setListing(feedback.getListing());
         return repository.save(feedback);

@@ -7,8 +7,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/v1/user")
-@PreAuthorize("permitAll()")
 public class UserController {
     
     private final UserService service;
@@ -17,8 +17,7 @@ public class UserController {
     public UserController(UserService service) {
         this.service = service;
     }
-
-
+    
     @DeleteMapping("/{id}")
     public boolean deleteUser(@PathVariable Long id){
         return service.deleteUserById(id);

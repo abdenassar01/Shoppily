@@ -11,6 +11,7 @@ import java.awt.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("api/v1/order")
 @PreAuthorize(value = "hasAnyRole('ROLE_ADMIN', 'ROLE_SELLER', 'ROLE_USER')")
 public class OrderController {
