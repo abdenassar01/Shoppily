@@ -25,13 +25,13 @@ public class Product {
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private com.api.ecommerce.model.Category category;
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "store_id", referencedColumnName = "store_id")
     private Store store; 
     
     @OneToOne(mappedBy = "product")
     private Order order;
-    
+
     @ManyToOne
     @JoinColumn(name = "listing_id")
     private Listing listing;
@@ -41,7 +41,23 @@ public class Product {
     
     @ElementCollection
     private List<String> images = new ArrayList<>();
-    
+
+    public Product(String title, Double price, String discription, Category category, Store store, Listing listing, Integer availableQte, List<String> images) {
+        this.title = title;
+        this.price = price;
+        this.discription = discription;
+        this.category = category;
+        this.store = store;
+        this.listing = listing;
+        this.availableQte = availableQte;
+        this.images = images;
+    }
+
+    public Product() {
+        
+    }
+
+
     public Long getId() {
         return id;
     }
@@ -53,7 +69,33 @@ public class Product {
     public void setTitle(String title) {
         this.title = title;
     }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public Listing getListing() {
+        return listing;
+    }
+
+    public void setListing(Listing listing) {
+        this.listing = listing;
+    }
     public Double getPrice() {
         return price;
     }
@@ -69,15 +111,7 @@ public class Product {
     public void setDiscription(String discription) {
         this.discription = discription;
     }
-
-    public com.api.ecommerce.model.Category getGategory() {
-        return category;
-    }
-
-    public void setGategory(com.api.ecommerce.model.Category category) {
-        this.category = category;
-    }
-
+    
     public Store getStore() {
         return store;
     }

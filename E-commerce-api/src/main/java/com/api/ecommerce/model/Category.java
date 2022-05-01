@@ -15,9 +15,13 @@ public class Category {
     @Column(name = "category_label")
     private String label;
     
-    @OneToOne(mappedBy = "category", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "category", cascade = CascadeType.MERGE)
     @PrimaryKeyJoinColumn
     private Product product;
+
+    public Category() {
+        
+    }
 
     public Long getId() {
         return id;

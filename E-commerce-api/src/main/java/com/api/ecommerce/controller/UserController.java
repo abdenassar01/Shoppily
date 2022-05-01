@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin
 @RequestMapping("/api/v1/user")
+@PreAuthorize(value = "hasAnyRole('ADMIN', 'USER', 'SELLER')")
 public class UserController {
     
     private final UserService service;

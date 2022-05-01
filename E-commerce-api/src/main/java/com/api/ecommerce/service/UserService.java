@@ -42,6 +42,10 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new IllegalStateException("user with id: " + id + " is not found"));
     }
     
+    public User getUserByUsername(String username){
+        return repository.findByUsername(username);
+    }
+    
     public User updateUser(Long id, User newUser){
         User user = getUserById(id);
         deleteUser(user);

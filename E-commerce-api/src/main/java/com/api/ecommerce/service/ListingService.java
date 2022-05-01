@@ -21,7 +21,6 @@ public class ListingService {
 
     private final ListingRepository repository;
     private final StoreRepository storeRepository;
-
     @Autowired
     public ListingService(ListingRepository repository, StoreRepository storeRepository) {
         this.repository = repository;
@@ -29,7 +28,7 @@ public class ListingService {
     }
 
     public Listing getListingById(Long id) {
-        return repository.getById(id);
+        return repository.findById(id).orElseThrow(() -> new IllegalStateException("there is no listing with the specified id: " + id));
     }
 
     public Page<Listing> getPageOfListingByTitle(String title) {
@@ -44,9 +43,7 @@ public class ListingService {
         lst.setFeedbacks(listing.getFeedbacks());
         lst.setStore(
                 storeRepository
-                        .findById(listing.getId())
-                        .orElseThrow(
-                                () -> new IllegalStateException("there no store with the id: " + listing.getId()))
+                        .findByName(listing.getStore().getName())
         );
         lst.setFeedbacks(listing.getFeedbacks());
         lst.setProducts(listing.getProducts());
@@ -54,7 +51,7 @@ public class ListingService {
     }
 
     public Listing updateListing(Long id, Listing listing) {
-        repository.delete(repository.getById(id));
+        repository.delete(repository.findById(id).orElseThrow(() -> new IllegalStateException("there is no listing with the specified id: " + id)));
         return addListing(listing);
     }
 
@@ -65,12 +62,12 @@ public class ListingService {
 
     public Listing deleteListing(Long id) {
         repository.deleteById(id);
-        return repository.getById(id);
+        return repository.findById(id).orElseThrow(() -> new IllegalStateException("there is no listing with the specified id: " + id));
     }
 
     public Page<Listing> getListingByStore(Long storeId) {
         Store store = storeRepository.getById(storeId);
-        return repository.getAllByStore(
+        return repository.findAllByStore(
                 PageRequest.of(1, 10, Sort.by("title")), 
                 store
         );
@@ -78,11 +75,15 @@ public class ListingService {
 
     public Listing getListingByStore(Long storeId, Long listingId) {
         Store store = storeRepository.getById(storeId);
-        List<Listing> listings = repository.getAllByStore(
+        List<Listing> listings = repository.findAllByStore(
                 PageRequest.of(1, 10, Sort.by("title")),
                 store
         ).stream()
                 .filter((listing) -> Objects.equals(listing.getId(), listingId)).collect(Collectors.toList());
         return listings.get(0);
+    }
+
+    public Listing getListingByTitle(String title) {
+        return repository.getByTitle(title);
     }
 }

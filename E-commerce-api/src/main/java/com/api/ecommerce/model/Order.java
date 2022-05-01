@@ -32,9 +32,25 @@ public class Order {
     @Column(name = "quantity")
     private Integer qte;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     private Product product;
+
+    public Order(User user, String address, String city, String status, Integer zip, Date dateCreated, Double priceXqte, Integer qte, Product product) {
+        this.user = user;
+        this.address = address;
+        this.city = city;
+        this.status = status;
+        this.zip = zip;
+        this.dateCreated = dateCreated;
+        this.priceXqte = priceXqte;
+        this.qte = qte;
+        this.product = product;
+    }
+
+    public Order() {
+        
+    }
 
     @JsonProperty("id")
     public Long getId() {
@@ -131,19 +147,7 @@ public class Order {
         this.product = product;
     }
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", user=" + user +
-                ", address='" + address + '\'' +
-                ", city='" + city + '\'' +
-                ", status='" + status + '\'' +
-                ", zip=" + zip +
-                ", dateCreated=" + dateCreated +
-                ", priceXqte=" + priceXqte +
-                ", qte=" + qte +
-                ", product=" + product +
-                '}';
+    public void setId(Long id) {
+        this.id = id;
     }
 }

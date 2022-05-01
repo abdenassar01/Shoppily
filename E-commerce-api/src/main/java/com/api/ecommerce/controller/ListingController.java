@@ -24,7 +24,7 @@ public class ListingController {
         return ResponseEntity.ok().body(service.getListingById(id));
     }
     
-    @GetMapping("/{title}")
+    @GetMapping("/title/{title}")
     public ResponseEntity<Page<Listing>> getListingByTitle(@PathVariable String title){
         return ResponseEntity.ok().body(service.getPageOfListingByTitle(title));
     }

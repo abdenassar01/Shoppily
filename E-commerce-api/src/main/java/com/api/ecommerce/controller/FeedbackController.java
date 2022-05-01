@@ -20,10 +20,11 @@ public class FeedbackController {
         this.service = service;
     }
 
-    @GetMapping("/listing")
-    public ResponseEntity<Page<Feedback>> getFeedBackById(@RequestBody Listing listing){
-        return ResponseEntity.ok(service.getFeedbacks(listing));
+    @GetMapping("/listing/{listingId}")
+    public ResponseEntity<Page<Feedback>> getFeedBackById(@PathVariable Long listingId){
+        return ResponseEntity.ok(service.getFeedbacks(listingId));
     }
+    
     
    @PutMapping("/new")
     public ResponseEntity<Feedback> addFeedback(@RequestBody Feedback feedback){

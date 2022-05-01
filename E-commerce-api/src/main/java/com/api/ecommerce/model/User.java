@@ -1,7 +1,9 @@
 package com.api.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -11,7 +13,8 @@ import java.util.Collection;
 import static com.api.ecommerce.security.roles.UserRoles.*;
 
 @Entity
-@Table(name = "user")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@Table(name = "user", uniqueConstraints = @UniqueConstraint(name = "Uk_username", columnNames = { "username" }))
 public class User implements UserDetails {
     
     @Id
@@ -19,7 +22,7 @@ public class User implements UserDetails {
     @Column(name = "user_id")
     private Long id;
     
-    @Column(name = "username", unique = true)
+    @Column(name = "username")
     @JsonProperty
     private String username;
     

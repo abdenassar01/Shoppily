@@ -9,8 +9,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ListingRepository extends JpaRepository<Listing, Long> {
+    
+    Listing getByTitle(String title);
     Page<Listing> searchAllByTitle(Pageable pageable, String title);
-    Page<Listing> getAllByStore(Pageable pageable, Store store);
+    Page<Listing> findAllByStore(Pageable pageable, Store store);
     
     
 }

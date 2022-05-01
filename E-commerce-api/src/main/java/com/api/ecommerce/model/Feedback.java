@@ -1,5 +1,6 @@
 package com.api.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -23,9 +24,10 @@ public class Feedback {
     @JsonProperty(value = "date_created")
     private Date dateCreated;
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @JsonProperty(value = "user_id")
+    @JsonIdentityReference(alwaysAsId = true)
     private User user;
 
   
@@ -33,6 +35,7 @@ public class Feedback {
     @ManyToOne
     @JoinColumn(name = "listing_id")
     @JsonProperty(value = "listing")
+    @JsonIdentityReference(alwaysAsId = true)
     private Listing listing;
 
     public void setId(Long id) {

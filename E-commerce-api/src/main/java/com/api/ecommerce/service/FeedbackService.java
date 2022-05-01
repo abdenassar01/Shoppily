@@ -2,7 +2,9 @@ package com.api.ecommerce.service;
 
 import com.api.ecommerce.model.Feedback;
 import com.api.ecommerce.model.Listing;
+import com.api.ecommerce.model.User;
 import com.api.ecommerce.repository.FeedbackRepository;
+import com.api.ecommerce.repository.ListingRepository;
 import com.api.ecommerce.repository.UserRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,24 +14,27 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class FeedbackService {
     
     private final FeedbackRepository repository;
     private final UserRepository userRepository;
-//    private finale Lis
+    private final ListingRepository listingRepository;
     
     @Autowired
-    public FeedbackService(FeedbackRepository repository, UserRepository userRepository) {
+    public FeedbackService(FeedbackRepository repository, UserRepository userRepository, ListingRepository listingRepository) {
         this.repository = repository;
         this.userRepository = userRepository;
+        this.listingRepository = listingRepository;
     }
     
     public Feedback createFeedback(@NotNull Feedback feedback){
         Feedback newFeedback = new Feedback();
         newFeedback.setDateCreated(feedback.getDateCreated());
         newFeedback.setContent(feedback.getContent());
-        newFeedback.setUser(userRepository.getById(feedback.getId()));
+        newFeedback.setUser(userRepository.findByUsername(feedback.getUser().getUsername()));
 //        newFeedback.setListing();
         //TODO: make it like the user and inject the listing repository
         newFeedback.setListing(feedback.getListing());
@@ -57,9 +62,9 @@ public class FeedbackService {
         return repository.save(newFeedback);
     }
     
-    public Page<Feedback> getFeedbacks(Listing listing){
+    public Page<Feedback> getFeedbacks(Long id){
         Pageable page = PageRequest.of(1, 20, Sort.by("date_created"));
-        return repository.findByListing(listing, page);
+        return repository.findByListing(id, page);
     }
     
     public Feedback getFeedbackById(Long id){
@@ -67,7 +72,7 @@ public class FeedbackService {
                 .findById(id)
                 .orElseThrow( 
                         () -> new IllegalStateException(
-                                String.format("there is no feedback with the spicified id: " + id))
+                                String.format("there is no feedback with the specified id: " + id))
                 );
     }
 }
