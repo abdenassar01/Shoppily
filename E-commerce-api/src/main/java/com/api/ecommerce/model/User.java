@@ -1,9 +1,6 @@
 package com.api.ecommerce.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -43,10 +40,12 @@ public class User implements UserDetails {
 
     @JsonIgnore
     @OneToOne(mappedBy = "user")
+    @JsonIdentityReference(alwaysAsId = true)
     private Feedback feedback;
 
     @JsonIgnore
     @OneToOne(mappedBy = "user")
+    @JsonIdentityReference(alwaysAsId = true)
     private Store store;
 
     @JsonIgnore

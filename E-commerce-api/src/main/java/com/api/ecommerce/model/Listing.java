@@ -1,9 +1,6 @@
 package com.api.ecommerce.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.ObjectIdGenerator;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -35,6 +32,7 @@ public class Listing {
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "store_id", referencedColumnName = "store_id")
     @JsonProperty(value = "store")
+    @JsonIdentityReference(alwaysAsId = true)
     private Store store;
 
     @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)

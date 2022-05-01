@@ -1,13 +1,17 @@
 package com.api.ecommerce.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "order_info")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Order {
 
     @Id
@@ -34,6 +38,7 @@ public class Order {
 
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
+    @JsonIdentityReference(alwaysAsId = true)
     private Product product;
 
     public Order(User user, String address, String city, String status, Integer zip, Date dateCreated, Double priceXqte, Integer qte, Product product) {
