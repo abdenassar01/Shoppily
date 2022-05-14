@@ -1,10 +1,15 @@
 package com.api.ecommerce.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "category")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Category {
     
     @Id
@@ -15,9 +20,14 @@ public class Category {
     @Column(name = "category_label")
     private String label;
     
-    @OneToOne(mappedBy = "category", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "category", cascade = CascadeType.MERGE)
     @PrimaryKeyJoinColumn
+    @JsonIdentityReference(alwaysAsId = true)
     private Product product;
+
+    public Category() {
+        
+    }
 
     public Long getId() {
         return id;

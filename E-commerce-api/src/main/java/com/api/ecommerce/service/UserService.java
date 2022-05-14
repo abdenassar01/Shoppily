@@ -42,6 +42,10 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new IllegalStateException("user with id: " + id + " is not found"));
     }
     
+    public User getUserByUsername(String username){
+        return repository.findByUsername(username);
+    }
+    
     public User updateUser(Long id, User newUser){
         User user = getUserById(id);
         deleteUser(user);
@@ -52,6 +56,14 @@ public class UserService implements UserDetailsService {
     public boolean deleteUser(User user){
         if (getUser(user) != null){
             repository.delete(user);
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean deleteUserById(Long id){
+        if (getUserById(id) != null){
+            repository.deleteById(id);
             return true;
         }
         return false;
@@ -70,8 +82,9 @@ public class UserService implements UserDetailsService {
         );
     }
     
-    public User save(User user){
+    public User save(@NotNull User user){
         User newUser = new User();
+        System.out.println("password : " + user.getPassword() + ", UserName: " + user.getUsername());
         newUser.setUsername(user.getUsername());
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
         newUser.setFirstname(user.getFirstname());
@@ -81,6 +94,7 @@ public class UserService implements UserDetailsService {
         newUser.setCredentialsNonExpired(true);
         newUser.setEnabled(true);
         newUser.setRole(user.getRole());
+        
         return repository.save(newUser);
     }
 }

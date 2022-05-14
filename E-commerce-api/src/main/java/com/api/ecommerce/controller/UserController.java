@@ -3,34 +3,39 @@ package com.api.ecommerce.controller;
 import com.api.ecommerce.model.User;
 import com.api.ecommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/v1/user")
+@PreAuthorize(value = "hasAnyRole('ADMIN', 'USER', 'SELLER')")
 public class UserController {
     
-    private final UserService userService;
+    private final UserService service;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(UserService service) {
+        this.service = service;
+    }
+    
+    @DeleteMapping("/{id}")
+    public boolean deleteUser(@PathVariable Long id){
+        return service.deleteUserById(id);
     }
 
-//    @PostMapping("/add")
-//    public User addUser(User user){
-//        return userService.addUser(user);
-//    }
-    
-    @GetMapping("/")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Page<User> getUser(){
-        return userService.getAllUser();
+    @GetMapping("/{id}")
+    public User getUser(@PathVariable Long id){
+        return service.getUserById(id);
     }
-    
+
+    @PutMapping("/new")
+    public User addNewUser(@RequestBody User user){
+        return service.save(user);
+    }
+
+    @PostMapping("/{id}/update")
+    public User updateUser(@PathVariable Long id, User user){
+        return service.updateUser(id, user);
+    }
 }

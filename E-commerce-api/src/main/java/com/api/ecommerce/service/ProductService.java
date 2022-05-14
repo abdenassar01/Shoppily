@@ -57,7 +57,7 @@ public class ProductService {
         return repository.findAllByTitle(title, page);
     }
     
-    // TODO: Method Still Not Working
+//     TODO: Method Still Not Working
     public Page<Product> getProductByCategory(Long id){
         Pageable page = PageRequest.of(1, 20, Sort.by("product_price"));
         return repository.findAllByCategory(id, page);
@@ -66,11 +66,11 @@ public class ProductService {
     public Product searchProductByTitle(String title){
         return repository.searchFirstByTitle(title);
     }
-    
+
     public Page<Product> searchProductsByTitle(String title){
         Pageable page = PageRequest.of(1, 10);
-        
+
         return repository.searchByTitle(title, page);
     }
-    
+
 }

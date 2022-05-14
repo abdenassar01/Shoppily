@@ -1,5 +1,6 @@
 package com.api.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,7 +10,8 @@ import java.util.Collection;
 import static com.api.ecommerce.security.roles.UserRoles.*;
 
 @Entity
-@Table(name = "user")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@Table(name = "user", uniqueConstraints = @UniqueConstraint(name = "Uk_username", columnNames = { "username" }))
 public class User implements UserDetails {
     
     @Id
@@ -17,26 +19,48 @@ public class User implements UserDetails {
     @Column(name = "user_id")
     private Long id;
     
-    @Column(name = "username", unique = true)
+    @Column(name = "username")
+    @JsonProperty
     private String username;
     
     @Column(name = "first_name")
+    @JsonProperty
     private String firstname;
     
     @Column(name = "last_name")
+    @JsonProperty
     private String lastname;
    
     @Column(name = "password")
     private String password;
     
     @Column(name = "role", nullable = false)
+    @JsonProperty
     private String role;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "user")
+    @JsonIdentityReference(alwaysAsId = true)
     private Feedback feedback;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "user")
+    @JsonIdentityReference(alwaysAsId = true)
     private Store store;
+
+    @JsonIgnore
+    private boolean isAccountNonExpired;
+    
+    @JsonIgnore
+    private boolean isAccountNonLocked;
+    
+    @JsonIgnore
+    private boolean isCredentialsNonExpired;
+
+    @JsonIgnore
+    private boolean isEnabled;
+
+    public User() {}
 
     public User(String username, String firstname, String lastname, String password, String role, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
         this.username = username;
@@ -50,9 +74,10 @@ public class User implements UserDetails {
         this.isEnabled = isEnabled;
     }
 
-    public User(String firstname, String username, String password, String role) {
+    public User(String firstname, String lastname, String  username, String password, String role) {
         this.username = username;
         this.password = password;
+        this.lastname = lastname;
         this.firstname = firstname;
         this.role = role;
         this.isAccountNonExpired = true;
@@ -69,18 +94,7 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-    private boolean isAccountNonExpired;
-    
-    private boolean isAccountNonLocked;
-    
-    private boolean isCredentialsNonExpired;
-
-    private boolean isEnabled;
-
-    public User() {}
-
-
-
+    @JsonProperty(value = "username")
     public void setUsername(String username) {
         this.username = username;
     }
@@ -101,6 +115,7 @@ public class User implements UserDetails {
         this.lastname = lastname;
     }
 
+    @JsonProperty(value = "password")
     public void setPassword(String password) {
         this.password = password;
     }
@@ -110,6 +125,7 @@ public class User implements UserDetails {
         return id;
     }
 
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
          if (getRole().equalsIgnoreCase("Admin")){
@@ -122,30 +138,37 @@ public class User implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
+//    @JsonProperty(value = "password")
     public String getPassword() {
         return password;
     }
 
     @Override
+    @JsonProperty(value = "username")
     public String getUsername() {
         return username;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
         return isAccountNonExpired;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
         return isAccountNonLocked;
     }
 
+    @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
         return isCredentialsNonExpired;
     }
 
+    @JsonIgnore
     @Override
     public boolean isEnabled() {
         return isEnabled;

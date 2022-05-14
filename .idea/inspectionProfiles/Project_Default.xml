@@ -1,0 +1,14 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="IncorrectHttpHeaderInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="customHeaders">
+        <set>
+          <option value="&quot;password&quot; " />
+          <option value="&quot;username&quot; " />
+          <option value="Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYmRlbmFzc2FyLWFkbWluIiwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifSx7ImF1dGhvcml0eSI6ImZlZWRiYWNrOnJlYWQifSx7ImF1dGhvcml0eSI6ImZlZWRiYWNrOndyaXRlIn0seyJhdXRob3JpdHkiOiJsaXN0aW5nOnJlYWQifSx7ImF1dGhvcml0eSI6Imxpc3Rpbmc6d3JpdGUifSx7ImF1dGhvcml0eSI6Im9yZGVyOnJlYWQifSx7ImF1dGhvcml0eSI6Im9yZGVyOndyaXRlIn0seyJhdXRob3JpdHkiOiJwcm9kdWN0OnJlYWQifSx7ImF1dGhvcml0eSI6InByb2R1Y3Q6d3JpdGUifSx7ImF1dGhvcml0eSI6InN0b3JlOnJlYWQifSx7ImF1dGhvcml0eSI6InN0b3JlOndyaXRlIn0seyJhdXRob3JpdHkiOiJ1c2VyOnJlYWQifSx7ImF1dGhvcml0eSI6InVzZXI6d3JpdGUifV0sImlhdCI6MTY1MDkxMjIwNSwiZXhwIjoxNjUxNDQ5NjAwfQ.1S1xdovddcPs4Ob6Eg_ZJG6VzySQBLygEnBrPxyjrmsH2IZZvOR5cn4ALTkTUPgHU3COya04vyyUgoKt1TOPrw" />
+        </set>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

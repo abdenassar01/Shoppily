@@ -1,10 +1,13 @@
 package com.api.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.*;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "feedback")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Feedback {
     
     @Id
@@ -13,19 +16,49 @@ public class Feedback {
     private Long id;
     
     @Column(name = "feedback_content", nullable = false)
+    @JsonProperty(value = "content")
     private String content;
     
     @Column(name = "date_created")
+    @JsonProperty(value = "date_created")
     private Date dateCreated;
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JsonProperty(value = "user_id")
+    @JsonIdentityReference(alwaysAsId = true)
     private User user;
-    
+
+  
+
     @ManyToOne
     @JoinColumn(name = "listing_id")
+    @JsonProperty(value = "listing")
+    @JsonIdentityReference(alwaysAsId = true)
     private Listing listing;
-    
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @JsonIgnore
+    public Listing getListing() {
+        return listing;
+    }
+
+    public void setListing(Listing listing) {
+        this.listing = listing;
+    }
+    public Feedback(String content, Date dateCreated, User user, Listing listing) {
+        this.content = content;
+        this.dateCreated = dateCreated;
+        this.user = user;
+        this.listing = listing;
+    }
+
+    public Feedback() {
+        
+    }
 
     public Long getId() {
         return id;
