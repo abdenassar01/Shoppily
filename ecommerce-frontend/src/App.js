@@ -16,7 +16,7 @@ const App = () => {
     const [ theme, setTheme ] = useState("light")
 
 	const ToggleTheme = () => {
-        theme === "light" ? setTheme("dark") : setTheme("light");
+      theme === "light" ? setTheme("dark") : setTheme("light");
   }
 
     return (
@@ -26,9 +26,12 @@ const App = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
-                <Route path="/*" element={<h1 >hey</h1>}/> 
+                <Route path="/*" element={<h1 >Error 404</h1>}/> 
             </Routes>
             <Footer />
+            <button onClick={ToggleTheme}>
+              ToggleTheme
+            </button>
           <GlobalStyle />
         </ThemeProvider>
     )
