@@ -37,7 +37,7 @@ const Login = () => {
                 <Icon>
                   <RiLockPasswordFill color={ PrimaryColors[100] } size={20}/>
                 </Icon>
-                <Input name="password" id="password" type="text" onChange={ (e) => setPassword(e.target.value) } placeHolder="Password?" value={password}/>
+                <Input name="password" id="password" type="password" onChange={ (e) => setPassword(e.target.value) } placeHolder="Password?" value={password}/>
               </InputWrapper>
             </Field>
             <TextLink to="/" color={ props => props.theme.main }> 

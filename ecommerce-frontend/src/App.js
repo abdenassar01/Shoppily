@@ -6,6 +6,7 @@ import Navbar from "./components/navbar/Navbar"
 import Footer from './components/footer/Footer'
 import Login from './components/account/login/Login'
 import Signup from './components/account/signup/Signup'
+import Terms from './components/account/Terms'
 
 import { dark, light } from "./utils";
 import { ThemeProvider } from "styled-components";
@@ -28,12 +29,12 @@ const App = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
+                <Route path="/terms" element={<Terms />} />
                 <Route path="/*" element={<h1 >Error 404</h1>}/> 
             </Routes>
             <Footer />
             <IconButton onClick={ToggleTheme}>
               <MdDarkMode size={30}/>  
-              ToggleTheme
             </IconButton>
           <GlobalStyle />
         </ThemeProvider>
