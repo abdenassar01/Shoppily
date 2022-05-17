@@ -6,7 +6,7 @@ const StyledLink = styled(Link)`
     display: flex;
     justify-content: space-around;
     align-items: center; 
-    color: white;
+    color: ${ props => props.color ? props.color : props.theme.text };
     text-decoration: none;
     padding: 2px 10px;
 `
@@ -21,4 +21,14 @@ export const PrimaryLink = styled(StyledLink)`
     &:hover{
         color: ${props => props.theme.secondary};
     }
+`
+
+export const TextLink = styled(Link)`
+   font-weight: bold;
+   text-decoration: none;
+   color: ${ props => props.color ? props.color : props.theme.text };
+
+    &:hover{
+        color: ${ props => props.theme.tertiary}; 
+    } 
 `

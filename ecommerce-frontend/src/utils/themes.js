@@ -2,10 +2,11 @@
 
 
 export const dark = {
-    main: PrimaryColors[100],
+    main: PrimaryColors[200],
     neutral: "black",
     text: "white",
-    secondary: PrimaryColors[400]
+    secondary: PrimaryColors[400],
+    tertiary: PrimaryColors[300]
 }
 
 //the main color stay the same 
@@ -13,8 +14,9 @@ export const dark = {
 export const light = {
     main: PrimaryColors[100],
     neutral: "white",
-    text: "white",
-    secondary:  PrimaryColors[400]
+    text: "black",
+    secondary:  PrimaryColors[400],
+    tertiary: PrimaryColors[300]
 }
 
 
