@@ -1,15 +1,17 @@
 import { Routes, Route } from "react-router-dom";
-import {  GlobalStyle } from "./utils";
+import {  GlobalStyle, IconButton } from "./utils";
 
 import Home from "./components/home/Home"
 import Navbar from "./components/navbar/Navbar"
 import Footer from './components/footer/Footer'
-import Login from './components/login/Login'
-import Signup from './components/signup/Signup'
+import Login from './components/account/login/Login'
+import Signup from './components/account/signup/Signup'
 
 import { dark, light } from "./utils";
 import { ThemeProvider } from "styled-components";
 import { useState } from 'react';
+
+import { MdDarkMode } from 'react-icons/md'
 
 const App = () => {
 
@@ -29,9 +31,10 @@ const App = () => {
                 <Route path="/*" element={<h1 >Error 404</h1>}/> 
             </Routes>
             <Footer />
-            <button onClick={ToggleTheme}>
+            <IconButton onClick={ToggleTheme}>
+              <MdDarkMode size={30}/>  
               ToggleTheme
-            </button>
+            </IconButton>
           <GlobalStyle />
         </ThemeProvider>
     )

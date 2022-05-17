@@ -1,7 +1,7 @@
 import { Wrapper, Modal, Field, Label, Input, InputWrapper, Form, LogoWrapper, Icon, Submit} from "./SubComponents"
 import { useState } from "react"
-import { PrimaryColors, H2, Paragraph, TextLink } from "../../utils"
-import Logo from '../logo/Logo'
+import { PrimaryColors, H2, Paragraph, TextLink } from "../../../utils"
+import Logo from '../../logo/Logo'
 
 import { RiLockPasswordFill, RiAccountBoxFill } from 'react-icons/ri';
 
