@@ -16,7 +16,7 @@ import { MdDarkMode } from 'react-icons/md'
 
 const App = () => {
 
-    const [ theme, setTheme ] = useState("light")
+  const [ theme, setTheme ] = useState("light")
 
 	const ToggleTheme = () => {
       theme === "light" ? setTheme("dark") : setTheme("light");
@@ -25,17 +25,17 @@ const App = () => {
     return (
         <ThemeProvider theme={theme === "light" ? light : dark}  >
           <Navbar />
+          <IconButton onClick={ToggleTheme}>
+              <MdDarkMode size={30}/>  
+          </IconButton>
           <Routes >
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/terms" element={<Terms />} />
                 <Route path="/*" element={<h1 >Error 404</h1>}/> 
-            </Routes>
-            <Footer />
-            <IconButton onClick={ToggleTheme}>
-              <MdDarkMode size={30}/>  
-            </IconButton>
+            </Routes> 
+            <Footer /> 
           <GlobalStyle />
         </ThemeProvider>
     )

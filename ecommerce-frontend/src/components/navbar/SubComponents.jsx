@@ -6,6 +6,10 @@ export const Wrapper = styled.header`
     padding: 2px 20px;
     display: flex;
     justify-content: space-between;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 1000;
 `
 
 export const Nav = styled.nav`

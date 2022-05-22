@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
 `
 
 export const Modal = styled.div`
-    width: 80%;
+    width: 50%;
     padding: 70px;
     margin: 50px 0;
     border-radius: 10px;
@@ -25,21 +25,18 @@ export const Form = styled.form`
     flex-direction: column;
     justify-content: space-around;
     width: 100%;
-    /* border: 1px solid red; */
 `
 
 export const Field = styled.div`
     margin: 10px 0;
     display: flex;
     flex-direction: column;
-    /* border: 1px solid purple; */
 `
 
 export const Label = styled.label`
     color: ${ props => props.theme.main };
     font-size: 14px;
     font-weight: bold;
-    /* border: 1px solid blue; */
 `
 
 export const Input = styled.input`

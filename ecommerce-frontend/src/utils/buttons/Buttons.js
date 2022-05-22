@@ -42,5 +42,15 @@ export const IconButton = styled(PrimaryButton)`
     display: flex;
     justify-content: center;
     align-items: center;
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    top: 50px;
+
+    &:hover{
+        color: ${ props => props.theme.main };
+        background-color: transparent;
+    }
+
 `
 

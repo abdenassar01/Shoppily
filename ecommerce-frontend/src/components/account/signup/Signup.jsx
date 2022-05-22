@@ -53,7 +53,11 @@ const Signup = () => {
               <Input name="password" id="password" type="password" onChange={ (e) => setPassword(e.target.value) } placeHolder="Password?" value={password}/>
             </Field>
             <LicenceInput>
-              <Checkbox name="licence" id="licence" type="checkbox" onChange={ (e) => setLicence(!licence) } value={licence}/> I have read and agreed on the&nbsp;<TextLink to="/terms" color={ props => props.theme.main }> terms of use</TextLink>
+              <Checkbox name="licence" id="licence" type="checkbox" onChange={ (e) => setLicence(!licence) } value={licence}/> 
+                I have read and agreed on the&nbsp;
+                <TextLink to="/terms" color={ props => props.theme.main }>
+                  terms of use
+                </TextLink>
             </LicenceInput>
             <Submit type="submit" value="Login" onClick={ (e) => handleSubmit(e) }/>
           </Form>
