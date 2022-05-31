@@ -9,7 +9,7 @@ export const FooterWrapper = styled.footer`
     align-items: center;
     background-color: ${ props => props.theme.main};
     color: white;
-
+    padding-top: 10px;
 `
 
 export const Left = styled.div`

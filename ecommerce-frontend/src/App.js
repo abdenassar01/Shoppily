@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 import {  GlobalStyle, IconButton } from "./utils";
 
-import Home from "./components/home/Home"
+import Home from "./components/pages/home/Home"
 import Navbar from "./components/navbar/Navbar"
 import Footer from './components/footer/Footer'
-import Login from './components/account/login/Login'
-import Signup from './components/account/signup/Signup'
-import Terms from './components/account/Terms'
+import Login from './components/pages/account/login/Login'
+import Signup from './components/pages/account/signup/Signup'
+import Terms from './components/pages/account/Terms'
 
 import { dark, light } from "./utils";
 import { ThemeProvider } from "styled-components";

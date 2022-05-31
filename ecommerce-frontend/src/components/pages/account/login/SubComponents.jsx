@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     background: #e0e0e0; 
-    
+    padding-top: 20px;
 `
 
 export const Modal = styled.div`
@@ -19,6 +19,10 @@ export const Modal = styled.div`
     background: ${props => props.theme.neutral };
     box-shadow:  20px 20px 60px #bebebe,
              -20px -20px 60px #ffffff;
+
+    @media (max-width: 768px){
+        width: 95%;
+    }         
 `
 
 export const Form = styled.form`
@@ -56,8 +60,7 @@ export const Input = styled.input`
     caret-color: ${ props => props.theme.main };
 
     &:focus{
-        outline: none;
-        
+        outline: none;   
     }
 `
 

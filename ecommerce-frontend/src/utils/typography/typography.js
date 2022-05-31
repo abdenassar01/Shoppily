@@ -3,8 +3,6 @@ import styled from "styled-components"
 const header = styled.p`
     color: ${props => props.color? props.color : props.theme.fontColor };
     font-weight: ${props => props.bold ? "bold" : "100"};
-   
-
 `;
 
 export const Text = styled(header)`

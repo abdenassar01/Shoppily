@@ -6,8 +6,8 @@ import {
 } from "./SubComponents"
 
 import { useState } from "react"
-import { PrimaryColors, Paragraph, TextLink } from "../../../utils"
-import Logo from '../../logo/Logo'
+import { PrimaryColors, Paragraph, TextLink } from "../../../../utils"
+import Logo from '../../../logo/Logo'
 
 
 const Signup = () => {
@@ -54,10 +54,13 @@ const Signup = () => {
             </Field>
             <LicenceInput>
               <Checkbox name="licence" id="licence" type="checkbox" onChange={ (e) => setLicence(!licence) } value={licence}/> 
-                I have read and agreed on the&nbsp;
-                <TextLink to="/terms" color={ props => props.theme.main }>
-                  terms of use
-                </TextLink>
+                <label htmlFor="licence">
+                  I have read and agreed on the &nbsp;
+                  <TextLink to="/terms" color={ props => props.theme.main }>
+                    terms of use
+                  </TextLink>
+                </label>
+                
             </LicenceInput>
             <Submit type="submit" value="Login" onClick={ (e) => handleSubmit(e) }/>
           </Form>
