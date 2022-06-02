@@ -45,6 +45,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "index")
                 .permitAll()
                 .antMatchers(HttpMethod.GET, "/api/v1/user/*")
+                .permitAll() 
+                .antMatchers(HttpMethod.GET, "/api/v1/*")
                 .permitAll()
                 .antMatchers(HttpMethod.GET, "/api/v1/listing/**")
                 .permitAll()

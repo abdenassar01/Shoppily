@@ -41,6 +41,9 @@ public class OrderService {
         return repository.getById(id);
     }
     
+    public List<Order> getAll(){
+        return repository.findAll();
+    }
     public List<Order> getOrdersByUser(User user){
         return repository.findAllByUser(user);
     }
