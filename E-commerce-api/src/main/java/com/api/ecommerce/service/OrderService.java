@@ -49,7 +49,7 @@ public class OrderService {
     }
 
     public List<Order> getPageOfOrdersByUser(Long id){
-        return repository.findAllByUser(id);
+        return repository.findAllByUser(userService.getUserById(id));
     }
     
 }

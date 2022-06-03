@@ -15,7 +15,4 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     
     List<Order> findAllByUser(User user);
     
-    @Query(value = "select order_info.* from order_info inner join user on user.user_id = order_info.user_id and order_info.user_id = ?;", nativeQuery = true)
-    List<Order> findAllByUser(Long id);
-    
 }
