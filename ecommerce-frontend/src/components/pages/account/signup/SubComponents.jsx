@@ -33,7 +33,7 @@ export const Form = styled.form`
 `
 
 export const Field = styled.div`
-    margin: 10px 0;
+    margin: 2px 0;
     display: flex;
     flex-direction: column;
      
@@ -112,6 +112,10 @@ export const LicenceInput = styled.p`
 export const Checkbox = styled.input`
     width: fit-content;
     border: 1px solid ${ props => props.theme.main };
+`
 
-
+export const ErrorSpan = styled.span`
+    font-size: 12px;
+    color: #ff0022;
+    margin-bottom: 10px;
 `
