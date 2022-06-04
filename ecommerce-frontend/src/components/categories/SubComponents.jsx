@@ -7,8 +7,6 @@ export const CategoryWrapper = styled.aside`
     background-color: white;
     width: fit-content;
     border-radius: 10px;
-
-
     margin: 30px;
 `
 
