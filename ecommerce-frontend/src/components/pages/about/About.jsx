@@ -1,10 +1,13 @@
+import { PageWrapper } from "./SubComponents";
 
-// To be Created
+// TODO: To be Created
 
-const About = () => {
+function About() {
   return (
-    <div>About</div>
-  )
+    <PageWrapper>
+      About
+    </PageWrapper>
+  );
 }
 
 export default About
