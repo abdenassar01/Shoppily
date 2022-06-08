@@ -1,8 +1,6 @@
 package com.api.ecommerce.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -18,6 +16,7 @@ public class Product {
     private Long id;
     
     @Column(name = "product_reference")
+    @JsonProperty(value = "reference")
     private String reference;
     
     @Column(name = "product_price")
@@ -26,33 +25,29 @@ public class Product {
     @Column(name = "product_discription")
     private String discription;
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
-    @JsonIdentityReference(alwaysAsId = true)
-    private com.api.ecommerce.model.Category category;
-    
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "store_id", referencedColumnName = "store_id")
-    private Store store; 
-    
-    @OneToOne(mappedBy = "product")
+    private Store store;
+
+    @ManyToOne
+    @JoinColumn(name="order_id", nullable=false)
     private Order order;
 
     @ManyToOne
     @JoinColumn(name = "listing_id")
+    @JsonIdentityReference(alwaysAsId = true)
     private Listing listing;
     
     @Column(name = "quantity_available")
     private Integer availableQte;
     
     @ElementCollection
-    private List<String> images = new ArrayList<>();
+    private List<String> images;
 
-    public Product(String reference, Double price, String discription, Category category, Store store, Listing listing, Integer availableQte, List<String> images) {
+    public Product(String reference, Double price, String discription, Store store, Listing listing, Integer availableQte, List<String> images) {
         this.reference = reference;
         this.price = price;
         this.discription = discription;
-        this.category = category;
         this.store = store;
         this.listing = listing;
         this.availableQte = availableQte;
@@ -62,8 +57,7 @@ public class Product {
     public Product() {
         
     }
-
-
+    
     public Long getId() {
         return id;
     }
@@ -77,14 +71,6 @@ public class Product {
     }
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     public Order getOrder() {
