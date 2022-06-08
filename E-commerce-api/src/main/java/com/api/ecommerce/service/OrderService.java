@@ -41,12 +41,15 @@ public class OrderService {
         return repository.getById(id);
     }
     
+    public List<Order> getAll(){
+        return repository.findAll();
+    }
     public List<Order> getOrdersByUser(User user){
         return repository.findAllByUser(user);
     }
 
     public List<Order> getPageOfOrdersByUser(Long id){
-        return repository.findAllByUser(id);
+        return repository.findAllByUser(userService.getUserById(id));
     }
     
 }
