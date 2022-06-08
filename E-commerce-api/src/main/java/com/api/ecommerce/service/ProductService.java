@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductService {
     
-    
     private final ProductRepository repository;
 
     @Autowired
@@ -58,19 +57,19 @@ public class ProductService {
     }
     
 //     TODO: Method Still Not Working
-    public Page<Product> getProductByCategory(Long id){
-        Pageable page = PageRequest.of(1, 20, Sort.by("product_price"));
-        return repository.findAllByCategory(id, page);
-    }
+//    public Page<Product> getProductByCategory(Long id){
+//        Pageable page = PageRequest.of(1, 20, Sort.by("product_price"));
+//        return repository.findAllByCategory(id, page);
+//    }
     
-    public Product searchProductByTitle(String title){
-        return repository.searchFirstByTitle(title);
+    public Product searchProductByTitle(String ref){
+        return repository.searchFirstByReference(ref);
     }
 
-    public Page<Product> searchProductsByTitle(String title){
+    public Page<Product> searchProductsByTitle(String ref){
         Pageable page = PageRequest.of(1, 10);
 
-        return repository.searchByTitle(title, page);
+        return repository.findAllByReference(ref, page);
     }
 
 }

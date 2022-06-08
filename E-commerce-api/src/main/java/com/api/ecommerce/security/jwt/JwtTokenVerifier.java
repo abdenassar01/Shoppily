@@ -15,6 +15,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.Console;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -62,6 +63,7 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
+            
         }catch (JwtException ex){
             throw new IllegalStateException("token cannot be trusted:  " + token);
         }
