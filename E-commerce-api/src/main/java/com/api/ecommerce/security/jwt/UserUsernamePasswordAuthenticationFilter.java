@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Date;
 
+
 public class UserUsernamePasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
  
     private final AuthenticationManager authenticationManager;
@@ -53,7 +54,6 @@ public class UserUsernamePasswordAuthenticationFilter extends UsernamePasswordAu
                 .compact();
         
         response.addHeader("Authorization", "Bearer " + token);
-        response.setContentType("application/json");
-        response.getWriter().write("{\n \"token\" : \"" + token + "\" \n}");
+        response.getWriter().write("{ \n\"token\": \"" + token + "\"\n}" );
     }
 }
