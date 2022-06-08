@@ -18,7 +18,7 @@ const Navbar = () => {
           <FaHome size={20}/>
           <h2 >Home </h2>
         </PrimaryLink>
-        <PrimaryLink to="/" color={TextColors["textInverted"]}>
+        <PrimaryLink to="/sell" color={TextColors["textInverted"]}>
           <FaShopify size={20}/>
           <h2>Start selling </h2>
         </PrimaryLink>

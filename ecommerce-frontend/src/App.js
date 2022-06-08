@@ -9,7 +9,7 @@ import Signup from "./components/pages/account/signup/Signup";
 import Terms from "./components/pages/account/Terms";
 import ContactUs from "./components/pages/contact/ContactUs";
 import About from "./components/pages/about/About";
-
+import BecomeSeller from "./components/pages/seller/sell/BecomeSeller";
 import Error404 from "./components/error/Error404";
 
 import { dark, light } from "./utils";
@@ -17,6 +17,7 @@ import { ThemeProvider } from "styled-components";
 import { useState } from 'react';
 
 import { MdDarkMode } from 'react-icons/md'
+import PrivateRoute from "./components/privateRoute/PrivateRoute";
 
 const App = () => {
 
@@ -39,6 +40,9 @@ const App = () => {
                 <Route path="/terms" element={<Terms />} />
                 <Route path="/contact" element={<ContactUs />} />
                 <Route path="/about" element={<About />} />
+                <Route 
+                  path="/sell" element={ <PrivateRoute Element={ <BecomeSeller /> } /> } 
+                />
                 <Route path="/*" element={<Error404 />}/> 
             </Routes> 
             <Footer /> 
