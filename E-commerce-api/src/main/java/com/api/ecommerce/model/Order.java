@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "order_info")
@@ -36,12 +37,10 @@ public class Order {
     @Column(name = "quantity")
     private Integer qte;
 
-    @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
-    @JsonIdentityReference(alwaysAsId = true)
-    private Product product;
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "order")
+    private List<Product> products;
 
-    public Order(User user, String address, String city, String status, Integer zip, Date dateCreated, Double priceXqte, Integer qte, Product product) {
+    public Order(User user, String address, String city, String status, Integer zip, Date dateCreated, Double priceXqte, Integer qte, List<Product> products) {
         this.user = user;
         this.address = address;
         this.city = city;
@@ -50,7 +49,7 @@ public class Order {
         this.dateCreated = dateCreated;
         this.priceXqte = priceXqte;
         this.qte = qte;
-        this.product = product;
+        this.products = products;
     }
 
     public Order() {
@@ -142,14 +141,16 @@ public class Order {
         this.qte = qte;
     }
 
-    @JsonProperty(value = "product_id")
-    public Product getProduct() {
-        return product;
+    @JsonProperty(value = "products")
+    @JsonIdentityReference(alwaysAsId = false)
+    public List<Product> getProduct() {
+        return products;
     }
 
-    @JsonProperty(value = "product_id")
-    public void setProduct(Product product) {
-        this.product = product;
+    @JsonProperty(value = "products")
+    @JsonIdentityReference(alwaysAsId = true)
+    public void setProduct(List<Product> products) {
+        this.products = products;
     }
 
     public void setId(Long id) {

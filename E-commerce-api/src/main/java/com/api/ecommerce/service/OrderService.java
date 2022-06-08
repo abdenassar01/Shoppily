@@ -52,4 +52,9 @@ public class OrderService {
         return repository.findAllByUser(userService.getUserById(id));
     }
     
+    public Order updateOrder(Long id, Order newOrder){
+        repository.deleteById(id);
+        return repository.save(newOrder);
+    }
+    
 }

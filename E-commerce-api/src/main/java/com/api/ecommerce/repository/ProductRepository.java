@@ -14,11 +14,10 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Page<Product> findAllByReference(String reference, Pageable page);
 //        @Query(value = "SELECT DISTINCT * FROM product WHERE category_id = ?;")
-    Page<Product> findAllByCategory(Long category, Pageable pageable);
 
-    Page<Product> searchByTitle(String title, Pageable page);
+//    Page<Product> searchByTitle(String title, Pageable page);
 
     List<Product> findAllByListing(Listing listing);
 
-    Product searchFirstByTitle(String title);
+    Product searchFirstByReference(String ref);
 }

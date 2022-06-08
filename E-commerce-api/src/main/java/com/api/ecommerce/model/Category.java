@@ -25,16 +25,30 @@ public class Category {
     @PrimaryKeyJoinColumn
     @JsonIdentityReference(alwaysAsId = true)
     @JsonIgnore
-    private Product product;
+    private Listing listing;
 
+    
+    
     public Category() {
         
+    }
+
+    public Category(Long id, String label) {
+        this.id = id;
+        this.label = label;
     }
 
     public Long getId() {
         return id;
     }
-    
+
+    public Listing getListing() {
+        return listing;
+    }
+
+    public void setListing(Listing listing) {
+        this.listing = listing;
+    }
 
     public String getLabel() {
         return label;
@@ -43,17 +57,5 @@ public class Category {
     public void setLabel(String label) {
         this.label = label;
     }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public Category(String label, Product product) {
-        this.label = label;
-        this.product = product;
-    }
+    
 }

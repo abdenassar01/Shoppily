@@ -10,8 +10,7 @@ import java.util.List;
 @Table(name = "listing")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Listing {
-  
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "listing_id")
@@ -32,23 +31,28 @@ public class Listing {
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "store_id", referencedColumnName = "store_id")
     @JsonProperty(value = "store")
-    @JsonIdentityReference(alwaysAsId = true)
     private Store store;
 
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+    @JsonProperty(value = "category")
+    private Category category;
+    
     @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)
     @JsonProperty(value = "feedbacks")
-    private List<Feedback> feedbacks = new ArrayList<>();
+    private List<Feedback> feedbacks;
     
     @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)
     @JsonProperty(value = "products")
-    private List<Product> products = new ArrayList<>();
+    private List<Product> products;
 
-    public Listing(String discription, String title, Double rating, Store store, List<Feedback> feedbacks, List<Product> products) {
+    public Listing(String discription, String title, Double rating, Store store, List<Feedback> feedbacks, List<Product> products, Category category) {
         this.discription = discription;
         this.title = title;
         this.rating = rating;
         this.store = store;
         this.feedbacks = feedbacks;
+        this.category = category;
         this.products = products;
     }
 
@@ -71,6 +75,15 @@ public class Listing {
         return rating;
     }
 
+    @JsonIdentityReference(alwaysAsId = false)
+    public Category getCategory() {
+        return category;
+    }
+
+    @JsonIdentityReference(alwaysAsId = true)
+    public void setCategory(Category category) {
+        this.category = category;
+    }
     public void setRating(Double rating) {
         this.rating = rating;
     }
