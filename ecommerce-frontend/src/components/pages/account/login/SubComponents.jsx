@@ -33,7 +33,7 @@ export const Form = styled.form`
 `
 
 export const Field = styled.div`
-    margin: 10px 0;
+    margin: 2px 0;
     display: flex;
     flex-direction: column;
 `
@@ -96,4 +96,10 @@ export const Submit = styled.input`
         background-color: white;
         border: 2px solid ${props => props.theme.main};
     }
+`
+
+export const ErrorSpan = styled.span`
+    font-size: 12px;
+    color: #ff0022;
+    margin-bottom: 10px;
 `

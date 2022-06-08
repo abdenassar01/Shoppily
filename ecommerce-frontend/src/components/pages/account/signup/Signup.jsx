@@ -2,24 +2,20 @@ import {
   Wrapper, Modal, Field, 
   Label, Input, Form, 
   LogoWrapper, Submit, ParagraphWrapper, 
-  LicenceInput, Checkbox
+  LicenceInput, Checkbox, ErrorSpan
 } from "./SubComponents"
 
-import { useState } from "react"
 import { PrimaryColors, Paragraph, TextLink } from "../../../../utils"
 import Logo from '../../../logo/Logo'
 
+import { useForm } from "react-hook-form";
 
 const Signup = () => {
- 
-  const [ fullName, setFullName ] = useState("");
-  const [ username, setUsername ] = useState("");
-  const [ email, setEmail ] = useState("");
-  const [ password, setPassword ] = useState("");
-  const [ licence, setLicence ] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const { handleSubmit, register, formState: { errors } } = useForm()
+
+  const onSubmit = (data) => {
+    console.log(data)
   }
 
   return (
@@ -30,38 +26,61 @@ const Signup = () => {
           </LogoWrapper>
           <ParagraphWrapper>
             <Paragraph bold>Already have an account? 
-                <TextLink to="/login" color={ props => props.theme.main}>
+                <TextLink to="/login" color={ props => props.theme.main }>
                   log in
                 </TextLink>
             </Paragraph>
           </ParagraphWrapper>
-          <Form method="post">
+          <Form onSubmit={ handleSubmit(onSubmit) }>
             <Field>
-              <Label for="fullname">fullname: </Label>
-                <Input name="fullname" id="fullname" type="text" onChange={ (e) => setFullName(e.target.value) } placeHolder="fullname?" value={fullName} />
+              <Label htmlFor="fullname">fullname: </Label>
+                <Input
+                  id="fullname" type="text" placeHolder="Your Fullname?" 
+                  { ...register("fullname",{ required: true }) }
+                />
             </Field>
+            <ErrorSpan>{ ((errors.fullname?.type === 'required') && "Please provide a your name.") }</ErrorSpan>
             <Field>
-              <Label for="email">email: </Label>
-                <Input name="email" id="email" type="email" onChange={ (e) => setEmail(e.target.value) } placeHolder="password?" value={email}/>
+              <Label htmlFor="email">email: </Label>
+                <Input 
+                  {...register("email",{ required: true, 
+                    pattern: {
+                      value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+                      message: "Please provide a valid email"
+                  }})}
+                  id="email" type="email" placeHolder="Your E-mail?" 
+                />
             </Field>
+            <ErrorSpan>{ ((errors.email?.type === 'required') && "Please provide an email.") || (errors.email?.message) }</ErrorSpan>
             <Field>
-              <Label for="username">username: </Label>
-                <Input name="username" id="username" type="text" onChange={ (e) => setUsername(e.target.value) } placeHolder="username?" value={username}/>
+              <Label htmlFor="username">username: </Label>
+                <Input
+                  id="username" type="text" placeHolder="Your username?" 
+                  { ...register("username",{ required: true }) }
+                />
             </Field>
+            <ErrorSpan>{ ((errors.username?.type === 'required') && "Please provide a username.") }</ErrorSpan>
             <Field>
-              <Label for="password">password: </Label>
-              <Input name="password" id="password" type="password" onChange={ (e) => setPassword(e.target.value) } placeHolder="Password?" value={password}/>
+              <Label htmlFor="password">password: </Label>
+              <Input id="password" type="password" 
+                { ...register("password",{ required: true, minLength: {
+                  value: 8,
+                  message: "Your password should be at least 8 characteres long"
+                } }) }
+              />
             </Field>
+            <ErrorSpan>{ ((errors.password?.type === 'required') && "Please provide a password.") || (errors.password?.message)  }</ErrorSpan>
             <LicenceInput>
-              <Checkbox name="licence" id="licence" type="checkbox" onChange={ (e) => setLicence(!licence) } value={licence}/> 
+              <Checkbox id="licence" type="checkbox" 
+                { ...register("liecence",{ required: true }) }/> 
                 <label htmlFor="licence">
                   I have read and agreed on the &nbsp;
                   <TextLink to="/terms" color={ props => props.theme.main }>
                     terms of use
                   </TextLink>
                 </label>
-                
             </LicenceInput>
+            <ErrorSpan>{ ((errors.liecence?.type === 'required') && "You should agree on terms of use.") }</ErrorSpan>
             <Submit type="submit" value="Login" onClick={ (e) => handleSubmit(e) }/>
           </Form>
         </Modal>

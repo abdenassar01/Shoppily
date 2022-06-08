@@ -2,12 +2,13 @@
 
 
 export const dark = {
-    main: PrimaryColors[500],
-    neutral: "#1E1E1E",
-    text: "white",
+    main: "#242526",
+    // main: PrimaryColors[500],
+    neutral: "#F4FFE3",
+    text: "black",
     helperText: "white",
     secondary: PrimaryColors[400],
-    tertiary: PrimaryColors[300],
+    tertiary: PrimaryColors[300]
 }
 
 //the main color stay the same 

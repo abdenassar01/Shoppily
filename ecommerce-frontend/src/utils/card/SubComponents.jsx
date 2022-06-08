@@ -7,7 +7,7 @@ export const CardWrapper = styled.article`
 
 export const Container = styled.div`
     max-width: 200px;
-    min-height: 300px; 
+    min-height: 250px; 
     display: flex;
     flex-direction: column;
     gap: 20px;  
@@ -18,7 +18,6 @@ export const Container = styled.div`
     transition: all 0.5s ease;
     box-shadow:  20px 20px 60px #bebebe,
              -20px -20px 60px #ffffff;
-
     /* border: 1px solid purple; */
 
     &:hover{

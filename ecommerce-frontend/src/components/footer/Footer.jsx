@@ -29,15 +29,15 @@ const Footer = () => {
           <ContentBox>
             we sell the best products for you            
             <br />
-            <RouteLink to="/products">
+            <RouteLink to="/about">
               About us
             </RouteLink> 
             <br />
-            <RouteLink to="/products">
+            <RouteLink to="/contact">
               Contact us
             </RouteLink>
             <br />
-            <RouteLink to="/products">
+            <RouteLink to="/sell">
               Become a seller
             </RouteLink>
             <SocialMedia>

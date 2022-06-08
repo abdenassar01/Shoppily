@@ -19,18 +19,18 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     ::selection{
-        background-color: #FF385C ;
+        background-color: #00ACEE ;
         color: #FFFFFF;
     }
 
     ::-webkit-scrollbar {
         width: 7px;
         height: 8px;
-        background-color: green; 
+        background-color: #00ACEE; 
     }
 
     ::-webkit-scrollbar-thumb {
-        background:  #FF385C ;
+        background:  #2374E1 ;
         border-radius: 50px;
     }
 `
