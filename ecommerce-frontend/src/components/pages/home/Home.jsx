@@ -1,4 +1,5 @@
 import ProductCard from '../../../utils/card/ProductCard';
+import Category from "../../categories/Category";
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
         <br />
         Home
         <ProductCard />
+        <Category />
         <br />
         <br />
         <br />

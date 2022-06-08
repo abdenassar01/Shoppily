@@ -19,7 +19,7 @@ export const PrimaryLink = styled(StyledLink)`
     font-weight: bold;
 
     &:hover{
-        color: ${props => props.theme.secondary};
+        color: ${ props => props.theme.secondary } ;
     }
 `
 
