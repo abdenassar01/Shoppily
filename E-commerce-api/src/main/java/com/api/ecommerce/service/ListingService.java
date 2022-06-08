@@ -35,6 +35,10 @@ public class ListingService {
         Pageable pageable = PageRequest.of(1, 10, Sort.by("title"));
         return repository.searchAllByTitle(pageable, title);
     }
+    
+//    public Page<Listing> searchByTitle(String title){
+//        return repository.getByTitleContaining(title);
+//    }
 
     public Listing addListing(@NotNull Listing listing) {
         Listing lst = new Listing();
@@ -83,7 +87,7 @@ public class ListingService {
         return listings.get(0);
     }
 
-    public Listing getListingByTitle(String title) {
-        return repository.getByTitle(title);
+    public List<Listing> getListingByTitle(String title) {
+        return repository.getByTitleContaining(title);
     }
 }

@@ -32,7 +32,7 @@ public class ProductService {
     } 
     
     public boolean deleteProduct(@NotNull Product product){
-        if (repository.findById(product.getId()) != null){
+        if (repository.findById(product.getId()).isPresent()){
             repository.delete(product);
             return true;
         }else {
@@ -49,12 +49,12 @@ public class ProductService {
     
     public  Page<Product> getProductByTitleSorted(String title){
         Pageable page = PageRequest.of(1, 20, Sort.by("product_price"));
-        return repository.findAllByTitle(title, page);
+        return repository.findAllByReference(title, page);
     }
 
     public  Page<Product> getProductByTitle(String title){
         Pageable page = PageRequest.of(1, 20);
-        return repository.findAllByTitle(title, page);
+        return repository.findAllByReference(title, page);
     }
     
 //     TODO: Method Still Not Working

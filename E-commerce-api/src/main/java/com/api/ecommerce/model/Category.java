@@ -3,6 +3,7 @@ package com.api.ecommerce.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -23,6 +24,7 @@ public class Category {
     @OneToOne(mappedBy = "category", cascade = CascadeType.MERGE)
     @PrimaryKeyJoinColumn
     @JsonIdentityReference(alwaysAsId = true)
+    @JsonIgnore
     private Product product;
 
     public Category() {

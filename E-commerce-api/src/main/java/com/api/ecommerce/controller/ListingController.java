@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/listing")
 @CrossOrigin("*")
@@ -24,9 +26,9 @@ public class ListingController {
         return ResponseEntity.ok().body(service.getListingById(id));
     }
     
-    @GetMapping("/title/{title}")
-    public ResponseEntity<Page<Listing>> getListingByTitle(@PathVariable String title){
-        return ResponseEntity.ok().body(service.getPageOfListingByTitle(title));
+    @GetMapping("/title")
+    public ResponseEntity<List<Listing>> searchByTitle(@RequestParam String title){
+        return ResponseEntity.ok().body(service.getListingByTitle(title));
     }
     
     @GetMapping("/store/{id}/all")
@@ -49,7 +51,7 @@ public class ListingController {
         return service.deleteListing(listing);
     }
     
-    @PutMapping("/")
+    @PutMapping("/new")
     public ResponseEntity<Listing> addListing(@RequestBody Listing listing){
         return ResponseEntity.ok().body(service.addListing(listing));
     }

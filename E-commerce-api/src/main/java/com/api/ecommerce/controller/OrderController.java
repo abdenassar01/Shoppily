@@ -2,6 +2,7 @@ package com.api.ecommerce.controller;
 
 import com.api.ecommerce.model.Order;
 import com.api.ecommerce.service.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,8 +19,15 @@ public class OrderController {
 
     private final OrderService service;
     
+    @Autowired
     public OrderController(OrderService orderService) {
         this.service = orderService;
+    }
+
+    @GetMapping("/")
+    @PreAuthorize(value = "hasRole('ROLE_ADMIN')")
+    public List<Order> getAll(){
+        return service.getAll();
     }
 
     @PutMapping(value = "/new",consumes = MediaType.APPLICATION_JSON_VALUE)

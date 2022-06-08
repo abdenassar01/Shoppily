@@ -17,8 +17,8 @@ public class Product {
     @Column(name = "product_id")
     private Long id;
     
-    @Column(name = "product_title")
-    private String title;
+    @Column(name = "product_reference")
+    private String reference;
     
     @Column(name = "product_price")
     private Double price;
@@ -48,8 +48,8 @@ public class Product {
     @ElementCollection
     private List<String> images = new ArrayList<>();
 
-    public Product(String title, Double price, String discription, Category category, Store store, Listing listing, Integer availableQte, List<String> images) {
-        this.title = title;
+    public Product(String reference, Double price, String discription, Category category, Store store, Listing listing, Integer availableQte, List<String> images) {
+        this.reference = reference;
         this.price = price;
         this.discription = discription;
         this.category = category;
@@ -69,11 +69,11 @@ public class Product {
     }
 
     public String getTitle() {
-        return title;
+        return reference;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitle(String reference) {
+        this.reference = reference;
     }
     public void setId(Long id) {
         this.id = id;
