@@ -1,20 +1,60 @@
 import { Field, Label, Input, ErrorMessage, 
-  ProductWrapper, HorisontalSpacer } from "../styles/Styles"
+  ProductWrapper, HorisontalSpacer, InputWrapper,
+  Currency, ImageInput
+ } from "../styles/Styles"
 
-const ProductInfoForm = () => {
+const ProductInfoForm = ({ errors, register }) => {
 
   return (
     <ProductWrapper>
         <Field>
           <Label>Reference: </Label>
-          <Input />
-          <ErrorMessage>reference is required</ErrorMessage>
+          <Input type="text" 
+            placeholder="Black"
+            {...register("reference", {
+              required: true
+            })}
+          />
+          <ErrorMessage>{ (errors.reference?.type === 'required') && "Reference is required." }</ErrorMessage>
         </Field>
         <HorisontalSpacer />
         <Field>
           <Label>Price: </Label>
-          <Input />
-          <ErrorMessage>Price is required</ErrorMessage>
+          <InputWrapper>
+            <Input 
+              type="number" 
+              placeholder="20"
+              {...register("price", {
+                required: true
+              })}
+            />
+            <Currency>$ USD </Currency>
+          </InputWrapper>
+          <ErrorMessage>{ (errors.price?.type === 'required') && "Price is required." }</ErrorMessage>
+        </Field>
+        <HorisontalSpacer />
+        <Field>
+          <Label>Available Quantity: </Label>
+          <Input 
+            type="number" 
+            placeholder={12}
+            defaultValue={1}
+            {...register("availableQte", {
+              required: true
+            })}
+          />
+          <ErrorMessage>{ (errors.availableQte?.type === 'required') && "Quantity on store is required." }</ErrorMessage>
+        </Field>
+        <HorisontalSpacer />
+        <Field>
+          <Label>Image: </Label>
+          <ImageInput type="file"
+            placeholder="product main image"
+            {...register("image", {
+              required: true
+            })}
+          />
+          <ErrorMessage>{ (errors.image?.type === 'required') && "Image is required." }</ErrorMessage>
         </Field>
     </ProductWrapper>
   )
