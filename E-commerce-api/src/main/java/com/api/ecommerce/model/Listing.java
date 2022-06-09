@@ -13,28 +13,28 @@ public class Listing {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "listing_id")
+    @Column(name = "id")
     private Long id;
     
-    @Column(name = "listing_discription")
+    @Column(name = "discription")
     @JsonProperty(value = "discription")
     private String discription;
     
-    @Column(name = "listing_Title")
+    @Column(name = "title")
     @JsonProperty(value = "title")
     private String title;
     
-    @Column(name = "listing_rating")
+    @Column(name = "rating")
     @JsonProperty(value = "rating")
     private Double rating;
     
-    @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "store_id", referencedColumnName = "store_id")
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "store_id", referencedColumnName = "id")
     @JsonProperty(value = "store")
     private Store store;
 
     @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
     @JsonProperty(value = "category")
     private Category category;
     

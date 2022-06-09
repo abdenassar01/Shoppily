@@ -12,21 +12,21 @@ import java.util.List;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "product_id")
+    @Column(name = "id")
     private Long id;
     
-    @Column(name = "product_reference")
+    @Column(name = "reference")
     @JsonProperty(value = "reference")
     private String reference;
     
-    @Column(name = "product_price")
+    @Column(name = "price")
     private Double price;
     
-    @Column(name = "product_discription")
+    @Column(name = "discription")
     private String discription;
     
     @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "store_id", referencedColumnName = "store_id")
+    @JoinColumn(name = "store_id", referencedColumnName = "id")
     private Store store;
 
     @ManyToOne

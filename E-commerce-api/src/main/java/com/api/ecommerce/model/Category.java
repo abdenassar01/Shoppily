@@ -15,10 +15,10 @@ public class Category {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "category_id")
+    @Column(name = "id")
     private Long id;
     
-    @Column(name = "category_label")
+    @Column(name = "label")
     private String label;
     
     @OneToOne(mappedBy = "category", cascade = CascadeType.MERGE)
@@ -26,8 +26,6 @@ public class Category {
     @JsonIdentityReference(alwaysAsId = true)
     @JsonIgnore
     private Listing listing;
-
-    
     
     public Category() {
         

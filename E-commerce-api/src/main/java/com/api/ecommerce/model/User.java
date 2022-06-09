@@ -16,7 +16,7 @@ public class User implements UserDetails {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "user_id")
+    @Column(name = "id")
     private Long id;
     
     @Column(name = "username")

@@ -107,7 +107,7 @@ public class App implements CommandLineRunner {
 //        
 //        // TODO: I should insert all that shit using the service
 //
-//        Store store1 = new Store("Brilliant Boutique", userRepository.getUserByUsername(user1.getUsername()), 5.0, new ArrayList<>(), 0);
+        Store store1 = new Store("El-Borj", userRepository.getUserByUsername("Rochdiya-seller"), 5.0, new ArrayList<>(), 0);
 //        Store store2 = new Store("Cartmax", userRepository.getUserByUsername(user3.getUsername()), 5.0, new ArrayList<>(), 0);
 //        Store store3 = new Store("DollarSmart", userRepository.getUserByUsername(user4.getUsername()), 5.0, new ArrayList<>(), 0);
 //        Store store4 = new Store("Megaplex", userRepository.getUserByUsername(user5.getUsername()), 5.0, new ArrayList<>(), 0);
@@ -164,30 +164,31 @@ public class App implements CommandLineRunner {
 //        Feedback feedback9 = new Feedback("great deal bro, happy to work with you", new Date(), userRepository.getUserByUsername(user22.getUsername()),  listingService.getListingByTitle(listing9.getTitle()));
 //        Feedback feedback10 = new Feedback("great deal bro, happy to work with yout", new Date(), userRepository.getUserByUsername(user23.getUsername()),listingService.getListingByTitle(listing10.getTitle()));
 //        
-////        feedbackService.createFeedback(feedback1);
-////        feedbackService.createFeedback(feedback2);
-////        feedbackService.createFeedback(feedback3);
-////        feedbackService.createFeedback(feedback4);
-////        feedbackService.createFeedback(feedback5);
-////        feedbackService.createFeedback(feedback6);
-////        feedbackService.createFeedback(feedback7);
-////        feedbackService.createFeedback(feedback8);
-////        feedbackService.createFeedback(feedback9);
-////        feedbackService.createFeedback(feedback10);
+//        feedbackService.createFeedback(feedback1);
+//        feedbackService.createFeedback(feedback1);
+//        feedbackService.createFeedback(feedback2);
+//        feedbackService.createFeedback(feedback3);
+//        feedbackService.createFeedback(feedback4);
+//        feedbackService.createFeedback(feedback5);
+//        feedbackService.createFeedback(feedback6);
+//        feedbackService.createFeedback(feedback7);
+//        feedbackService.createFeedback(feedback8);
+//        feedbackService.createFeedback(feedback9);
+//        feedbackService.createFeedback(feedback10);
 //        
 //        ArrayList<String> images = new ArrayList<>();
 //        images.add("https://ae01.alicdn.com/kf/Seddf7a958d894bfbb3fa53aacda12abcw/Keyboard-Bluetooth-Keyboard-and-Mouse-Wireless-Spanish-Russian-Mini-Keyboard-for-Tablet-ipad-8-Air-4.jpg_Q90.jpg_.webp");
 //        
 //        Product prd1 = new Product("smart watch",30.1, "WaterProof watch", categoryRepository.getById(35L), storeService.getStore(store1.getName()),  listingService.getListingByTitle(listing1.getTitle()), 10, images);
-//        Product prd2 = new Product("usb",33.1, "WaterProof watch", categoryRepository.getById(32L), storeService.getStore(store2.getName()),  listingService.getListingByTitle(listing2.getTitle()), 5, images);
-//        Product prd3 = new Product("cable usb", 14.1, "WaterProof watch", categoryRepository.getById(42L), storeService.getStore(store3.getName()), listingService.getListingByTitle(listing3.getTitle()), 2, images);
-//        Product prd4 = new Product("mouse",50.1, "WaterProof watch", categoryRepository.getById(32L), storeService.getStore(store4.getName()),  listingService.getListingByTitle(listing4.getTitle()), 7, images);
-//        Product prd5 = new Product("keyboard",19.1, "WaterProof watch", categoryRepository.getById(32L), storeService.getStore(store5.getName()),  listingService.getListingByTitle(listing5.getTitle()), 13, images);
-//        Product prd6 = new Product("snow ball",200.0, "WaterProof watch", categoryRepository.getById(42L), storeService.getStore(store6.getName()),  listingService.getListingByTitle(listing6.getTitle()), 20, images);
-//        Product prd7 = new Product("monitor",300.1, "WaterProof watch", categoryRepository.getById(33L), storeService.getStore(store7.getName()),  listingService.getListingByTitle(listing7.getTitle()), 21, images);
-//        Product prd8 = new Product("phone charger",99.0, "WaterProof watch", categoryRepository.getById(34L), storeService.getStore(store8.getName()),  listingService.getListingByTitle(listing8.getTitle()), 19, images);
-//        Product prd9 = new Product("smartphone case",199.5, "WaterProof watch", categoryRepository.getById(34L), storeService.getStore(store9.getName()),  listingService.getListingByTitle(listing9.getTitle()), 100, images);
-//        Product prd10 = new Product("watch", 200.0, "WaterProof watch", categoryRepository.getById(31L), storeService.getStore(store10.getName()),  listingService.getListingByTitle(listing10.getTitle()), 50, images);
+//        Product prd2 = new Product("usb",33.1, "WaterProof watch", categoryRepository.getById(32L), storeService.getStore(store1.getName()),  listingService.getListingByTitle(listing2.getTitle()), 5, images);
+//        Product prd3 = new Product("cable usb", 14.1, "WaterProof watch", categoryRepository.getById(42L), storeService.getStore(store1.getName()), listingService.getListingByTitle(listing3.getTitle()), 2, images);
+//        Product prd4 = new Product("mouse",50.1, "WaterProof watch", categoryRepository.getById(32L), storeService.getStore(store1.getName()),  listingService.getListingByTitle(listing4.getTitle()), 7, images);
+//        Product prd5 = new Product("keyboard",19.1, "WaterProof watch", categoryRepository.getById(32L), storeService.getStore(store1.getName()),  listingService.getListingByTitle(listing5.getTitle()), 13, images);
+//        Product prd6 = new Product("snow ball",200.0, "WaterProof watch", categoryRepository.getById(42L), storeService.getStore(store1.getName()),  listingService.getListingByTitle(listing6.getTitle()), 20, images);
+//        Product prd7 = new Product("monitor",300.1, "WaterProof watch", categoryRepository.getById(33L), storeService.getStore(store1.getName()),  listingService.getListingByTitle(listing7.getTitle()), 21, images);
+//        Product prd8 = new Product("phone charger",99.0, "WaterProof watch", categoryRepository.getById(34L), storeService.getStore(store1.getName()),  listingService.getListingByTitle(listing8.getTitle()), 19, images);
+//        Product prd9 = new Product("smartphone case",199.5, "WaterProof watch", categoryRepository.getById(34L), storeService.getStore(store1.getName()),  listingService.getListingByTitle(listing9.getTitle()), 100, images);
+//        Product prd10 = new Product("watch", 200.0, "WaterProof watch", categoryRepository.getById(31L), storeService.getStore(store1.getName()),  listingService.getListingByTitle(listing10.getTitle()), 50, images);
 //        
 //        // TODO: SOME shity Exception occurred here 
 //        

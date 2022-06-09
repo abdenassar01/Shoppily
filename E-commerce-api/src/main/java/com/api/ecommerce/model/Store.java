@@ -15,14 +15,14 @@ public class Store {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "store_id")
+    @Column(name = "id")
     private Long id;
     
-    @Column(name = "store_name")
+    @Column(name = "name")
     private String name;
     
     @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name =  "manager_id", referencedColumnName = "user_id")
+    @JoinColumn(name =  "manager_id", referencedColumnName = "id")
     private User user;
     
     @Column(name = "store_rating")
@@ -39,9 +39,9 @@ public class Store {
     @JsonIdentityReference(alwaysAsId = true)
     private Product product;
     
-    @OneToOne(mappedBy = "store")
+    @OneToMany(mappedBy = "store")
     @JsonIdentityReference(alwaysAsId = true)
-    private Listing listing;
+    private List<Listing> listing;
 
     public Store(String name, User user, Double rating, List<Listing> listings, Integer successfulSells) {
         this.name = name;
@@ -107,11 +107,11 @@ public class Store {
         this.product = product;
     }
 
-    public Listing getListing() {
+    public List<Listing> getListing() {
         return listing;
     }
 
-    public void setListing(Listing listing) {
+    public void setListing(List<Listing> listing) {
         this.listing = listing;
     }
 

@@ -17,11 +17,11 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "order_id")
+    @Column(name = "id")
     private Long id;
     
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
     private String address;
     private String city;
@@ -31,7 +31,7 @@ public class Order {
     @Column(name = "date_created")
     private Date dateCreated;
 
-    @Column(name = "price_X_quantity")
+    @Column(name = "Total")
     private Double priceXqte;
 
     @Column(name = "quantity")

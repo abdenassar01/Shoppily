@@ -12,10 +12,10 @@ public class Feedback {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "feedback_id")
+    @Column(name = "id")
     private Long id;
     
-    @Column(name = "feedback_content", nullable = false)
+    @Column(name = "content", nullable = false)
     @JsonProperty(value = "content")
     private String content;
     
@@ -24,7 +24,7 @@ public class Feedback {
     private Date dateCreated;
     
     @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     @JsonProperty(value = "user_id")
     @JsonIdentityReference(alwaysAsId = true)
     private User user;
