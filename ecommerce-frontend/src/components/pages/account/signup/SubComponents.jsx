@@ -21,7 +21,7 @@ export const Modal = styled.div`
              -20px -20px 60px #ffffff;
 
     @media (max-width: 768px){
-        width: 85%;
+        width: 95%;
     }   
 `
 
@@ -29,7 +29,7 @@ export const Form = styled.form`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    width: 90%;
+    width: 100%;   
 `
 
 export const Field = styled.div`
@@ -96,8 +96,11 @@ export const ParagraphWrapper = styled.div`
     position: absolute;
     top: 50px;
     right: 40px;
-
-
+    
+    @media (max-width: 768px){
+        position: static;
+        padding: 20px 0;
+    }      
 `
 
 export const LicenceInput = styled.p`

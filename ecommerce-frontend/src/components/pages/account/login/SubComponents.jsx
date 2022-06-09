@@ -30,19 +30,22 @@ export const Form = styled.form`
     flex-direction: column;
     justify-content: space-around;
     width: 100%;
+
+    @media (max-width: 768px){
+        width: 140%;
+    }     
 `
 
 export const Field = styled.div`
     margin: 2px 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: column;    
 `
 
 export const Label = styled.label`
     color: ${ props => props.theme.main };
     font-size: 14px;
     font-weight: bold;
-    /* border: 1px solid blue; */
 `
 
 export const InputWrapper = styled.div`
@@ -61,7 +64,7 @@ export const Input = styled.input`
 
     &:focus{
         outline: none;   
-    }
+    }    
 `
 
 export const LogoWrapper = styled.div`
