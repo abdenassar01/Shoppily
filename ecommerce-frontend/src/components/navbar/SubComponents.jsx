@@ -10,6 +10,10 @@ export const Wrapper = styled.header`
     top: 0px;
     width: 100%;
     z-index: 1000;
+
+    @media screen and (max-width: 780px) {
+        display:none;
+    }
 `
 
 export const Nav = styled.nav`
@@ -19,9 +23,40 @@ export const Nav = styled.nav`
     gap: 30px;
 `
 
+export const MobileNav = styled.header`
+    background-color: ${props => props.theme.main };
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 5px 0;
+    display: none;
+
+    @media screen and (max-width: 780px) {
+        display: block;
+    }
+`
+
+export const ExtendedMenu = styled.nav`
+    padding: 5px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px; 
+`
+
+export const AccountWrapper = styled.div`
+    padding-top: 40px;
+`
+
 export const Account = styled.nav`
     display: flex;
     justify-content: space-around;
     gap: 20px;
+`
 
+export const NavTab = styled.div`
+    display: flex;
+    justify-content: space-between;
+    padding-right: 10px;
 `
