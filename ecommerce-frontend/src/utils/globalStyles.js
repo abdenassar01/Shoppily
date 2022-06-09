@@ -5,6 +5,7 @@ export const GlobalStyle = createGlobalStyle`
         font-size: 16px;
         font-family: 'Roboto', monospace; 
         background-color: #E0E0E0;
+        scroll-behavior: smooth;
     }
 
     *{
