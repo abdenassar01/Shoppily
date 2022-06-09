@@ -2,6 +2,7 @@
 
 
 export const dark = {
+    background: "#18191A",
     main: "#242526",
     // main: PrimaryColors[500],
     neutral: "#F4FFE3",
@@ -14,6 +15,7 @@ export const dark = {
 //the main color stay the same 
 
 export const light = {
+    background: "white",
     main: PrimaryColors[100],
     neutral: "white",
     helperText: "white",

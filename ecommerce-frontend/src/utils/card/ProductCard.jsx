@@ -3,15 +3,13 @@ import { CardWrapper, Container, ImageWrapper,
     AddToCart
  } from './SubComponents'
 
- import img from './Sale.jpg'
-
 const ProductCard = () => {
 
   return (
     <CardWrapper>
         <Container>
             <ImageWrapper>
-                <Image src={img}/>
+                <Image src={"https://i.imgur.com/z315mrB.jpg"}/>
             </ImageWrapper>
             <Title>Product - Smart Watch</Title>
             <Quantity>

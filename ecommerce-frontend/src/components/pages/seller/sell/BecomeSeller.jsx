@@ -1,14 +1,29 @@
+import StoreForm from "./StoreForm";
+import  { PageWrapper, MainSection, MainIllustration, BigHeading,
+      MeduimHeading, Text, TextWrapper
+   } from "./Style/Styles";
 
 
 const BecomeSeller = () => {
   return (
-    <div>
-        Open Your Personalized Store
-        BecomeSeller
-        Selling as a business? We make it easy
-        {/* illustration link : https://i.imgur.com/h8FxQ2X.png  */}
-        form
-    </div>
+    <PageWrapper>
+      <MainSection>
+        <BigHeading>
+          Open Your Personalized Store
+        </BigHeading>
+        <MainIllustration src="https://i.imgur.com/kg4z633.png" alt="open a store on shoppily" />
+      </MainSection>
+      <MainSection color="#E0E0E0">
+        <MainIllustration src="https://svgshare.com/i/iA3.svg" alt="Shoppily Store" />
+        <TextWrapper>
+          <MeduimHeading>Selling as a business? We make it easy</MeduimHeading>
+          <Text>
+            We've got powerful tools to help you manage your inventory and orders, track your sales, and build your brand.
+          </Text>
+        </TextWrapper>
+      </MainSection>
+      <StoreForm />
+    </PageWrapper>
   )
 }
 
