@@ -19,6 +19,10 @@ export const BigHeading = styled.h1`
     line-height: 56.25px;
     color: ${props => props.theme.main };
     width: 472px;
+
+    @media (max-width: 667px) {
+        font-size: 28px;
+    }
 `
 
 export const TextWrapper = styled.div`
@@ -28,6 +32,10 @@ export const TextWrapper = styled.div`
 
 export const MainIllustration = styled.img`
     width: 514px;
+
+    @media (max-width: 667px) {
+        width: 350px;
+    }
 `
 
 export const MeduimHeading = styled.h2`
@@ -36,6 +44,11 @@ export const MeduimHeading = styled.h2`
     font-weight: 700;
     line-height: 35px;
     letter-spacing: 0em;
+
+    @media (max-width: 667px) {
+        margin-top: 30px;
+        font-size: 22px;
+    }
 `
 
 export const Text = styled.p`
@@ -44,6 +57,11 @@ export const Text = styled.p`
     font-size: 16px;
     line-height: 19px;
     color: ${props => props.color && props.color };
+    
+    @media (max-width: 667px) {
+        font-size: 12px;
+        font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    }
 `
 
 export const FormSection = styled.section`
@@ -55,12 +73,16 @@ export const FormSection = styled.section`
 `
 
 export const SmallHeading = styled.h3`
-    font-family: Roboto;
     font-size: 32px;
     font-weight: 400;
     line-height: 38px;
     letter-spacing: 0em;
     text-align: center;
+
+    @media (max-width: 667px) {
+        font-size: 22px;
+        font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    }
 `
 
 export const Form = styled.form`
@@ -78,6 +100,10 @@ export const Field = styled.div`
     flex-direction: column;
     width: 60%;
     gap: 5px;
+
+    @media (max-width: 667px) {
+        width: 100%;
+    }
 `
 
 export const Label = styled.label`
@@ -115,9 +141,17 @@ export const Submit = styled(Input)`
         color: ${props => props.theme.text };
         box-shadow:  5px 5px 0px ${props => props.theme.main };
     }
+
+    @media (max-width: 667px) {
+        width: 50%;
+    }
 `
 
 export const FormTextWrapper = styled.div`
     width: 50%;
     text-align: center;
+
+    @media (max-width: 667px) {
+        width: 90%;
+    }
 `
