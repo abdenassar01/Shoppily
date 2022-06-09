@@ -1,7 +1,7 @@
 import StoreForm from "./StoreForm";
 import  { PageWrapper, MainSection, MainIllustration, BigHeading,
       MeduimHeading, Text, TextWrapper
-   } from "./Style/Styles";
+   } from "./style/Styles";
 
 
 const BecomeSeller = () => {

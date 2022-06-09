@@ -11,13 +11,16 @@ import ContactUs from "./components/pages/contact/ContactUs";
 import About from "./components/pages/about/About";
 import BecomeSeller from "./components/pages/seller/sell/BecomeSeller";
 import Error404 from "./components/error/Error404";
+import ListProduct from "./components/pages/seller/listing/ListProduct";
+
+import PrivateRoute from "./components/privateRoute/PrivateRoute";
 
 import { dark, light } from "./utils";
 import { ThemeProvider } from "styled-components";
 import { useState } from 'react';
 
 import { MdDarkMode } from 'react-icons/md'
-import PrivateRoute from "./components/privateRoute/PrivateRoute";
+
 
 const App = () => {
 
@@ -42,6 +45,9 @@ const App = () => {
                 <Route path="/about" element={<About />} />
                 <Route 
                   path="/sell" element={ <PrivateRoute Element={ <BecomeSeller /> } /> } 
+                /> 
+                <Route 
+                  path="/list" element={ <PrivateRoute Element={ <ListProduct /> } /> } 
                 />
                 <Route path="/*" element={<Error404 />}/> 
             </Routes> 

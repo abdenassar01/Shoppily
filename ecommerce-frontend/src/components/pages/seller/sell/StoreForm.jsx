@@ -1,7 +1,7 @@
 import { FormSection, SmallHeading, Text,
     Form ,Field, Label, Input, ErrorMessage,
     Submit, FormTextWrapper
-} from "./Style/Styles";
+} from "./style/Styles";
 
 import { useForm } from "react-hook-form";
 
