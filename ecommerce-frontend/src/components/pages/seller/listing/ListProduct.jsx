@@ -27,7 +27,7 @@ const ListProduct = () => {
   return (
     <PageWrapper>
         {/* <Alert /> */}
-        <BigHeading>Add  a new Product</BigHeading>
+        <BigHeading>Add  a new Listing</BigHeading>
         <FormWrapper>
             <Form onSubmit={ handleSubmit(onSubmit) } >
                 <Field>

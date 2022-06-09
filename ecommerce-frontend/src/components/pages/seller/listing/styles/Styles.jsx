@@ -18,6 +18,10 @@ export const BigHeading = styled.h1`
     font-size: 32px;
     font-weight: bold;
     color: ${ props => props.theme.main };
+
+    @media (max-width: 667px) {
+        font-size: 22px; 
+    }
 `
 
 export const FormWrapper = styled.div`
@@ -75,12 +79,20 @@ export const Submit = styled(Input)`
         color: ${props => props.theme.text };
         box-shadow:  5px 5px 0px ${props => props.theme.main };
     }
+
+    @media (max-width: 667px) {
+        width: 50%; 
+    }
 `
 
 export const SubmitWrapper = styled.div`
     width: 60%;
     display: flex;
     justify-content: flex-end;
+
+    @media (max-width: 667px) {
+        width: 100%; 
+    }
 `
 
 export const ErrorMessage = styled.span`
@@ -164,5 +176,9 @@ export const AddProdButton = styled.button`
     &:hover{
         outline: none;
         box-shadow:  -5px -5px 0px ${props => props.theme.main };
+    }
+
+    @media (max-width: 667px) {
+        width: 80%; 
     }
 `
