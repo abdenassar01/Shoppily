@@ -31,8 +31,7 @@ public class Category {
         
     }
 
-    public Category(Long id, String label) {
-        this.id = id;
+    public Category(String label) {
         this.label = label;
     }
 

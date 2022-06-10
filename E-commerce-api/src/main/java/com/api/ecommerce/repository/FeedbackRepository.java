@@ -9,14 +9,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface FeedbackRepository extends JpaRepository<com.api.ecommerce.model.Feedback, Long> {
-
-    @Query(value = "select feedback_id, feedback_content, date_created, listing_id, user_id from feedback where listing_id = ?1 \n-- #pageable\n ",
-            nativeQuery = true,
-            countQuery = "select count(*) from feedback where listing_id = ?1;"
-    )
-    Page<Feedback> findByListing(Long listingId, Pageable pageable);
+    
     List<Feedback> findByListing(Listing listing);
+    
+    List<Feedback> findAllByListing(Listing listing);
+
+    Page<Optional<Feedback>> findByListing(Optional<Listing> listing, Pageable page);
 }

@@ -15,6 +15,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FeedbackService {
@@ -35,9 +37,7 @@ public class FeedbackService {
         newFeedback.setDateCreated(feedback.getDateCreated());
         newFeedback.setContent(feedback.getContent());
         newFeedback.setUser(userRepository.findByUsername(feedback.getUser().getUsername()));
-//        newFeedback.setListing();
-        //TODO: make it like the user and inject the listing repository
-        newFeedback.setListing(feedback.getListing());
+        newFeedback.setListing(listingRepository.findById(feedback.getListing().getId()));
         return repository.save(feedback);
     }
     
@@ -62,9 +62,9 @@ public class FeedbackService {
         return repository.save(newFeedback);
     }
     
-    public Page<Feedback> getFeedbacks(Long id){
-        Pageable page = PageRequest.of(1, 20, Sort.by("date_created"));
-        return repository.findByListing(id, page);
+    public List<Feedback> getListingFeedBack(Long id){
+        Listing lst = listingRepository.getById(id);
+        return repository.findAllByListing(lst);
     }
     
     public Feedback getFeedbackById(Long id){

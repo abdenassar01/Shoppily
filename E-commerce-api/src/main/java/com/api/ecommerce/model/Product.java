@@ -15,43 +15,33 @@ public class Product {
     @Column(name = "id")
     private Long id;
     
-    @Column(name = "reference")
-    @JsonProperty(value = "reference")
+    @Column(name = "label")
+    @JsonProperty(value = "label")
     private String reference;
     
     @Column(name = "price")
     private Double price;
-    
-    @Column(name = "discription")
-    private String discription;
-    
-    @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "store_id", referencedColumnName = "id")
-    private Store store;
 
     @ManyToOne
-    @JoinColumn(name="order_id", nullable=false)
+    @JoinColumn(name="order_id", referencedColumnName = "id")
     private Order order;
 
     @ManyToOne
-    @JoinColumn(name = "listing_id")
+    @JoinColumn(name = "listing_id", referencedColumnName = "id")
     @JsonIdentityReference(alwaysAsId = true)
     private Listing listing;
     
     @Column(name = "quantity_available")
     private Integer availableQte;
-    
-    @ElementCollection
-    private List<String> images;
 
-    public Product(String reference, Double price, String discription, Store store, Listing listing, Integer availableQte, List<String> images) {
+    @Column(name = "cover")
+    private String image;
+
+    public Product(String reference, Double price, Integer availableQte, String image) {
         this.reference = reference;
         this.price = price;
-        this.discription = discription;
-        this.store = store;
-        this.listing = listing;
         this.availableQte = availableQte;
-        this.images = images;
+        this.image = image;
     }
 
     public Product() {
@@ -96,22 +86,6 @@ public class Product {
         this.price = price;
     }
 
-    public String getDiscription() {
-        return discription;
-    }
-
-    public void setDiscription(String discription) {
-        this.discription = discription;
-    }
-    
-    public Store getStore() {
-        return store;
-    }
-
-    public void setStore(Store store) {
-        this.store = store;
-    }
-
     public Integer getAvailableQte() {
         return availableQte;
     }
@@ -120,11 +94,11 @@ public class Product {
         this.availableQte = availableQte;
     }
 
-    public List<String> getImages() {
-        return images;
+    public String getImages() {
+        return image;
     }
 
-    public void setImages(List<String> images) {
-        this.images = images;
+    public void setImages(String image) {
+        this.image = image;
     }
 }

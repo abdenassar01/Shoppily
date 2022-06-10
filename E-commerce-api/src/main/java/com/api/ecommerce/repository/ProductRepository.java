@@ -13,10 +13,7 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Page<Product> findAllByReference(String reference, Pageable page);
-//        @Query(value = "SELECT DISTINCT * FROM product WHERE category_id = ?;")
-
-//    Page<Product> searchByTitle(String title, Pageable page);
-
+    
     List<Product> findAllByListing(Listing listing);
 
     Product searchFirstByReference(String ref);

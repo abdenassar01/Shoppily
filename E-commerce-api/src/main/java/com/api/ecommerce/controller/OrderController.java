@@ -44,13 +44,6 @@ public class OrderController {
     @PreAuthorize(value = "hasRole('ROLE_SELLER')")
     public Order addProduct(@PathVariable Long id){
         Order order = service.getOrderById(id);
-        order.setProduct(
-                List.of(new Product(
-                        "reference", 12.2, "html generated",
-                        storeService.getStore("Cartmax"),
-                        listingService.getListingById(42L), 5,
-                        List.of("https://i.imgur.com/iCQ3YoU.png"))));
-        
         return service.updateOrder(id, order);
     }
     @GetMapping("/{id}")

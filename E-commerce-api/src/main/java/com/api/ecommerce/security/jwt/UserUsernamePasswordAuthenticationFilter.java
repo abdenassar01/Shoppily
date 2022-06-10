@@ -54,6 +54,7 @@ public class UserUsernamePasswordAuthenticationFilter extends UsernamePasswordAu
                 .compact();
         
         response.addHeader("Authorization", "Bearer " + token);
+        response.setContentType("Application/Json");
         response.getWriter().write("{ \n\"token\": \"" + token + "\"\n}" );
     }
 }

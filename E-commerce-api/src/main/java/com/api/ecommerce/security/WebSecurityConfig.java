@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(new UserUsernamePasswordAuthenticationFilter(authenticationManager()))
                 .addFilterAfter(new JwtTokenVerifier(), UserUsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("/", "index")
+                .antMatchers("/", "index", "/login", "/public")
                 .permitAll()
                 .antMatchers(HttpMethod.GET, "/api/v1/user/*")
                 .permitAll() 

@@ -84,11 +84,12 @@ public class UserService implements UserDetailsService {
     
     public User save(@NotNull User user){
         User newUser = new User();
-        System.out.println("password : " + user.getPassword() + ", UserName: " + user.getUsername());
         newUser.setUsername(user.getUsername());
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
         newUser.setFirstname(user.getFirstname());
         newUser.setLastname(user.getLastname());
+        newUser.setLastname(user.getLastname());
+        newUser.setAddress(user.getAddress());
         newUser.setAccountNonExpired(true);
         newUser.setAccountNonLocked(true);
         newUser.setCredentialsNonExpired(true);

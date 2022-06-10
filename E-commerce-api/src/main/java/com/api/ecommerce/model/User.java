@@ -38,6 +38,10 @@ public class User implements UserDetails {
     @JsonProperty
     private String role;
 
+    @Column(name = "address")
+    @JsonProperty
+    private String address;
+
     @JsonIgnore
     @OneToOne(mappedBy = "user")
     @JsonIdentityReference(alwaysAsId = true)
@@ -47,6 +51,15 @@ public class User implements UserDetails {
     @OneToOne(mappedBy = "user")
     @JsonIdentityReference(alwaysAsId = true)
     private Store store;
+
+    public User(String username, String firstname, String lastname, String password, String role, String address) {
+        this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.password = password;
+        this.role = role;
+        this.address = address;
+    }
 
     @JsonIgnore
     private boolean isAccountNonExpired;
@@ -61,30 +74,7 @@ public class User implements UserDetails {
     private boolean isEnabled;
 
     public User() {}
-
-    public User(String username, String firstname, String lastname, String password, String role, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
-        this.username = username;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.password = password;
-        this.role = role;
-        this.isAccountNonExpired = isAccountNonExpired;
-        this.isAccountNonLocked = isAccountNonLocked;
-        this.isCredentialsNonExpired = isCredentialsNonExpired;
-        this.isEnabled = isEnabled;
-    }
-
-    public User(String firstname, String lastname, String  username, String password, String role) {
-        this.username = username;
-        this.password = password;
-        this.lastname = lastname;
-        this.firstname = firstname;
-        this.role = role;
-        this.isAccountNonExpired = true;
-        this.isAccountNonLocked = true;
-        this.isCredentialsNonExpired = true;
-        this.isEnabled = true;
-    }
+    
 
     public String getRole() {
         return role;
@@ -115,6 +105,14 @@ public class User implements UserDetails {
         this.lastname = lastname;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @JsonProperty(value = "password")
     public void setPassword(String password) {
         this.password = password;
@@ -139,7 +137,6 @@ public class User implements UserDetails {
 
     @Override
     @JsonIgnore
-//    @JsonProperty(value = "password")
     public String getPassword() {
         return password;
     }

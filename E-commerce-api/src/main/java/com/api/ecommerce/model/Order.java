@@ -14,13 +14,13 @@ import java.util.List;
 @Table(name = "order_info")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Order {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private Long id;
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
     private String address;
@@ -40,13 +40,13 @@ public class Order {
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "order")
     private List<Product> products;
 
-    public Order(User user, String address, String city, String status, Integer zip, Date dateCreated, Double priceXqte, Integer qte, List<Product> products) {
+    public Order(User user, String address, String city, String status, Integer zip, Double priceXqte, Integer qte, List<Product> products) {
         this.user = user;
         this.address = address;
         this.city = city;
         this.status = status;
         this.zip = zip;
-        this.dateCreated = dateCreated;
+        this.dateCreated = new Date();
         this.priceXqte = priceXqte;
         this.qte = qte;
         this.products = products;
@@ -121,12 +121,12 @@ public class Order {
         this.dateCreated = dateCreated;
     }
 
-    @JsonProperty(value = "price_x_qte")
+    @JsonProperty(value = "total")
     public Double getPriceXqte() {
         return priceXqte;
     }
 
-    @JsonProperty(value = "price_x_qte")
+    @JsonProperty(value = "total")
     public void setPriceXqte(Double priceXqte) {
         this.priceXqte = priceXqte;
     }

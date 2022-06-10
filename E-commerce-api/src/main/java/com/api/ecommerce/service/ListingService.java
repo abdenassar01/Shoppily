@@ -47,8 +47,10 @@ public class ListingService {
         lst.setFeedbacks(listing.getFeedbacks());
         lst.setStore(
                 storeRepository
-                        .findByName(listing.getStore().getName())
+                        .getById(listing.getStore().getId())
         );
+        lst.setTitle(listing.getTitle());
+        lst.setCategory(listing.getCategory());
         lst.setFeedbacks(listing.getFeedbacks());
         lst.setProducts(listing.getProducts());
         return repository.save(lst);

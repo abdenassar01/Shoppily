@@ -7,6 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/v1/feedback")
@@ -20,10 +23,9 @@ public class FeedbackController {
     }
 
     @GetMapping("/listing/{listingId}")
-    public ResponseEntity<Page<Feedback>> getFeedBackById(@PathVariable Long listingId){
-        return ResponseEntity.ok(service.getFeedbacks(listingId));
+    public ResponseEntity<List<Feedback>> getFeedBackById(@PathVariable Long listingId){
+        return ResponseEntity.ok(service.getListingFeedBack(listingId));
     }
-    
     
    @PutMapping("/new")
     public ResponseEntity<Feedback> addFeedback(@RequestBody Feedback feedback){

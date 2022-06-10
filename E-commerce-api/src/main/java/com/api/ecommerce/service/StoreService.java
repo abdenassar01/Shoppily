@@ -28,6 +28,10 @@ public class StoreService {
         
         return repository.findAll(page);
     }
+    
+    public Store getStoreById(Long id){
+        return repository.getById(id);
+    }
 
 
     public Store createStore(Store store){

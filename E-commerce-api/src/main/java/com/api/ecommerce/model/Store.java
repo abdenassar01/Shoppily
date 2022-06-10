@@ -28,27 +28,22 @@ public class Store {
     @Column(name = "store_rating")
     private Double rating;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Listing> listings = new ArrayList<>();
-
-
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Listing> listings;
+    
     @Column(name = "successful_sells")
     private Integer successfulSells;
-    
-    @OneToOne(mappedBy = "store")
-    @JsonIdentityReference(alwaysAsId = true)
-    private Product product;
     
     @OneToMany(mappedBy = "store")
     @JsonIdentityReference(alwaysAsId = true)
     private List<Listing> listing;
 
-    public Store(String name, User user, Double rating, List<Listing> listings, Integer successfulSells) {
+    public Store(String name, User user, Double rating) {
         this.name = name;
         this.user = user;
         this.rating = rating;
-        this.listings = listings;
-        this.successfulSells = successfulSells;
+        this.listings = new ArrayList<>();
+        this.successfulSells = 0;
     }
 
     public Store() {
@@ -98,15 +93,7 @@ public class Store {
     public void setListings(List<Listing> listings) {
         this.listings = listings;
     }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
+    
     public List<Listing> getListing() {
         return listing;
     }

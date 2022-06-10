@@ -31,6 +31,7 @@ public class OrderService {
         order.setCity(ord.getCity());
         order.setProduct(ord.getProduct());
         order.setQte(ord.getQte());
+        order.setZip(ord.getZip());
         order.setPriceXqte(ord.getPriceXqte());
         order.setUser(user);
         order.setStatus(ord.getStatus());

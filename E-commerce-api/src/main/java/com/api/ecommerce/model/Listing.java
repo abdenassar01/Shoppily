@@ -46,12 +46,12 @@ public class Listing {
     @JsonProperty(value = "products")
     private List<Product> products;
 
-    public Listing(String discription, String title, Double rating, Store store, List<Feedback> feedbacks, List<Product> products, Category category) {
-        this.discription = discription;
+    public Listing(String description, String title, Store store, List<Product> products, Category category) {
+        this.discription = description;
         this.title = title;
-        this.rating = rating;
+        this.rating = 0.0;
         this.store = store;
-        this.feedbacks = feedbacks;
+        this.feedbacks = new ArrayList<>();
         this.category = category;
         this.products = products;
     }

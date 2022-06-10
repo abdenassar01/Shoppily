@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Optional;
 
 @Entity
 @Table(name = "feedback")
@@ -28,14 +29,23 @@ public class Feedback {
     @JsonProperty(value = "user_id")
     @JsonIdentityReference(alwaysAsId = true)
     private User user;
-
-  
-
-    @ManyToOne
-    @JoinColumn(name = "listing_id")
+    
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "listing_id", referencedColumnName = "id")
     @JsonProperty(value = "listing")
     @JsonIdentityReference(alwaysAsId = true)
     private Listing listing;
+
+    public Feedback() {
+
+    }
+
+    public Feedback(String content, User user, Listing listing) {
+        this.content = content;
+        this.dateCreated = new Date();
+        this.user = user;
+        this.listing = listing;
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -46,19 +56,10 @@ public class Feedback {
         return listing;
     }
 
-    public void setListing(Listing listing) {
-        this.listing = listing;
-    }
-    public Feedback(String content, Date dateCreated, User user, Listing listing) {
-        this.content = content;
-        this.dateCreated = dateCreated;
-        this.user = user;
+    public void setListing(Optional<Listing> listing) {
         this.listing = listing;
     }
 
-    public Feedback() {
-        
-    }
 
     public Long getId() {
         return id;
