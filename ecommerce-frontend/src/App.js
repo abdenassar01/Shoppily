@@ -21,6 +21,7 @@ import { useState } from 'react';
 
 import { MdDarkMode } from 'react-icons/md'
 import Profile from "./components/pages/profile/Profile";
+import Cart from "./components/pages/cart/Cart";
 
 
 const App = () => {
@@ -49,6 +50,9 @@ const App = () => {
                 /> 
                 <Route 
                   path="/me" element={ <PrivateRoute Element={ <Profile /> } /> } 
+                />
+                <Route 
+                  path="/cart" element={ <PrivateRoute Element={ <Cart /> } /> } 
                 />
                 <Route 
                   path="/list" element={ <PrivateRoute Element={ <ListProduct /> } /> } 

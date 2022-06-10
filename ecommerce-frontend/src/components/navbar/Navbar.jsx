@@ -34,7 +34,7 @@ const Navbar = () => {
             <FaShopify size={20}/>
             <h2>Start selling </h2>
           </PrimaryLink>
-          <PrimaryLink to="/" color={TextColors["textInverted"]}>
+          <PrimaryLink to="/cart" color={TextColors["textInverted"]}>
             <FaShoppingBasket size={20}/>
             <h2>Cart </h2>
           </PrimaryLink> 
@@ -70,11 +70,11 @@ const Navbar = () => {
                 <FaShopify size={20}/>
                 <h2>Start selling </h2>
               </PrimaryLink>
-              <PrimaryLink to="/" color={TextColors["textInverted"]}>
+              <PrimaryLink to="/cart" color={TextColors["textInverted"]}>
                 <FaShoppingBasket size={20}/>
                 <h2>Cart </h2>
               </PrimaryLink> 
-              <PrimaryLink to="/" color={TextColors["textInverted"]}>
+              <PrimaryLink to="/me" color={TextColors["textInverted"]}>
                 <RiAccountPinCircleLine size={20}/>
                 <h2>Account</h2>
               </PrimaryLink>
