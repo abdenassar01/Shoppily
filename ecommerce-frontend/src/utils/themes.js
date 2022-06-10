@@ -6,7 +6,7 @@ export const dark = {
     main: "#242526",
     // main: PrimaryColors[500],
     neutral: "#F4FFE3",
-    text: "black",
+    text: "white",
     helperText: "white",
     secondary: PrimaryColors[400],
     tertiary: PrimaryColors[300]

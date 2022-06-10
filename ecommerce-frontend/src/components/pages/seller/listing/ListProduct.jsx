@@ -55,7 +55,10 @@ const ListProduct = () => {
                     <ProductListHeading>Add Products</ProductListHeading>
                     <ProductInfoForm register={ register } errors={ errors } />
                     <center>
-                        <AddProdButton onClick={ () => console.log("hello") }><FaPlusCircle />Add New Product</AddProdButton>
+                        <AddProdButton onClick={ (e) => {
+                            e.preventDefault()
+                            console.log("hello") 
+                            }}><FaPlusCircle />Add New Product</AddProdButton>
                     </center>
                 </ProductList>
                 <SubmitWrapper>

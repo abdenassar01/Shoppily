@@ -20,6 +20,7 @@ import { ThemeProvider } from "styled-components";
 import { useState } from 'react';
 
 import { MdDarkMode } from 'react-icons/md'
+import Profile from "./components/pages/profile/Profile";
 
 
 const App = () => {
@@ -46,6 +47,9 @@ const App = () => {
                 <Route 
                   path="/sell" element={ <PrivateRoute Element={ <BecomeSeller /> } /> } 
                 /> 
+                <Route 
+                  path="/me" element={ <PrivateRoute Element={ <Profile /> } /> } 
+                />
                 <Route 
                   path="/list" element={ <PrivateRoute Element={ <ListProduct /> } /> } 
                 />
