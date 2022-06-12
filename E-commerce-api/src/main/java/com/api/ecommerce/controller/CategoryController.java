@@ -4,6 +4,7 @@ import com.api.ecommerce.model.Category;
 import com.api.ecommerce.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,4 +25,5 @@ public class CategoryController {
     public List<Category> getAllCategories(){
         return service.getAll();
     }
+    
 }

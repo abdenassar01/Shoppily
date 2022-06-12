@@ -61,12 +61,12 @@ public class Order {
         return id;
     }
 
-    @JsonProperty(value = "user_id")
+    @JsonProperty(value = "user")
     public User getUser() {
         return user;
     }
 
-    @JsonProperty(value = "user_id")
+    @JsonProperty(value = "user")
     public void setUser(User user) {
         this.user = user;
     }
@@ -142,13 +142,11 @@ public class Order {
     }
 
     @JsonProperty(value = "products")
-    @JsonIdentityReference(alwaysAsId = false)
     public List<Product> getProduct() {
         return products;
     }
 
     @JsonProperty(value = "products")
-    @JsonIdentityReference(alwaysAsId = true)
     public void setProduct(List<Product> products) {
         this.products = products;
     }

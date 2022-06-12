@@ -7,8 +7,10 @@ import com.api.ecommerce.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.PermitAll;
 import java.util.List;
 
 @RestController
@@ -56,5 +58,11 @@ public class OrderController {
     @PreAuthorize(value = "hasAnyRole('ROLE_ADMIN', 'ROLE_SELLER', 'ROLE_USER')")
     public List<Order> getOrderOfUser(@PathVariable Long id) {
        return service.getPageOfOrdersByUser(id);
+    }  
+    
+    @GetMapping("/me/orders")
+    @PermitAll
+    public List<Order> getOrderOfUser() {
+       return service.getPageOfOrdersByUserUsername(SecurityContextHolder.getContext().getAuthentication().getName());
     }
 }

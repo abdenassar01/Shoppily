@@ -57,5 +57,8 @@ public class OrderService {
         repository.deleteById(id);
         return repository.save(newOrder);
     }
-    
+
+    public List<Order> getPageOfOrdersByUserUsername(String username) {
+        return repository.findAllByUser(userService.getUserByUsername(username));
+    }
 }

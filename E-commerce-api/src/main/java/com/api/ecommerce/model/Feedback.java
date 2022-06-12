@@ -24,16 +24,12 @@ public class Feedback {
     @JsonProperty(value = "date_created")
     private Date dateCreated;
     
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne()
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @JsonProperty(value = "user_id")
-    @JsonIdentityReference(alwaysAsId = true)
     private User user;
     
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "listing_id", referencedColumnName = "id")
-    @JsonProperty(value = "listing")
-    @JsonIdentityReference(alwaysAsId = true)
     private Listing listing;
 
     public Feedback() {
@@ -51,16 +47,17 @@ public class Feedback {
         this.id = id;
     }
 
-    @JsonIgnore
+    @JsonProperty("listing_id")
+    @JsonIdentityReference(alwaysAsId = true)
     public Listing getListing() {
         return listing;
     }
-
+    
+    @JsonProperty("listing_id")
     public void setListing(Optional<Listing> listing) {
-        this.listing = listing;
+        this.listing = listing.orElse(null);
     }
-
-
+    
     public Long getId() {
         return id;
     }
@@ -81,11 +78,15 @@ public class Feedback {
         this.dateCreated = dateCreated;
     }
 
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonProperty("user_id")
     public User getUser() {
         return user;
     }
 
+    @JsonProperty("user_id")
     public void setUser(User user) {
         this.user = user;
     }
+    
 }

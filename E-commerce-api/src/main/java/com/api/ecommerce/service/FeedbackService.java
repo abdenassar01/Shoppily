@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -34,11 +35,11 @@ public class FeedbackService {
     
     public Feedback createFeedback(@NotNull Feedback feedback){
         Feedback newFeedback = new Feedback();
-        newFeedback.setDateCreated(feedback.getDateCreated());
+        newFeedback.setDateCreated(new Date());
         newFeedback.setContent(feedback.getContent());
-        newFeedback.setUser(userRepository.findByUsername(feedback.getUser().getUsername()));
-        newFeedback.setListing(listingRepository.findById(feedback.getListing().getId()));
-        return repository.save(feedback);
+        newFeedback.setUser(userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
+        newFeedback.setListing(Optional.ofNullable(feedback.getListing()));
+        return repository.save(newFeedback);
     }
     
     public boolean deleteFeedback(@NotNull Feedback feedback){

@@ -80,7 +80,7 @@ public class Listing {
         return category;
     }
 
-    @JsonIdentityReference(alwaysAsId = true)
+
     public void setCategory(Category category) {
         this.category = category;
     }
@@ -88,10 +88,11 @@ public class Listing {
         this.rating = rating;
     }
 
+    @JsonIdentityReference(alwaysAsId = true)
     public Store getStore() {
         return store;
     }
-
+    
     public void setStore(Store store) {
         this.store = store;
     }
