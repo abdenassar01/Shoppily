@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 import static com.api.ecommerce.security.roles.UserRoles.*;
 
@@ -43,9 +44,9 @@ public class User implements UserDetails {
     private String address;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIdentityReference(alwaysAsId = true)
-    private Feedback feedback;
+    private List<Feedback> feedbacks;
 
     @JsonIgnore
     @OneToOne(mappedBy = "user")
@@ -182,14 +183,13 @@ public class User implements UserDetails {
     public void setId(Long id) {
         this.id = id;
     }
-    
 
-    public Feedback getFeedback() {
-        return feedback;
+    public List<Feedback> getFeedbacks() {
+        return feedbacks;
     }
 
-    public void setFeedback(Feedback feedback) {
-        this.feedback = feedback;
+    public void setFeedbacks(List<Feedback> feedbacks) {
+        this.feedbacks = feedbacks;
     }
 
     public void setAccountNonExpired(boolean accountNonExpired) {

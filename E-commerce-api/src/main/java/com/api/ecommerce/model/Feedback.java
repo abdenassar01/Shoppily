@@ -24,7 +24,7 @@ public class Feedback {
     @JsonProperty(value = "date_created")
     private Date dateCreated;
     
-    @OneToOne()
+    @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
     

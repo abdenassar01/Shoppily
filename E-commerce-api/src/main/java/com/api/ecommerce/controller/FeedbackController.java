@@ -37,7 +37,7 @@ public class FeedbackController {
         return ResponseEntity.ok(service.getFeedbackById(id));
     }
     
-    @PostMapping("/{id}/update")
+    @PostMapping("/{id}")
     public ResponseEntity<Feedback>  updateFeedback(@PathVariable Long id, @RequestBody Feedback feedback) {
         return ResponseEntity.ok(service.updateFeedback(id, feedback));
     }
