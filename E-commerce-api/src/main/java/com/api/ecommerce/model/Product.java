@@ -51,18 +51,12 @@ public class Product {
     public Long getId() {
         return id;
     }
-
-    public String getTitle() {
-        return reference;
-    }
-
-    public void setTitle(String reference) {
-        this.reference = reference;
-    }
+    
     public void setId(Long id) {
         this.id = id;
     }
 
+    @JsonIgnore
     public Order getOrder() {
         return order;
     }
@@ -71,6 +65,7 @@ public class Product {
         this.order = order;
     }
 
+    @JsonIgnore
     public Listing getListing() {
         return listing;
     }

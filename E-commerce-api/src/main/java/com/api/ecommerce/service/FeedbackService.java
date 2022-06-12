@@ -60,7 +60,7 @@ public class FeedbackService {
     
     public Feedback updateFeedback(Long id, Feedback newFeedback){
         repository.deleteById(id);
-        return repository.save(newFeedback);
+        return createFeedback(newFeedback); 
     }
     
     public List<Feedback> getListingFeedBack(Long id){

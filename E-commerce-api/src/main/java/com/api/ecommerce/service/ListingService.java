@@ -73,8 +73,9 @@ public class ListingService {
 
     public Page<Listing> getListingByStore(Long storeId) {
         Store store = storeRepository.getById(storeId);
+        
         return repository.findAllByStore(
-                PageRequest.of(1, 10, Sort.by("title")), 
+                PageRequest.of(1, 10), 
                 store
         );
     }

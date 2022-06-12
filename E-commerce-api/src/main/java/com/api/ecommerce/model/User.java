@@ -44,7 +44,7 @@ public class User implements UserDetails {
     private String address;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user")
     @JsonIdentityReference(alwaysAsId = true)
     private List<Feedback> feedbacks;
 
