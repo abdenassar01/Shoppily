@@ -2,6 +2,7 @@ package com.api.ecommerce.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -23,20 +24,18 @@ public class Store {
     
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name =  "manager_id", referencedColumnName = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     private User user;
     
     @Column(name = "store_rating")
     private Double rating;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<Listing> listings;
     
     @Column(name = "successful_sells")
     private Integer successfulSells;
     
     @OneToMany(mappedBy = "store")
     @JsonIdentityReference(alwaysAsId = true)
-    private List<Listing> listing;
+    private List<Listing> listings;
 
     public Store(String name, User user, Double rating) {
         this.name = name;
@@ -62,6 +61,7 @@ public class Store {
         this.name = name;
     }
 
+    @JsonProperty(value = "user")
     public User getUser() {
         return user;
     }
@@ -94,14 +94,6 @@ public class Store {
         this.listings = listings;
     }
     
-    public List<Listing> getListing() {
-        return listing;
-    }
-
-    public void setListing(List<Listing> listing) {
-        this.listing = listing;
-    }
-
     public void setSuccessfulSells(Integer successfulSells) {
         this.successfulSells = successfulSells;
     }

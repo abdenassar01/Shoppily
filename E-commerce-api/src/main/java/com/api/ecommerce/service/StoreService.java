@@ -1,31 +1,35 @@
 package com.api.ecommerce.service;
 
 import com.api.ecommerce.model.Store;
+import com.api.ecommerce.model.User;
 import com.api.ecommerce.repository.StoreRepository;
+import com.api.ecommerce.repository.UserRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class StoreService {
     
     private final StoreRepository repository;
+    private final UserRepository userRepository;
     
     @Autowired
-    public StoreService(StoreRepository repository) {
+    public StoreService(StoreRepository repository, UserRepository userRepository) {
         this.repository = repository;
+        this.userRepository = userRepository;
     }
     
     public Page<Store> getPageOfStores(int pageSize){
         Pageable page = PageRequest.ofSize(pageSize);
-        return repository.findAll(page);
-    }
-
-    public Page<Store> getStoresSortedByName(int pageNumber,int pageSize){
-        Pageable page = PageRequest.of(pageNumber, pageSize, Sort.by("store_name"));
-        
         return repository.findAll(page);
     }
     
@@ -33,27 +37,41 @@ public class StoreService {
         return repository.getById(id);
     }
 
-
-    public Store createStore(Store store){
-        return repository.save(store);
+    public Store createStore(@NotNull Store store){
+        Optional<Store> prev = Optional.ofNullable(repository.getByUser(store.getUser()));
+        if(prev.isPresent()){
+            return prev.get();
+        }
+        Store str = new Store();
+        str.setName(store.getName());
+        str.setRating(0.0);
+        
+        str.setUser(
+                userRepository.getById(
+                        store.getUser().getId()
+                ));
+        str.setListings(new ArrayList<>());
+        str.setSuccessfulSells(0);
+        return repository.save(str);
     }
     
-    public Store deleteStore(@NotNull Store store){
-        Store seller = repository.findByName(store.getName());
-        repository.delete(store);
-        return seller;
+    public String deleteStoreById(Long id) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByUsername(username);
+        Store store = repository.getById(id);
+        if((Objects.equals(user.getRole(), "ADMIN")) || (Objects.equals(user.getStore(), store))){
+            repository.deleteById(id);
+            return "deleted successfully";  
+        }
+        return "You don't have the right to access";
     }
     
-    public Store getStore(String name){
-        return repository.findByName(name);
+    public Store getStoreByUserUsername(String username){
+        User user = userRepository.findByUsername(username);
+        return repository.getByUser(user);
     }
     
-    public boolean exist(Store store){
-        return repository.exists(Example.of(store));
-    }
-    
-    public Store updateStore(@NotNull Store store){
-        repository.deleteById(store.getId());
-       return repository.save(store);
+    public List<Store> searchStoreByTitle(String store){
+        return repository.findAllByNameContaining(store);
     }
 }
