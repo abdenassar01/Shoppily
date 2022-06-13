@@ -1,10 +1,11 @@
 spring:
   datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/E_COMMERCE?createDatabaseIfNotExist=true&useSSL=true
+    url: jdbc:mysql://ecommercedb.c0lrqwuyarga.eu-west-3.rds.amazonaws.com:3306/E_COMMERCE?createDatabaseIfNotExist=true
     username: root
-    password: 27701
+    password: nassardev
   jpa:
     hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: true
+server:
+  port: 5000
