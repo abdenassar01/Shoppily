@@ -53,13 +53,21 @@ public class User implements UserDetails {
     @JsonIdentityReference(alwaysAsId = true)
     private Store store;
 
-    public User(String username, String firstname, String lastname, String password, String role, String address) {
+    public User(String firstname , String lastname, String username , String password, String role, String address) {
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
         this.password = password;
         this.role = role;
         this.address = address;
+    }  
+    
+    public User(String firstname , String lastname, String username , String password, String role) {
+        this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.password = password;
+        this.role = role;
     }
 
     @JsonIgnore

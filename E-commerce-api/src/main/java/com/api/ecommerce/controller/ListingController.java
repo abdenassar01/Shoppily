@@ -51,7 +51,7 @@ public class ListingController {
         return service.deleteListing(listing);
     }
     
-    @PutMapping("/new")
+    @PostMapping("/new")
     public ResponseEntity<Listing> addListing(@RequestBody Listing listing){
         return ResponseEntity.ok().body(service.addListing(listing));
     }

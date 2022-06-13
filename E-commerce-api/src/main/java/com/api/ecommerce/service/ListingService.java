@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -21,10 +22,13 @@ public class ListingService {
 
     private final ListingRepository repository;
     private final StoreRepository storeRepository;
+    private final CategoryService categoryService; 
+    
     @Autowired
-    public ListingService(ListingRepository repository, StoreRepository storeRepository) {
+    public ListingService(ListingRepository repository, StoreRepository storeRepository, CategoryService categoryService) {
         this.repository = repository;
         this.storeRepository = storeRepository;
+        this.categoryService = categoryService;
     }
 
     public Listing getListingById(Long id) {
@@ -50,7 +54,7 @@ public class ListingService {
                         .getById(listing.getStore().getId())
         );
         lst.setTitle(listing.getTitle());
-        lst.setCategory(listing.getCategory());
+        lst.setCategory(categoryService.getCategoryById(listing.getCategory().getId()));
         lst.setFeedbacks(listing.getFeedbacks());
         lst.setProducts(listing.getProducts());
         return repository.save(lst);
