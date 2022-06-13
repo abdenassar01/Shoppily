@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "category")
@@ -21,11 +22,11 @@ public class Category {
     @Column(name = "label")
     private String label;
     
-    @OneToOne(mappedBy = "category", cascade = CascadeType.MERGE)
+    @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)
     @PrimaryKeyJoinColumn
     @JsonIdentityReference(alwaysAsId = true)
     @JsonIgnore
-    private Listing listing;
+    private List<Listing> listing;
     
     public Category() {
         
@@ -39,11 +40,11 @@ public class Category {
         return id;
     }
 
-    public Listing getListing() {
+    public List<Listing> getListing() {
         return listing;
     }
 
-    public void setListing(Listing listing) {
+    public void setListing(List<Listing> listing) {
         this.listing = listing;
     }
 

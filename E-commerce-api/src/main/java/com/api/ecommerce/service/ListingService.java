@@ -35,7 +35,9 @@ public class ListingService {
     }
 
     public Listing getListingById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new IllegalStateException("there is no listing with the specified id: " + id));
+        return repository.findById(id).orElseThrow(
+                () -> new IllegalStateException("there is no listing with the specified id: " + id)
+        );
     }
 
     public Page<Listing> getPageOfListingByTitle(String title) {
@@ -69,7 +71,10 @@ public class ListingService {
     }
 
     public Listing updateListing(Long id, Listing listing) {
-        repository.delete(repository.findById(id).orElseThrow(() -> new IllegalStateException("there is no listing with the specified id: " + id)));
+        repository.delete(
+                repository.findById(id).orElseThrow(
+                        () -> new IllegalStateException("there is no listing with the specified id: " + id))
+        );
         return addListing(listing);
     }
 
@@ -79,27 +84,35 @@ public class ListingService {
     }
 
     public Listing deleteListing(Long id) {
+        Listing lst = repository.findById(id).orElseThrow(
+                () -> new IllegalStateException("there is no listing with the specified id: " + id)
+        );
         repository.deleteById(id);
-        return repository.findById(id).orElseThrow(() -> new IllegalStateException("there is no listing with the specified id: " + id));
+        return lst;
     }
 
     public Page<Listing> getListingByStore(Long storeId) {
         Store store = storeRepository.getById(storeId);
         
-        return repository.findAllByStore(
+        Page<Listing> listings =  repository.findAllByStore(
                 PageRequest.of(1, 10), 
                 store
         );
+
+        listings.get().forEach(el -> System.out.println(el.getTitle()));
+        return listings;
     }
 
     public Listing getListingByStore(Long storeId, Long listingId) {
         Store store = storeRepository.getById(storeId);
-        List<Listing> listings = repository.findAllByStore(
-                PageRequest.of(1, 10, Sort.by("title")),
-                store
-        ).stream()
-                .filter((listing) -> Objects.equals(listing.getId(), listingId)).collect(Collectors.toList());
-        return listings.get(0);
+//        List<Listing> listings = repository.findAllByStore(
+//                PageRequest.of(1, 10, Sort.by("title")),
+//                store
+//        ).stream()
+//                .filter((listing) -> Objects.equals(listing.getId(), listingId))
+//                .collect(Collectors.toList());
+//        return listings.get(0);
+        return repository.getAllByIdAndStore(listingId, store);
     }
 
     public List<Listing> getListingByTitle(String title) {

@@ -33,7 +33,7 @@ public class Listing {
     @JsonProperty(value = "store")
     private Store store;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     @JsonProperty(value = "category")
     private Category category;

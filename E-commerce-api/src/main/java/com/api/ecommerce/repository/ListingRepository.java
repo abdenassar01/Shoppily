@@ -13,9 +13,10 @@ import java.util.List;
 public interface ListingRepository extends JpaRepository<Listing, Long> {
 
     List<Listing> getByTitleContaining(String title);
+    
     Page<Listing> searchAllByTitle(Pageable pageable, String title);
     
     Page<Listing> findAllByStore(Pageable pageable, Store store);
     
-    
+    Listing getAllByIdAndStore(Long id, Store store);
 }
