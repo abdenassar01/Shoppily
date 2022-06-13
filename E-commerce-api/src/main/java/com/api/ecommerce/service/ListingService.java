@@ -1,8 +1,10 @@
 package com.api.ecommerce.service;
 
 import com.api.ecommerce.model.Listing;
+import com.api.ecommerce.model.Product;
 import com.api.ecommerce.model.Store;
 import com.api.ecommerce.repository.ListingRepository;
+import com.api.ecommerce.repository.ProductRepository;
 import com.api.ecommerce.repository.StoreRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +25,13 @@ public class ListingService {
     private final ListingRepository repository;
     private final StoreRepository storeRepository;
     private final CategoryService categoryService; 
-    
+    private final ProductRepository productRepository;
     @Autowired
-    public ListingService(ListingRepository repository, StoreRepository storeRepository, CategoryService categoryService) {
+    public ListingService(ListingRepository repository, StoreRepository storeRepository, CategoryService categoryService, ProductRepository productRepository) {
         this.repository = repository;
         this.storeRepository = storeRepository;
         this.categoryService = categoryService;
+        this.productRepository = productRepository;
     }
 
     public Listing getListingById(Long id) {
@@ -40,23 +43,28 @@ public class ListingService {
         return repository.searchAllByTitle(pageable, title);
     }
     
-//    public Page<Listing> searchByTitle(String title){
-//        return repository.getByTitleContaining(title);
-//    }
-
     public Listing addListing(@NotNull Listing listing) {
+        ArrayList<Product> products = new ArrayList<>();
+        
+        for(Product p : listing.getProducts() ) {
+            productRepository.save(p);
+            products.add(productRepository.getById(p.getId()));
+        }
+        
         Listing lst = new Listing();
         lst.setDiscription(listing.getDiscription());
         lst.setRating(listing.getRating());
         lst.setFeedbacks(listing.getFeedbacks());
         lst.setStore(
                 storeRepository
-                        .getById(listing.getStore().getId())
-        );
+                        .getById(
+                                listing.getStore().getId()
+                        ));
         lst.setTitle(listing.getTitle());
-        lst.setCategory(categoryService.getCategoryById(listing.getCategory().getId()));
+        lst.setCategory(listing.getCategory());
         lst.setFeedbacks(listing.getFeedbacks());
-        lst.setProducts(listing.getProducts());
+        lst.setProducts(products);
+        
         return repository.save(lst);
     }
 

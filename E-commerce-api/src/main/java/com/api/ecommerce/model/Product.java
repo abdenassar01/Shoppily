@@ -35,6 +35,7 @@ public class Product {
     private Integer availableQte;
 
     @Column(name = "cover")
+    @JsonProperty("cover")
     private String image;
 
     public Product(String reference, Double price, Integer availableQte, String image) {
@@ -89,11 +90,19 @@ public class Product {
         this.availableQte = availableQte;
     }
 
-    public String getImages() {
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
+    public String getImage() {
         return image;
     }
 
-    public void setImages(String image) {
+    public void setImage(String image) {
         this.image = image;
     }
 }
