@@ -25,14 +25,13 @@ import java.util.stream.Collectors;
 public class JwtTokenVerifier extends OncePerRequestFilter {
 
     @Override
-    protected void doFilterInternal(HttpServletRequest httpServletRequest,
-                                    HttpServletResponse httpServletResponse,
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
-        String authorizationHedear = httpServletRequest.getHeader("Authorization");
-
+        String authorizationHedear = request.getHeader("Authorization");
 
         if(Strings.isNullOrEmpty(authorizationHedear) || !authorizationHedear.startsWith("Bearer ")){
-            filterChain.doFilter(httpServletRequest, httpServletResponse);
+            filterChain.doFilter(request, response);
             return;
         }
 
@@ -67,6 +66,6 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
             throw new IllegalStateException("token cannot be trusted:  " + token);
         }
 
-        filterChain.doFilter(httpServletRequest, httpServletResponse);
+        filterChain.doFilter(request, response);
     }
 }
