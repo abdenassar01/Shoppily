@@ -48,14 +48,16 @@ export const Label = styled.label`
 export const Input = styled.input`
     width: 100% ;
     height: 30px ;
-    border-radius: 50px;
+    border-radius: 5px;
     padding-left: 10px;
     border: 2px solid ${ props => props.theme.main };
     caret-color: ${ props => props.theme.main };
+    transition: all .3s cubic-bezier(0.165, 0.84, 0.44, 1);
 
-    &:focus{
-        outline: none; 
-    }
+    &:focus {
+        outline: none;
+        box-shadow:  5px 5px 0px ${props => props.theme.main };
+    } 
 `
 
 export const LogoWrapper = styled.div`
@@ -79,7 +81,7 @@ export const Submit = styled.input`
     padding: 7px 0;
     margin: 20px 50px;
     font-weight: bold;
-    border-radius: 50px;
+    border-radius: 5px;
     color: white;
     border: 2px solid ${ props => props.theme.main };
     background-color: ${ props => props.theme.main };
@@ -89,6 +91,7 @@ export const Submit = styled.input`
         color:  ${ props => props.theme.main };
         background-color: white;
         border: 2px solid ${props => props.theme.main};
+        box-shadow:  5px 5px 0px ${props => props.theme.main };
     }
 `
 
@@ -121,4 +124,5 @@ export const ErrorSpan = styled.span`
     font-size: 12px;
     color: #ff0022;
     margin-bottom: 10px;
+    margin-top: 3px;
 `

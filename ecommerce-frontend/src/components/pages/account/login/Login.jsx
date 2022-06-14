@@ -8,12 +8,17 @@ import { useForm } from "react-hook-form"
 
 import { RiLockPasswordFill, RiAccountBoxFill } from 'react-icons/ri';
 
+import { useUserStore } from "../../../../models/user";
+
 const Login = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data)
+  const user = useUserStore();
+
+  const onSubmit = async (data) => {
+    console.log(await user.login(data))
+    // console.log(data)
   }
 
   return (
