@@ -3,11 +3,14 @@ import styled from "styled-components";
 import { StatusColors } from "../colors/colors";
 
 export const PageWrapper = styled.div`
-    width: 100%;
-    height: 100%;
+
     position: absolute;
     background-color: #00000086;
-    z-index: 1;
+    z-index: 1000000;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 `
 
 export const AlertDailog = styled.div`

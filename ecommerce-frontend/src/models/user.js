@@ -1,6 +1,11 @@
 import { types } from "mobx-state-tree";
 import { main } from "../utils/axios/axois";
 
+const _userLoginAsync = async (payload) => {
+    const response = await main.post("/login", payload);
+    console.log(response);
+}
+
 export const User = types.model("user", {
     id : types.optional(types.number, 0),
     firstname : types.optional(types.string, ""),
@@ -34,15 +39,15 @@ export const UserStore = types.model("userStore", {
     removeToken(){
         self.token = ""
     },
-    async login(data){
-        return data;
+    async login(payload){
+        await _userLoginAsync(payload)
     }
 }))
 
 let _userStore
 export const useUserStore = () => {
     if(!_userStore){
-        _userStore: UserStore.create({
+        _userStore = UserStore.create({
             token: "",
             isAuthorized: false
         })

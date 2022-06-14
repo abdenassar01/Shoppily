@@ -1,14 +1,16 @@
 import { Wrapper, Modal, Field, Label, Input, 
   InputWrapper, Form, LogoWrapper, Icon, Submit,
   ErrorSpan
-} from "./SubComponents"
-import { PrimaryColors, H2, Paragraph, TextLink } from "../../../../utils"
+} from "./SubComponents";
+
+import { PrimaryColors, H2, Paragraph, TextLink, Alert } from "../../../../utils"
 import Logo from '../../../logo/Logo'
 import { useForm } from "react-hook-form"
 
 import { RiLockPasswordFill, RiAccountBoxFill } from 'react-icons/ri';
 
 import { useUserStore } from "../../../../models/user";
+import { useState } from "react";
 
 const Login = () => {
 
@@ -16,13 +18,19 @@ const Login = () => {
 
   const user = useUserStore();
 
+  const [ message, setMessage ] = useState("Testing Message")
+
   const onSubmit = async (data) => {
-    console.log(await user.login(data))
-    // console.log(data)
+    const payload = {
+      username: data.username_login,
+      password: data.password_login
+    }
+    user.login(payload)
   }
 
   return (
     <Wrapper>
+      <Alert message={ message } setMessage={ setMessage } status="success" />
         <Modal>
           <LogoWrapper>
             <Logo color={ PrimaryColors[100] }/>

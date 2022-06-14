@@ -3,10 +3,14 @@ import {
 } from "./Styles";
 
 import { ImCross } from "react-icons/im"
+import { useEffect } from "react";
 
 export const Alert = ({ message, setMessage, status }) => {
+
+  if(!message) return null
+
   return (
-    <PageWrapper >
+    <PageWrapper onClick={ () => setMessage("") }>
         <AlertDailog status={status}>
           <IconWrapper>
             <ImCross onClick={ () => setMessage("") }/>
