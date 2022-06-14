@@ -13,12 +13,12 @@ import javax.annotation.security.PermitAll;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/v1/store")
 public class StoreController {
     
     private final StoreService service;
     
-
     @Autowired
     public StoreController(StoreService service) {
         this.service = service;
