@@ -2,7 +2,6 @@ package com.api.ecommerce.controller;
 
 import com.api.ecommerce.model.Feedback;
 import com.api.ecommerce.service.FeedbackService;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

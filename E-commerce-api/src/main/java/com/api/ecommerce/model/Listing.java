@@ -16,8 +16,8 @@ public class Listing {
     @Column(name = "id")
     private Long id;
     
-    @Column(name = "discription")
-    @JsonProperty(value = "discription")
+    @Column(name = "description", length = 1000)
+    @JsonProperty(value = "description")
     private String discription;
     
     @Column(name = "title")
@@ -33,7 +33,7 @@ public class Listing {
     @JsonProperty(value = "store")
     private Store store;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     @JsonProperty(value = "category")
     private Category category;
@@ -42,7 +42,7 @@ public class Listing {
     @JsonProperty(value = "feedbacks")
     private List<Feedback> feedbacks;
     
-    @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonProperty(value = "products")
     private List<Product> products;
 

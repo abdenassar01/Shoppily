@@ -5,8 +5,11 @@ import {
 import { ImCross } from "react-icons/im"
 
 export const Alert = ({ message, setMessage, status }) => {
+
+  if(!message) return null
+
   return (
-    <PageWrapper >
+    <PageWrapper onClick={ () => setMessage("") }>
         <AlertDailog status={status}>
           <IconWrapper>
             <ImCross onClick={ () => setMessage("") }/>

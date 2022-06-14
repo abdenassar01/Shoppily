@@ -1,8 +1,10 @@
 package com.api.ecommerce.service;
 
 import com.api.ecommerce.model.Listing;
+import com.api.ecommerce.model.Product;
 import com.api.ecommerce.model.Store;
 import com.api.ecommerce.repository.ListingRepository;
+import com.api.ecommerce.repository.ProductRepository;
 import com.api.ecommerce.repository.StoreRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +25,19 @@ public class ListingService {
     private final ListingRepository repository;
     private final StoreRepository storeRepository;
     private final CategoryService categoryService; 
-    
+    private final ProductRepository productRepository;
     @Autowired
-    public ListingService(ListingRepository repository, StoreRepository storeRepository, CategoryService categoryService) {
+    public ListingService(ListingRepository repository, StoreRepository storeRepository, CategoryService categoryService, ProductRepository productRepository) {
         this.repository = repository;
         this.storeRepository = storeRepository;
         this.categoryService = categoryService;
+        this.productRepository = productRepository;
     }
 
     public Listing getListingById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new IllegalStateException("there is no listing with the specified id: " + id));
+        return repository.findById(id).orElseThrow(
+                () -> new IllegalStateException("there is no listing with the specified id: " + id)
+        );
     }
 
     public Page<Listing> getPageOfListingByTitle(String title) {
@@ -40,28 +45,36 @@ public class ListingService {
         return repository.searchAllByTitle(pageable, title);
     }
     
-//    public Page<Listing> searchByTitle(String title){
-//        return repository.getByTitleContaining(title);
-//    }
-
     public Listing addListing(@NotNull Listing listing) {
+        ArrayList<Product> products = new ArrayList<>();
+        
+        for(Product p : listing.getProducts() ) {
+            productRepository.save(p);
+            products.add(productRepository.getById(p.getId()));
+        }
+        
         Listing lst = new Listing();
         lst.setDiscription(listing.getDiscription());
         lst.setRating(listing.getRating());
         lst.setFeedbacks(listing.getFeedbacks());
         lst.setStore(
                 storeRepository
-                        .getById(listing.getStore().getId())
-        );
+                        .getById(
+                                listing.getStore().getId()
+                        ));
         lst.setTitle(listing.getTitle());
-        lst.setCategory(categoryService.getCategoryById(listing.getCategory().getId()));
+        lst.setCategory(listing.getCategory());
         lst.setFeedbacks(listing.getFeedbacks());
-        lst.setProducts(listing.getProducts());
+        lst.setProducts(products);
+        
         return repository.save(lst);
     }
 
     public Listing updateListing(Long id, Listing listing) {
-        repository.delete(repository.findById(id).orElseThrow(() -> new IllegalStateException("there is no listing with the specified id: " + id)));
+        repository.delete(
+                repository.findById(id).orElseThrow(
+                        () -> new IllegalStateException("there is no listing with the specified id: " + id))
+        );
         return addListing(listing);
     }
 
@@ -71,27 +84,35 @@ public class ListingService {
     }
 
     public Listing deleteListing(Long id) {
+        Listing lst = repository.findById(id).orElseThrow(
+                () -> new IllegalStateException("there is no listing with the specified id: " + id)
+        );
         repository.deleteById(id);
-        return repository.findById(id).orElseThrow(() -> new IllegalStateException("there is no listing with the specified id: " + id));
+        return lst;
     }
 
     public Page<Listing> getListingByStore(Long storeId) {
         Store store = storeRepository.getById(storeId);
         
-        return repository.findAllByStore(
+        Page<Listing> listings =  repository.findAllByStore(
                 PageRequest.of(1, 10), 
                 store
         );
+
+        listings.get().forEach(el -> System.out.println(el.getTitle()));
+        return listings;
     }
 
     public Listing getListingByStore(Long storeId, Long listingId) {
         Store store = storeRepository.getById(storeId);
-        List<Listing> listings = repository.findAllByStore(
-                PageRequest.of(1, 10, Sort.by("title")),
-                store
-        ).stream()
-                .filter((listing) -> Objects.equals(listing.getId(), listingId)).collect(Collectors.toList());
-        return listings.get(0);
+//        List<Listing> listings = repository.findAllByStore(
+//                PageRequest.of(1, 10, Sort.by("title")),
+//                store
+//        ).stream()
+//                .filter((listing) -> Objects.equals(listing.getId(), listingId))
+//                .collect(Collectors.toList());
+//        return listings.get(0);
+        return repository.getAllByIdAndStore(listingId, store);
     }
 
     public List<Listing> getListingByTitle(String title) {

@@ -1,6 +1,6 @@
 import { Article, ProductInfo, PriceSection, Image,
     TextWrapper, ProductInfoContent, Quantity, ChangeQuantityButton,
-    Title, Type, MainHeading, RemoveItemButton, RemoveAllButton
+    Title, Type, RemoveAllButton
 } from "../styles/Styles"
 
 const Product = () => {

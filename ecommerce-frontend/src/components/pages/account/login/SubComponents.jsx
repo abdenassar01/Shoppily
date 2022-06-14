@@ -51,20 +51,22 @@ export const Label = styled.label`
 export const InputWrapper = styled.div`
     display: flex;
     object-fit: contain;
-    border-radius: 50px;
+    border-radius: 5px;
     border: 2px solid ${ props => props.theme.main };
 `
 
 export const Input = styled.input`
-    border-radius: 0 50px 50px 0; 
+    border-radius: 0 5px 5px 0; 
     width: 100% ;
     height: 30px ;
     padding-left: 10px;
     caret-color: ${ props => props.theme.main };
+    transition: all .3s cubic-bezier(0.165, 0.84, 0.44, 1);
 
-    &:focus{
-        outline: none;   
-    }    
+    &:focus {
+        outline: none;
+        box-shadow:  5px 5px 0px ${props => props.theme.main };
+    }   
 `
 
 export const LogoWrapper = styled.div`
@@ -76,19 +78,18 @@ export const LogoWrapper = styled.div`
 
 
 export const Icon = styled.div`
-    border-radius: 50px;
+    border-radius: 5px;
     width: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid ${ props => props.theme.main };
 `
 
 export const Submit = styled.input`
     padding: 7px 0;
     margin: 20px 50px;
     font-weight: bold;
-    border-radius: 50px;
+    border-radius: 5px;
     color: white;
     border: 2px solid ${ props => props.theme.main };
     background-color: ${ props => props.theme.main };
@@ -98,6 +99,7 @@ export const Submit = styled.input`
         color:  ${ props => props.theme.main };
         background-color: white;
         border: 2px solid ${props => props.theme.main};
+        box-shadow:  5px 5px 0px ${props => props.theme.main };
     }
 `
 
@@ -105,4 +107,5 @@ export const ErrorSpan = styled.span`
     font-size: 12px;
     color: #ff0022;
     margin-bottom: 10px;
+    margin-top: 3px;
 `
