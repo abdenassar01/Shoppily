@@ -3,7 +3,6 @@ import {
 } from "./Styles";
 
 import { ImCross } from "react-icons/im"
-import { useEffect } from "react";
 
 export const Alert = ({ message, setMessage, status }) => {
 

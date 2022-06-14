@@ -19,6 +19,7 @@ const ContactUs = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = (data) => {
+    setStatus("warn")
     console.log(data)
   }
 
