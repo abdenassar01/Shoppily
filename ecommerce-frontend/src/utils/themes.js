@@ -3,17 +3,16 @@
 
 export const dark = {
     background: "#18191A",
-    main: "#242526",
-    // main: PrimaryColors[500],
+    main: "#2F4858",
     neutral: "#F4FFE3",
-    text: "#bbbbbb",
+    text: "#A9CEC2",
     helperText: "white",
     secondary: PrimaryColors[400],
     tertiary: PrimaryColors[300]
 }
 
 export const light = {
-    background: "white",
+    background: "#E9E5D8",
     main: PrimaryColors[100],
     neutral: "white",
     helperText: "white",

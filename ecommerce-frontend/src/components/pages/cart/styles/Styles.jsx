@@ -13,11 +13,9 @@ export const CentredContent = styled.div`
     display: flex;
     padding: 30px;
     border-radius: 10px;
-    background-color: ${ props => props.theme.background };
+    background-color: ${ props => props.theme. main };
     flex-direction: column;
 
-    box-shadow:  20px 20px 50px #d7d7d7,
-             -20px -20px 50px #e9e9e9;
 
     @media screen and (max-width: 667px) {
         width: 95%;
