@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const PageWrapper = styled.main`
-    padding: 30px;
+    padding: 50px;
 `
 
 export const Reference = styled.div`
@@ -76,4 +76,48 @@ export const Description = styled.div`
 
 export const CentredBox = styled.div`
     width: 80%;
+`
+
+export const AddFeedback = styled.div`
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+`
+
+export const TextArea = styled.textarea`
+    width: 100%;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #D9D9D9;
+    color: black;
+    font-weight: 700;
+
+    &:focus{
+        outline: none;
+    }
+`
+
+export const FlexEnd = styled.div`
+    display: flex;
+    justify-content: flex-end;
+`
+
+export const Submit = styled.button`
+    padding: 7px 30px;
+    margin: 20px 0;  
+    background-color: ${ props => props.theme.main };
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 5px; 
+    transition: all .3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: 2px solid ${ props => props.theme.main };
+
+    &:hover{
+        background-color: transparent;
+        color: ${ props => props.theme.main };
+        border: 2px solid ${ props => props.theme.main }; 
+        box-shadow:  5px 5px 0px ${props => props.theme.main };
+    }
 `
