@@ -2,10 +2,13 @@ import { types } from "mobx-state-tree";
 import { main, extended } from "../utils/axios/axois";
 
 const _userLoginAsync = async (payload) => {
-    const response = await extended.delete("/store/search?store=t", {
-        "Authorization" : "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuYXNzYXJkZXYiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9LHsiYXV0aG9yaXR5IjoiZmVlZGJhY2s6cmVhZCJ9LHsiYXV0aG9yaXR5IjoiZmVlZGJhY2s6d3JpdGUifSx7ImF1dGhvcml0eSI6Imxpc3Rpbmc6cmVhZCJ9LHsiYXV0aG9yaXR5IjoibGlzdGluZzp3cml0ZSJ9LHsiYXV0aG9yaXR5Ijoib3JkZXI6cmVhZCJ9LHsiYXV0aG9yaXR5Ijoib3JkZXI6d3JpdGUifSx7ImF1dGhvcml0eSI6InByb2R1Y3Q6cmVhZCJ9LHsiYXV0aG9yaXR5IjoicHJvZHVjdDp3cml0ZSJ9LHsiYXV0aG9yaXR5Ijoic3RvcmU6cmVhZCJ9LHsiYXV0aG9yaXR5Ijoic3RvcmU6d3JpdGUifSx7ImF1dGhvcml0eSI6InVzZXI6cmVhZCJ9LHsiYXV0aG9yaXR5IjoidXNlcjp3cml0ZSJ9XSwiaWF0IjoxNjU1MjA3NjcxLCJleHAiOjE2NTU3NjYwMDB9.m9QFHSrlmT2gLgN2En4bVcVn50_iELyfeXYdHuvp65X0XHAUClwb-Q1oj8G3dznkVLFCzpmbFjvXLm4wy4ZutA"
-    });
-    console.log(response);
+    try{
+        const response = await main.post("/login", payload);
+        return response?.data.token;
+    }
+    catch(ex){
+        console.log(ex)
+    }
 }
 
 export const User = types.model("user", {
@@ -42,7 +45,8 @@ export const UserStore = types.model("userStore", {
         self.token = ""
     },
     async login(payload){
-        await _userLoginAsync(payload)
+        self.setToken(await _userLoginAsync(payload))
+        
     }
 }))
 
