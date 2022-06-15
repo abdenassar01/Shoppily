@@ -4,7 +4,7 @@ import { PrimaryLink } from "../../utils"
 
 export const PageWrapper = styled.main`
   /* TODO: change color to adapte both dark and lite theme */
-    background-color: #2375e1b2; 
+    background-color: ${props => props.theme.main}; 
 `
 
 export const Model = styled.div`

@@ -18,7 +18,6 @@ const Navbar = () => {
 
   const ToggleExtendedMenu = () => {
     setIsExtebded(!isExtebded)
-    console.log(isExtebded)
   }
   
   return (
@@ -62,28 +61,28 @@ const Navbar = () => {
         {
           isExtebded && 
           <ExtendedMenu>
-            <PrimaryLink to="/" color={TextColors["textInverted"]} >
+            <PrimaryLink to="/" color={TextColors["textInverted"]} onClick={ToggleExtendedMenu} >
                 <FaHome size={20}/>
                 <h2 >Home </h2>
               </PrimaryLink>
-              <PrimaryLink to="/sell" color={TextColors["textInverted"]}>
+              <PrimaryLink to="/sell" color={TextColors["textInverted"]} onClick={ToggleExtendedMenu}>
                 <FaShopify size={20}/>
                 <h2>Start selling </h2>
               </PrimaryLink>
-              <PrimaryLink to="/cart" color={TextColors["textInverted"]}>
+              <PrimaryLink to="/cart" color={TextColors["textInverted"]} onClick={ToggleExtendedMenu}>
                 <FaShoppingBasket size={20}/>
                 <h2>Cart </h2>
               </PrimaryLink> 
-              <PrimaryLink to="/me" color={TextColors["textInverted"]}>
+              <PrimaryLink to="/me" color={TextColors["textInverted"]} onClick={ToggleExtendedMenu}>
                 <RiAccountPinCircleLine size={20}/>
                 <h2>Account</h2>
               </PrimaryLink>
               <AccountWrapper>
-              <PrimaryLink to="/login" color={TextColors["textInverted"]}>
+              <PrimaryLink to="/login" color={TextColors["textInverted"]} onClick={ToggleExtendedMenu}>
                 <BiLogIn size={20}/>
                 <h2>Login</h2>
               </PrimaryLink>
-              <PrimaryLink to="/signup" color={TextColors["textInverted"]}>
+              <PrimaryLink to="/signup" color={TextColors["textInverted"]} onClick={ToggleExtendedMenu}>
                 <FaUserPlus size={20}/>
                 <h2>SignUp</h2>
               </PrimaryLink>

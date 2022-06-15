@@ -7,11 +7,14 @@ export const CategoryWrapper = styled.aside`
     background-color: white;
     width: fit-content;
     border-radius: 10px;
-    margin: 30px;
+    min-width: 250px;
+    
+    @media screen and (max-width: 667px) {
+    display: none;
+    }
 `
 
 export const CategoriesList = styled.div`
-
 `
 
 export const CategoryItemWrapper = styled(PrimaryLink)`

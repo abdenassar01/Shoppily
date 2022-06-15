@@ -29,7 +29,8 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         String authorizationHedear = request.getHeader("Authorization");
-
+        
+        
         if(Strings.isNullOrEmpty(authorizationHedear) || !authorizationHedear.startsWith("Bearer ")){
             filterChain.doFilter(request, response);
             return;
@@ -59,6 +60,7 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
                     null,
                     simpleAuthorities
             );
+            
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
             

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const StyledLink = styled(Link)`
+export const StyledLink = styled(Link)`
     width: fit-content;
     display: flex;
     justify-content: space-around;
@@ -19,7 +19,7 @@ export const PrimaryLink = styled(StyledLink)`
     font-weight: bold;
 
     &:hover{
-        color: ${ props => props.theme.secondary } ;
+        color: #BCC6AC ;
     }
 `
 

@@ -3,6 +3,7 @@ package com.api.ecommerce.security;
 import com.api.ecommerce.security.jwt.JwtTokenVerifier;
 import com.api.ecommerce.security.jwt.UserUsernamePasswordAuthenticationFilter;
 import com.api.ecommerce.service.UserService;
+import com.google.common.collect.ImmutableList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,6 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .cors().and()
                 .csrf().disable()
                 .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

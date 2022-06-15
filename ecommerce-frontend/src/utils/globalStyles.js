@@ -4,7 +4,7 @@ export const GlobalStyle = createGlobalStyle`
     html{
         font-size: 16px;
         font-family: 'Roboto', monospace; 
-        background-color: #E0E0E0;
+        background-color: ${props => props.theme.background };
         scroll-behavior: smooth;
     }
 

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.security.PermitAll;
 
 @RestController
-@CrossOrigin
+@CrossOrigin("*")
 @RequestMapping("/api/v1/user")
 public class UserController {
     
@@ -32,7 +32,6 @@ public class UserController {
     public User getUser(){
         return service.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
     }
-
     @PermitAll
     @PostMapping("/register")
     public User addNewUser(@RequestBody User user){

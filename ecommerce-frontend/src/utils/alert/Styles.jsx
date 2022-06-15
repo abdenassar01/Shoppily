@@ -3,9 +3,7 @@ import styled from "styled-components";
 import { StatusColors } from "../colors/colors";
 
 export const PageWrapper = styled.div`
-
     position: absolute;
-    background-color: #00000086;
     z-index: 1000000;
     top: 0;
     left: 0;
@@ -16,7 +14,7 @@ export const PageWrapper = styled.div`
 export const AlertDailog = styled.div`
     width: 400px;
     height: 200px;
-    background-color: white;
+    background-color: #2F4858;
     border-radius: 10px;
     padding: 20px;
     position: relative;
