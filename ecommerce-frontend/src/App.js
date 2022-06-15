@@ -22,7 +22,7 @@ import { useState } from 'react';
 import { MdDarkMode } from 'react-icons/md'
 import Profile from "./components/pages/profile/Profile";
 import Cart from "./components/pages/cart/Cart";
-import Product from "./components/pages/product/Product";
+import Listing from "./components/pages/listing/Listing";
 
 
 const App = () => {
@@ -46,8 +46,8 @@ const App = () => {
                 <Route path="/terms" element={<Terms />} />
                 <Route path="/contact" element={<ContactUs />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/product">
-                  <Route path=":id" element={<Product />} />
+                <Route path="/listing">
+                  <Route path=":id" element={<Listing />} />
                 </Route>
                 <Route 
                   path="/sell" element={ <PrivateRoute Element={ <BecomeSeller /> } /> } 
