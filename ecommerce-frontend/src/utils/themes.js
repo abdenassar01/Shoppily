@@ -8,7 +8,7 @@ export const dark = {
     text: "#A9CEC2",
     helperText: "white",
     secondary: PrimaryColors[400],
-    tertiary: PrimaryColors[300]
+    tertiary: "#2F4858"
 }
 
 export const light = {
@@ -18,7 +18,7 @@ export const light = {
     helperText: "white",
     text: "black",
     secondary:  PrimaryColors[400],
-    tertiary: PrimaryColors[300]
+    tertiary: "#D7FFFF"
 }
 
 

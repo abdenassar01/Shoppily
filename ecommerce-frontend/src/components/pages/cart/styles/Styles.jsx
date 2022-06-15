@@ -6,6 +6,7 @@ export const PageWrapper = styled.main`
     display: flex;
     justify-content: center;
     color:  ${ props => props.theme.text };
+    background-color: ${ props => props.theme.backround };
 `
 
 export const CentredContent = styled.div`
@@ -13,7 +14,7 @@ export const CentredContent = styled.div`
     display: flex;
     padding: 30px;
     border-radius: 10px;
-    background-color: ${ props => props.theme. main };
+    background-color: ${ props => props.theme.tertiary };
     flex-direction: column;
 
 
@@ -179,8 +180,8 @@ export const CheckoutButton = styled.button`
     width: 100%;
     margin: 10px 0;
     padding: 7px 0;
-    border: 2px solid ${ props => props.theme.main };
-    background-color: ${ props => props.theme.main };
+    border: 2px solid ${ props => props.theme.secondary };
+    background-color: ${ props => props.theme.secondary };
     color: white;
     border-radius: 5px;
     font-weight: 700;
@@ -189,6 +190,6 @@ export const CheckoutButton = styled.button`
     &:hover{
         background-color: transparent;
         color: ${props => props.theme.text };
-        box-shadow:  5px 5px 0px ${props => props.theme.main };
+        box-shadow:  5px 5px 0px ${props => props.theme.secondary };
     }
 `
