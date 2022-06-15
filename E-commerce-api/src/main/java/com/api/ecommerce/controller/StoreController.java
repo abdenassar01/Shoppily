@@ -13,7 +13,7 @@ import javax.annotation.security.PermitAll;
 import java.util.List;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(value = "*", maxAge = 3600)
 @RequestMapping("/api/v1/store")
 public class StoreController {
     
