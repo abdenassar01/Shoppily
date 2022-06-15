@@ -3,7 +3,7 @@ export const PrimaryColors = {
     // 100: '#FF385C',
     200: '#008A05',
     300: '#428BFF',
-    400: '#ECDFE2',
+    400: '#FF385C',
     500: '#BD1E59',
 }
 
