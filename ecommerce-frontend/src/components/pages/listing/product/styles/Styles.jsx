@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const ProductWrapper = styled.div`
-    padding: 30px;
     display: flex;
     gap: 20px;
 `
@@ -9,7 +8,7 @@ export const ProductWrapper = styled.div`
 export const Image = styled.div`
     width: 450px;
     height: 450px;
-    background-color: ${ props => props.theme.main };
+    background-color: #2F4858;
     background-image: url(${ props => props.background });
     background-size: cover;
     background-repeat: no-repeat;
