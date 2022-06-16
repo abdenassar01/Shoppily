@@ -73,7 +73,8 @@ export const User = types.model("user", {
 export const UserStore = types.model("userStore", {
     user: types.maybeNull(User),
     token: types.optional(types.string, ""),
-    isAuthorized: types.optional(types.boolean, false)
+    isAuthorized: types.optional(types.boolean, false),
+    error: types.optional(types.string, "") 
 }).actions(self => ({
     setUser(newUser){
         self.user = newUser
@@ -81,24 +82,32 @@ export const UserStore = types.model("userStore", {
     setToken(newToken){
         self.token = newToken
     },
-    setAuthorized(state){
+    setIsAuthorized(state){
         self.isAuthorized = state
     },
     removeToken(){
         self.token = ""
     },
+    setError(newError){
+        self.error = newError
+    },
     async getUserDetail(){
         const user = await _getUserDetailAsync(self.token)
+        
         return user
     },
     async login(payload){
         try{
-            self.setToken("Bearer " + await _userLoginAsync(payload))
-            self.setUser(await self.getUserDetail(self.token))
-            saveRole(self.user.getRole)
-            saveToken(self.token)
-            saveAuthStatus(true)
+            self.setToken("Bearer " + await _userLoginAsync(payload));
+            self.setUser(await self.getUserDetail(self.token));
+            self.setIsAuthorized(true);
+            saveRole(self.user.getRole);
+            saveToken(self.token);
+            saveAuthStatus(true);
+
         }catch(ex){
+            self.setIsAuthorized(false);
+            self.setError("password or username incorrect")
             return ex
         }
     },
@@ -109,6 +118,12 @@ export const UserStore = types.model("userStore", {
 })).views(self => ({
     get getUser(){
         return self.user
+    },
+    get isAuthentificated(){
+        return self.isAuthorized
+    },
+    get getError(){
+        return self.error
     }
 }))
 
@@ -117,6 +132,7 @@ export const useUserStore = () => {
     if(!_userStore){
         _userStore = UserStore.create({
             token: "",
+            error: "",
             isAuthorized: false
         })
     }

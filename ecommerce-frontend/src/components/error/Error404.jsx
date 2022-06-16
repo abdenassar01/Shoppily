@@ -3,13 +3,11 @@ import { PageWrapper, Model, ErrorMessage, Image,
     StyledPrimaryLink
 } from "./SubComponents"
 
-import error from "./error404.png"
-
 const Error404 = () => {
   return (
     <PageWrapper>
         <Model>
-            <Image src={ error } alt="Solayman Suffering" draggable={false} />
+            <Image src="https://i.imgur.com/tDB9FPy.png" alt="man shocked" draggable={false} />
             <ErrorMessage>
                 <BigHeading>Ooops!</BigHeading>
                 <MeduimHeading>We can't seem to find the page you're looking for.</MeduimHeading>

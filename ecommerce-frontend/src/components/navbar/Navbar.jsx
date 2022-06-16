@@ -11,8 +11,11 @@ import { TextColors } from '../../utils'
 
 import Logo from '../logo/Logo'
 import { useState } from 'react';
+import { useUserStore } from '../../models/user';
 
 const Navbar = () => {
+
+  const user = useUserStore();
 
   const [ isExtebded, setIsExtebded ] = useState(false);
 
@@ -45,7 +48,7 @@ const Navbar = () => {
         <Account>
           <PrimaryLink to="/login" color={TextColors["textInverted"]}>
             <BiLogIn size={20}/>
-            <h2>Login</h2>
+            <h2>{ user.isAuthentificated ? user.getFullName : "Login" }</h2>
           </PrimaryLink>
           <PrimaryLink to="/signup" color={TextColors["textInverted"]}>
             <FaUserPlus size={20}/>

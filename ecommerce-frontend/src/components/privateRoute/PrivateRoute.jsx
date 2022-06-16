@@ -1,12 +1,13 @@
+import { Navigate } from "react-router-dom";
+import { useUserStore } from "../../models/user"
 
 const PrivateRoute = ({ Element }) => {
 
-    //TODO: add business logique to test weather a user logged in or not and if he had the permission
+  const user = useUserStore();
 
+  if( !user.isAuthentificated ) return <Navigate to="/login" replace />
 
-  return (
-    Element
-  )
+  return Element
 }
 
 export default PrivateRoute
