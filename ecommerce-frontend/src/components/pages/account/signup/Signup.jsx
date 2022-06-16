@@ -9,13 +9,29 @@ import { PrimaryColors, Paragraph, TextLink } from "../../../../utils"
 import Logo from '../../../logo/Logo'
 
 import { useForm } from "react-hook-form";
+import { useUserStore } from "../../../../models/user";
 
 const Signup = () => {
 
   const { handleSubmit, register, formState: { errors } } = useForm()
 
-  const onSubmit = (data) => {
-    console.log(data)
+  const user = useUserStore();
+
+  const onSubmit = async (data) => {
+
+    //TODO: add email field in database
+
+    const payload = {
+        firstname : data.firstname,
+        lastname : data.lastname,
+        role : "USER",
+        address : data.address,
+        username : data.username,
+        password : data.password
+      }
+
+    await user.register(payload);
+    //console.log(data)
   }
 
   return (
@@ -33,13 +49,21 @@ const Signup = () => {
           </ParagraphWrapper>
           <Form onSubmit={ handleSubmit(onSubmit) }>
             <Field>
-              <Label htmlFor="fullname">fullname: </Label>
+              <Label htmlFor="firstName">firstName: </Label>
                 <Input
-                  id="fullname" type="text" placeHolder="Your Fullname?" 
-                  { ...register("fullname",{ required: true }) }
+                  id="firstName" type="text" placeHolder="Your Firstname?" 
+                  { ...register("firstname",{ required: true }) }
                 />
             </Field>
-            <ErrorSpan>{ ((errors.fullname?.type === 'required') && "Please provide a your name.") }</ErrorSpan>
+            <ErrorSpan>{ ((errors.firstname?.type === 'required') && "Please provide a your name.") }</ErrorSpan>
+            <Field>
+              <Label htmlFor="lastname">lastname: </Label>
+                <Input
+                  id="lastname" type="text" placeHolder="Your Lastname?" 
+                  { ...register("lastname",{ required: true }) }
+                />
+            </Field>
+            <ErrorSpan>{ ((errors.last?.type === 'required') && "Please provide a your name.") }</ErrorSpan>
             <Field>
               <Label htmlFor="email">email: </Label>
                 <Input 
@@ -70,6 +94,13 @@ const Signup = () => {
               />
             </Field>
             <ErrorSpan>{ ((errors.password?.type === 'required') && "Please provide a password.") || (errors.password?.message)  }</ErrorSpan>
+            <Field>
+              <Label htmlFor="address">address: </Label>
+              <Input id="address" type="text" 
+                { ...register("address",{ required: true }) }
+              />
+            </Field>
+            <ErrorSpan>{ ((errors.password?.type === 'required') && "Please provide an Address.") || (errors.password?.message)  }</ErrorSpan>
             <LicenceInput>
               <Checkbox id="licence" type="checkbox" 
                 { ...register("liecence",{ required: true }) }/> 

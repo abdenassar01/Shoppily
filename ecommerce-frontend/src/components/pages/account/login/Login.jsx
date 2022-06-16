@@ -22,7 +22,6 @@ const Login = () => {
   const [ status, setStatus ] = useState("success")
 
   const onSubmit = async (data) => {
-   
     const payload = {
       username: data.username_login,
       password: data.password_login
@@ -30,10 +29,10 @@ const Login = () => {
     
     user.login(payload)
 
-    // if(!user.isAuthentificated){
-    //   setMessage(user.getError)
-    //   setStatus("error")
-    // }
+    if(!user.isAuthentificated){
+      setMessage(user.getError)
+      setStatus("error")
+    }
 }
 
   return (
@@ -43,7 +42,7 @@ const Login = () => {
           <LogoWrapper>
             <Logo color={ PrimaryColors[100] }/>
           </LogoWrapper>
-          <H2 bold color={ props => props.theme.main}>Welcome Back</H2>
+          <H2 bold color={ props => props.theme.main }>Welcome Back</H2>
           <Form onSubmit={ handleSubmit(onSubmit) }>
             <Field>
               <Label htmlFor="username">Username: </Label>

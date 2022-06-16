@@ -12,8 +12,9 @@ import { useForm } from "react-hook-form";
 import SellerItem from "./item/SellerItem";
 
 import ListingsByCategory from "./listingByCategory/ListingsByCategory";
+import { withTheme } from "styled-components";
 
-const Home = () => {
+const Home = (props) => {
 
   const { control, handleSubmit } = useForm();
 
@@ -25,7 +26,7 @@ const Home = () => {
     <HomePageWrapper>
         <TopSection>
           <LogoWrapper>
-            <Logo color="#2374E1" size={30} />
+            <Logo color={ props.theme.main } size={30} />
           </LogoWrapper>
           <SearchBar control={ control } rules={null} name="query" />
           <SearchButton onClick={ handleSubmit(onSubmit) } >Search</SearchButton>
@@ -62,4 +63,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default withTheme(Home) 

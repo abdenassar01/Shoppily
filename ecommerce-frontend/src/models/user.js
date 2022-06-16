@@ -7,7 +7,7 @@ const _userLoginAsync = async (payload) => {
         return response?.data.token;
     }
     catch(ex){
-        console.log(ex)
+        return ex
     }
 }
 
@@ -21,7 +21,29 @@ const _getUserDetailAsync = async (token) => {
         return response?.data;
     }
     catch(ex){
-        console.log(ex)
+        return ex
+    }
+}
+
+const _registerAsync = async (payload) => {
+    const response = {
+        message: "",
+        status: "",
+        user: {}
+    }
+    try{
+        
+        const result = await extended.post("/user/register", payload);
+        if(result.status === 200){
+            response.message = "You have Successfully Created a new account in shoppily"
+            response.status = "success"
+            response.user = result.data;
+        }
+        return response;
+    }catch(ex){
+        response.message = "username has been taken"
+        response.status = "error" 
+        return response;
     }
 }
 
@@ -92,8 +114,7 @@ export const UserStore = types.model("userStore", {
         self.error = newError
     },
     async getUserDetail(){
-        const user = await _getUserDetailAsync(self.token)
-        
+        const user = await _getUserDetailAsync(self.token) 
         return user
     },
     async login(payload){
@@ -111,6 +132,17 @@ export const UserStore = types.model("userStore", {
             return ex
         }
     },
+    async register(payload){
+        const response = await _registerAsync(payload);
+        if(response.user){
+            // TODO: send Token from web Service 
+            self.setUser(response.user);
+            self.setIsAuthorized(true);
+            saveAuthStatus(true);
+            saveRole(self.user.getRole);
+        } 
+       return response;
+    },
     logout(){
         userLogout()
     }
@@ -124,6 +156,9 @@ export const UserStore = types.model("userStore", {
     },
     get getError(){
         return self.error
+    },
+    get getFullName(){
+        return self.user.getFullName
     }
 }))
 

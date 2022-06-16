@@ -88,6 +88,7 @@ export const Icon = styled.div`
 export const Submit = styled.input`
     padding: 7px 0;
     margin: 20px 50px;
+    cursor: pointer;
     font-weight: bold;
     border-radius: 5px;
     color: white;
