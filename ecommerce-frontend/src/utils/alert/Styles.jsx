@@ -38,6 +38,11 @@ export const AlertDailog = styled.div`
             top: 0px;
         }
     }
+
+    @media screen and (max-width: 666px) {
+        width: 300px;
+        height: 150px;
+    }
 `
 
 export const AlertMessageWrapper = styled.div`
@@ -51,6 +56,10 @@ export const AlertMessageWrapper = styled.div`
     font-weight: 700;
     font-size: 20px;
     text-align: center;
+
+    @media screen and (max-width: 666px) {
+        font-size: 18px;
+    }
 `
 
 export const IconWrapper = styled.div`

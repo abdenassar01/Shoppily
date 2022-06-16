@@ -11,6 +11,38 @@ const _userLoginAsync = async (payload) => {
     }
 }
 
+const _getUserDetailAsync = async (token) => {
+    try{
+        const response = await extended.get("/user/me", {
+            headers: {
+                "Authorization": token
+            }
+        });
+        return response?.data;
+    }
+    catch(ex){
+        console.log(ex)
+    }
+}
+
+function saveToken(token){
+    localStorage.setItem("token" , token)
+}
+
+function saveRole(role){
+    localStorage.setItem("role", role)
+}
+
+function saveAuthStatus(status){
+    localStorage.setItem("isAuthorized", status)
+}
+
+function userLogout(){
+    localStorage.removeItem("token")
+    localStorage.removeItem("role")
+    localStorage.removeItem("isAuthorized")
+}
+
 export const User = types.model("user", {
     id : types.optional(types.number, 0),
     firstname : types.optional(types.string, ""),
@@ -18,17 +50,28 @@ export const User = types.model("user", {
     role : types.optional(types.string, ""),
     address : types.optional(types.string, ""),
     username : types.optional(types.string, "")
-}).views(self => ({
-    get role(){
+})
+.actions(self => ({
+    setUser(newUser){
+        self.id = newUser.id;
+        self.firstname = newUser.firstname;
+        self.lastname = newUser.lastname;
+        self.address = newUser.address;
+        self.role = newUser.role;
+        self.username = newUser.username;
+    }
+}))
+.views(self => ({
+    get getRole(){
         return self.role
     },
-    get fullName(){
+    get getFullName(){
         return self.firstname + " " + self.lastname
     }
 }))
 
 export const UserStore = types.model("userStore", {
-    user: types.maybe(User),
+    user: types.maybeNull(User),
     token: types.optional(types.string, ""),
     isAuthorized: types.optional(types.boolean, false)
 }).actions(self => ({
@@ -44,9 +87,28 @@ export const UserStore = types.model("userStore", {
     removeToken(){
         self.token = ""
     },
+    async getUserDetail(){
+        const user = await _getUserDetailAsync(self.token)
+        return user
+    },
     async login(payload){
-        self.setToken(await _userLoginAsync(payload))
-        
+        try{
+            self.setToken("Bearer " + await _userLoginAsync(payload))
+            self.setUser(await self.getUserDetail(self.token))
+            saveRole(self.user.getRole)
+            saveToken(self.token)
+            saveAuthStatus(true)
+        }catch(ex){
+            return ex
+        }
+    },
+    logout(){
+        userLogout()
+    }
+
+})).views(self => ({
+    get getUser(){
+        return self.user
     }
 }))
 
