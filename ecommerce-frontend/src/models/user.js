@@ -38,6 +38,9 @@ const _registerAsync = async (payload) => {
             response.message = "You have Successfully Created a new account in shoppily"
             response.status = "success"
             response.user = result.data;
+        }else{
+            response.message = "username has been taken"
+            response.status = "error"
         }
         return response;
     }catch(ex){
@@ -125,7 +128,6 @@ export const UserStore = types.model("userStore", {
             saveRole(self.user.getRole);
             saveToken(self.token);
             saveAuthStatus(true);
-
         }catch(ex){
             self.setIsAuthorized(false);
             self.setError("password or username incorrect")
@@ -134,7 +136,7 @@ export const UserStore = types.model("userStore", {
     },
     async register(payload){
         const response = await _registerAsync(payload);
-        if(response.user){
+        if(response.status === "success"){
             // TODO: send Token from web Service 
             self.setUser(response.user);
             self.setIsAuthorized(true);

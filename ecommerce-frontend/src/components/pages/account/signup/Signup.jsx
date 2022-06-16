@@ -3,17 +3,23 @@ import {
   Label, Input, Form, 
   LogoWrapper, Submit, ParagraphWrapper, 
   LicenceInput, Checkbox, ErrorSpan
-} from "./SubComponents"
+} from "./SubComponents";
+
+import { Alert } from "../../../../utils";
 
 import { PrimaryColors, Paragraph, TextLink } from "../../../../utils"
 import Logo from '../../../logo/Logo'
 
 import { useForm } from "react-hook-form";
 import { useUserStore } from "../../../../models/user";
+import { useState } from "react";
 
 const Signup = () => {
 
   const { handleSubmit, register, formState: { errors } } = useForm()
+
+  const [ message, setMessage ] = useState("");
+  const [ status, setStatus ] = useState("");
 
   const user = useUserStore();
 
@@ -30,12 +36,14 @@ const Signup = () => {
         password : data.password
       }
 
-    await user.register(payload);
-    //console.log(data)
+    const response = await user.register(payload);
+    setMessage(response?.message) 
+    setStatus(response?.status)
   }
 
   return (
     <Wrapper>
+      <Alert message={ message } status={ status } setMessage={ setMessage } />
         <Modal>
           <LogoWrapper>
             <Logo color={ PrimaryColors[100] }/>
