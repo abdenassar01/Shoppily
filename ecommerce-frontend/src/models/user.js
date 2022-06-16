@@ -137,7 +137,7 @@ export const UserStore = types.model("userStore", {
     async register(payload){
         const response = await _registerAsync(payload);
         if(response.status === "success"){
-            // TODO: send Token from web Service 
+            // TODO: get Token from web Service  and prisest it to localstorage
             self.setUser(response.user);
             self.setIsAuthorized(true);
             saveAuthStatus(true);
