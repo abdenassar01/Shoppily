@@ -53,7 +53,6 @@ const App = observer(() => {
       }
     }).then(res =>{
       user.setUser(res?.data);
-      console.log(res.data)
       user.setToken(localStorage.getItem("token"))
       user.setIsAuthorized(true)
     }).catch(ex => {
