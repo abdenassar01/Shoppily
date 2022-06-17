@@ -37,7 +37,7 @@ const Home = (props) => {
             <Logo color={ props.theme.main } size={30} />
           </LogoWrapper>
           <SearchBar value={ query } name="query" onChange={(e) => setQuery(e.target.value) } />
-          <SearchButton to={`/search/q=${query}`} >Search</SearchButton>
+          <SearchButton to={`/search/${query}`} >Search</SearchButton>
         </TopSection>
         <LegendSection>
           <Category />
