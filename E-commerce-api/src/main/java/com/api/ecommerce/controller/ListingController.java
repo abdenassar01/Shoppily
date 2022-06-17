@@ -63,11 +63,6 @@ public class ListingController {
         return ResponseEntity.ok().body(service.updateListing(id, listing));
     }
     
-//    @GetMapping("/categories/{id}")
-//    public ResponseEntity<Page<Listing>> getListingByCategory(@PathVariable Long id, @RequestParam int page){
-//        return ResponseEntity.ok().body(service.getListingByCategory(id, page));
-//    }
-    
     @GetMapping("/categories/{id}")
     public ResponseEntity<Page<Listing>> getListingByCategory(@PathVariable Long id){
         return ResponseEntity.ok().body(service.getListingByCategory(id));
