@@ -34,7 +34,7 @@ public class StoreService {
     }
     
     public Store getStoreById(Long id){
-        return repository.getById(id);
+        return repository.findById(id).get();
     }
 
     public Store createStore(@NotNull Store store){

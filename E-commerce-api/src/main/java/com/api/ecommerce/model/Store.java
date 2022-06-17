@@ -1,9 +1,6 @@
 package com.api.ecommerce.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -34,7 +31,6 @@ public class Store {
     private Integer successfulSells;
     
     @OneToMany(mappedBy = "store")
-    @JsonIdentityReference(alwaysAsId = true)
     private List<Listing> listings;
 
     public Store(String name, User user, Double rating) {
@@ -89,7 +85,7 @@ public class Store {
     public List<Listing> getListings() {
         return listings;
     }
-
+    
     public void setListings(List<Listing> listings) {
         this.listings = listings;
     }

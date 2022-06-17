@@ -48,7 +48,14 @@ public class StoreController {
     public ResponseEntity<String> deleteStore(@PathVariable Long id){
         return ResponseEntity.ok().body(service.deleteStoreById(id));
     }
-   
+
+
+    @GetMapping("/{id}")
+    @PermitAll
+    public ResponseEntity<Store> getStoreyId(@PathVariable Long id){
+        return ResponseEntity.ok(service.getStoreById(id));
+   }
+        
     @PermitAll
     @GetMapping("/search")
     public ResponseEntity<List<Store>> searchStore(@RequestParam String store){
