@@ -9,8 +9,8 @@ export const Container = styled(PrimaryLink)`
 
 export const Avatar = styled.img`
     width: 100px;
-
-
+    border-radius : 50px;
+    
     @media screen and (max-width: 667px){
         width: 50px;
     }

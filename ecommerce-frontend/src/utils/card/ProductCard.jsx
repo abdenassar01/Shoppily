@@ -10,7 +10,7 @@ const ProductCard = ({ listing }) => {
         <div>
             <Container>
                 <ImageWrapper>
-                    <Image src={listing?.products[0]?.cover}/>
+                    <Image img={ listing?.products[0]?.cover }/>
                 </ImageWrapper>
                 <Title>{ listing?.title }</Title>
                 <Quantity>

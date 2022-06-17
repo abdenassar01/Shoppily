@@ -14,11 +14,15 @@ import { useQuery } from "react-query";
 import { extended } from "../../../utils/axios/axois";
 import { useState } from "react";
 
+import { useUserStore } from "../../../models/user";
+
 const Listing = () => {
 
   const [ shownProdId, setShownProdId ] = useState(0);
 
   const param = useParams();
+
+  const user = useUserStore();
 
   const { isLoading, error, data } = useQuery("fetch Listing Data", async () => {
     const result = await extended.get(`/listing/${ param.id }`);
@@ -51,15 +55,15 @@ const Listing = () => {
         <DescriptionWrapper>
           <CentredBox>
             <Heading>Description</Heading>
-            <Description dangerouslySetInnerHTML={{__html: "<h1>Text</h1><p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates saepe ea maiores qui ducimus. Quis rerum exercitationem ab excepturi, voluptates, sit possimus eaque libero blanditiis distinctio sint ducimus eos minus?</p>"}} />
+            <Description dangerouslySetInnerHTML={{__html: data?.data.description }} />
           </CentredBox>
         </DescriptionWrapper>
-        <Feedbacks />
+        <Feedbacks feedbacks={ data?.data.feedbacks }  />
         <AddFeedback>
           <CentredBox>
             <TextArea placeholder="Add Type your feedback..." />
             <FlexEnd>
-              <Submit>
+              <Submit disabled={ !user.isAuthentificated }>
                 Add Feedback
               </Submit>
             </FlexEnd>     

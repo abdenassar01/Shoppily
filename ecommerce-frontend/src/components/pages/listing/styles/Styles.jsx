@@ -141,4 +141,11 @@ export const Submit = styled.button`
         border: 2px solid ${ props => props.theme.main }; 
         box-shadow:  5px 5px 0px ${props => props.theme.main };
     }
+
+    &:disabled{
+        pointer-events: none;
+        border-color: transparent;
+        background-color: #888888;
+        color: #2e2e2e;
+    }
 `

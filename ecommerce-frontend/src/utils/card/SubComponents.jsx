@@ -19,9 +19,13 @@ export const ImageWrapper = styled.div`
     width: 100%;
 `
 
-export const Image = styled.img`
+export const Image = styled.div`
     width: 100%;
     border-radius: 5px;
+    height: 150px;
+    background-image: url(${props => props.img });
+    background-size: cover;
+    background-repeat: no-repeat;
 `
 
 export const Title = styled.h2`
