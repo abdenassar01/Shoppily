@@ -48,6 +48,7 @@ export const MeduimHeading = styled.h2`
 
     @media (max-width: 667px) {
         font-size: 1rem;
+    }
 `
 
 export const SmalHeading = styled.h3`

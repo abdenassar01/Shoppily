@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { PrimaryLink } from "../../../../utils";
+
 export const HomePageWrapper = styled.main`
     padding: 10px 20px;
     width: 100%;
@@ -27,7 +29,7 @@ export const CategoriesListingsWrapper = styled.section`
     
 `
 
-export const SearchButton = styled.button`
+export const SearchButton = styled(PrimaryLink)`
     text-align: center;
     color: #363636;
     padding: 5px 40px;

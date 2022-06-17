@@ -31,6 +31,7 @@ import { useEffect } from "react";
 import { useUserStore } from "./models/user";
 import { extended } from "./utils/axios/axois";
 import Store from "./components/pages/seller/store/Store";
+import Search from "./components/pages/listings/search/Search";
 
 
 const App = observer(() => {
@@ -80,6 +81,12 @@ const App = observer(() => {
                 <Route path="/contact" element={<ContactUs />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/logout" element={<Logout />} />
+                <Route path="/search">
+                  <Route path=":q" element={<Search />} />
+                </Route>
+                <Route path="/category">
+                  <Route path=":id" element={<Search />} />
+                </Route>
                 <Route path="/listing">
                   <Route path=":id" element={<Listing />} />
                 </Route>

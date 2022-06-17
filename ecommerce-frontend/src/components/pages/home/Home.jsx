@@ -28,7 +28,8 @@ const Home = (props) => {
   })
 
   const onSubmit = (data) => {
-    console.log(data)
+    <Navigate to="/search?title=t" />
+    // console.log(data)
   }
 
   if( isLoading ) return <Loading size={ 80 } />
@@ -42,7 +43,7 @@ const Home = (props) => {
             <Logo color={ props.theme.main } size={30} />
           </LogoWrapper>
           <SearchBar control={ control } rules={null} name="query" />
-          <SearchButton onClick={ handleSubmit(onSubmit) } >Search</SearchButton>
+          <SearchButton to="/search?title=2" >Search</SearchButton>
         </TopSection>
         <LegendSection>
           <Category />
