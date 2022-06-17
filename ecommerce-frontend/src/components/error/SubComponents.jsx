@@ -3,31 +3,51 @@ import styled from "styled-components";
 import { PrimaryLink } from "../../utils"
 
 export const PageWrapper = styled.main`
-  /* TODO: change color to adapte both dark and lite theme */
     background-color: ${props => props.theme.main}; 
+    overflow-x: hidden;
 `
 
 export const Model = styled.div`
     display: flex;
+    
+    @media (max-width: 667px) {
+        flex-direction: column-reverse;
+    }
 `
 
 export const ErrorMessage = styled.div`
     padding: 100px 0;
     font-family: 'Mochiy Pop One', sans-serif;
     color: ${props => props.theme.neutral};
+
+    @media (max-width: 667px) {
+        padding: 50px 20px;
+    }
 `
 
 export const Image = styled.img`
     height: 600px;
     opacity: .5;
+
+    @media (max-width: 667px) {
+        height: 300px;
+        width: 250px;
+    }
 `
 
 export const BigHeading = styled.h1`
     font-size: 5rem;
     color: #ff0015;
+
+    @media (max-width: 667px) {
+        font-size: 1.5rem;
+    }
 `
 export const MeduimHeading = styled.h2`
     font-size: 2rem;  
+
+    @media (max-width: 667px) {
+        font-size: 1rem;
 `
 
 export const SmalHeading = styled.h3`
