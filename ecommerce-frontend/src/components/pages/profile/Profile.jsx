@@ -41,10 +41,10 @@ const Profile = () => {
         <Form onSubmit={ () => handleSubmit(onSubmit) }>
           <LongField>
             <Label>Usename</Label>
-            <Input type="text" placeholder="username" {...register("username_update", {
+            <Input type="text" placeholder="email" {...register("email_update", {
               required: true
             })} />
-            <ErrorAlert>{ errors.username_update?.type === "required" && "Field is required" }</ErrorAlert>
+            <ErrorAlert>{ errors.email_update?.type === "required" && "Field is required" }</ErrorAlert>
           </LongField>
           <Raw>
             <Field>

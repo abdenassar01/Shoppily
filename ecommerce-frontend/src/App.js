@@ -30,6 +30,7 @@ import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { useUserStore } from "./models/user";
 import { extended } from "./utils/axios/axois";
+import Store from "./components/pages/seller/store/Store";
 
 
 const App = observer(() => {
@@ -85,6 +86,9 @@ const App = observer(() => {
                 <Route 
                   path="/sell" element={ <PrivateRoute Element={ <BecomeSeller /> } /> } 
                 /> 
+                <Route path="/store">
+                  <Route path=":id" element={ <Store /> } />
+                </Route>
                 <Route 
                   path="/me" element={ <PrivateRoute Element={ <Profile /> } /> } 
                 />
