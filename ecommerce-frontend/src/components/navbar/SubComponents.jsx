@@ -60,3 +60,34 @@ export const NavTab = styled.div`
     justify-content: space-between;
     padding-right: 10px;
 `
+
+export const ProfileWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+`
+
+export const Avatar = styled.img`
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+`
+
+export const NameText = styled.p`
+    text-transform: capitalize;
+`
+
+export const Logout = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    color: white;
+    font-weight: 800;
+    cursor: pointer;
+
+    &:hover{
+        color: #d1d1d1;
+    }
+`

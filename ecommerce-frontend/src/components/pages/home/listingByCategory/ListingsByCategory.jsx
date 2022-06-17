@@ -2,21 +2,29 @@ import { Container, CartsWrapper, Title } from "./styles/Styles";
 
 import ProductCard from "../../../../utils/card/ProductCard";
 
-const ListingsByCategory = ({ title }) => {
+import { extended } from "../../../../utils/axios/axois";
+import { useEffect, useState } from "react";
+
+const ListingsByCategory = ({ title, id }) => {
+
+    const [ listings, setListings ] = useState([]);
+    
+    const getListings = async () => {
+      const result = await extended.get(`/listing/categories/${id}`)
+      setListings(result.data.content)
+    } 
+    
+    useEffect(() => { 
+      getListings()
+    }, []) 
+    
   return (
     <Container>
       <Title>{title}</Title>
       <CartsWrapper>
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+        {
+          listings?.map(lst => <ProductCard key={ lst.id } listing={ lst } />)
+        }
       </CartsWrapper>
     </Container>
     

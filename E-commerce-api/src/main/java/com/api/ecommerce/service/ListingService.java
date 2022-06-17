@@ -1,5 +1,6 @@
 package com.api.ecommerce.service;
 
+import com.api.ecommerce.model.Category;
 import com.api.ecommerce.model.Listing;
 import com.api.ecommerce.model.Product;
 import com.api.ecommerce.model.Store;
@@ -41,7 +42,7 @@ public class ListingService {
     }
 
     public Page<Listing> getPageOfListingByTitle(String title) {
-        Pageable pageable = PageRequest.of(1, 10, Sort.by("title"));
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("title"));
         return repository.searchAllByTitle(pageable, title);
     }
     
@@ -69,6 +70,17 @@ public class ListingService {
         
         return repository.save(lst);
     }
+    
+    public Page<Listing> getListingByCategory(Long categoryId){
+        Category category = categoryService.getCategoryById(categoryId);
+        Pageable page = PageRequest.of(0, 10);
+        return repository.findAllByCategory(page, category);
+    } 
+    
+    public List<Listing> getListOfListingByCategory(Long categoryId){
+        Category category = categoryService.getCategoryById(categoryId);
+        return repository.findAllByCategory(category);
+    }
 
     public Listing updateListing(Long id, Listing listing) {
         repository.delete(
@@ -95,7 +107,7 @@ public class ListingService {
         Store store = storeRepository.getById(storeId);
         
         Page<Listing> listings =  repository.findAllByStore(
-                PageRequest.of(1, 10), 
+                PageRequest.of(0, 10), 
                 store
         );
 

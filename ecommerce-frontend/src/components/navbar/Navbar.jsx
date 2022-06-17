@@ -11,8 +11,13 @@ import { TextColors } from '../../utils'
 
 import Logo from '../logo/Logo'
 import { useState } from 'react';
+import { useUserStore } from '../../models/user';
+import Profile from './profile/Profile';
+import { observer } from 'mobx-react-lite';
 
-const Navbar = () => {
+const Navbar = observer(() => {
+
+  const user = useUserStore();
 
   const [ isExtebded, setIsExtebded ] = useState(false);
 
@@ -29,10 +34,19 @@ const Navbar = () => {
             <FaHome size={20}/>
             <h2 >Home </h2>
           </PrimaryLink>
-          <PrimaryLink to="/sell" color={TextColors["textInverted"]}>
-            <FaShopify size={20}/>
-            <h2>Start selling </h2>
-          </PrimaryLink>
+          {
+            localStorage.getItem("role") === "SELLER" 
+                  ?  
+            <PrimaryLink to="/list" color={TextColors["textInverted"]}>
+              <FaShopify size={20}/>
+              <h2>Create new listing</h2>
+            </PrimaryLink> 
+                  :
+            <PrimaryLink to="/sell" color={TextColors["textInverted"]}>
+              <FaShopify size={20}/>
+              <h2>Start selling </h2>
+            </PrimaryLink>
+          }
           <PrimaryLink to="/cart" color={TextColors["textInverted"]}>
             <FaShoppingBasket size={20}/>
             <h2>Cart </h2>
@@ -42,16 +56,22 @@ const Navbar = () => {
             <h2>Account</h2>
           </PrimaryLink>
         </Nav>
-        <Account>
-          <PrimaryLink to="/login" color={TextColors["textInverted"]}>
-            <BiLogIn size={20}/>
-            <h2>Login</h2>
-          </PrimaryLink>
-          <PrimaryLink to="/signup" color={TextColors["textInverted"]}>
-            <FaUserPlus size={20}/>
-            <h2>SignUp</h2>
-          </PrimaryLink>
-        </Account>
+        {
+            user?.isAuthentificated 
+              ?  
+                <Profile name={ user } />
+              :  
+            <Account>
+            <PrimaryLink to="/login" color={TextColors["textInverted"]}>
+              <BiLogIn size={20}/>
+              <h2>Login</h2>
+            </PrimaryLink>
+            <PrimaryLink to="/signup" color={TextColors["textInverted"]}>
+              <FaUserPlus size={20}/>
+              <h2>SignUp</h2>
+            </PrimaryLink>
+          </Account>
+        }
       </Wrapper>
       <MobileNav>
         <NavTab>
@@ -65,10 +85,19 @@ const Navbar = () => {
                 <FaHome size={20}/>
                 <h2 >Home </h2>
               </PrimaryLink>
-              <PrimaryLink to="/sell" color={TextColors["textInverted"]} onClick={ToggleExtendedMenu}>
-                <FaShopify size={20}/>
-                <h2>Start selling </h2>
-              </PrimaryLink>
+              {
+                localStorage.getItem("role") === "SELLER" 
+                      ?  
+                <PrimaryLink to="/list" color={TextColors["textInverted"]}>
+                  <FaShopify size={20}/>
+                  <h2>Create new listing</h2>
+                </PrimaryLink> 
+                      :
+                <PrimaryLink to="/sell" color={TextColors["textInverted"]}>
+                  <FaShopify size={20}/>
+                  <h2>Start selling </h2>
+                </PrimaryLink>
+              }
               <PrimaryLink to="/cart" color={TextColors["textInverted"]} onClick={ToggleExtendedMenu}>
                 <FaShoppingBasket size={20}/>
                 <h2>Cart </h2>
@@ -77,21 +106,27 @@ const Navbar = () => {
                 <RiAccountPinCircleLine size={20}/>
                 <h2>Account</h2>
               </PrimaryLink>
-              <AccountWrapper>
-              <PrimaryLink to="/login" color={TextColors["textInverted"]} onClick={ToggleExtendedMenu}>
-                <BiLogIn size={20}/>
-                <h2>Login</h2>
-              </PrimaryLink>
-              <PrimaryLink to="/signup" color={TextColors["textInverted"]} onClick={ToggleExtendedMenu}>
-                <FaUserPlus size={20}/>
-                <h2>SignUp</h2>
-              </PrimaryLink>
-            </AccountWrapper>
+              {
+                user?.isAuthentificated 
+                  ?  
+                    <Profile name={ user } />
+                  :  
+                    <AccountWrapper>
+                      <PrimaryLink to="/login" color={TextColors["textInverted"]} onClick={ToggleExtendedMenu}>
+                        <BiLogIn size={20}/>
+                        <h2>Login</h2>
+                      </PrimaryLink>
+                      <PrimaryLink to="/signup" color={TextColors["textInverted"]} onClick={ToggleExtendedMenu}>
+                        <FaUserPlus size={20}/>
+                        <h2>SignUp</h2>
+                      </PrimaryLink>
+                   </AccountWrapper>
+              }
         </ExtendedMenu>
         }
       </MobileNav>
     </>
   )
-}
+})
 
 export default Navbar

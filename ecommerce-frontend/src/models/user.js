@@ -2,10 +2,70 @@ import { types } from "mobx-state-tree";
 import { main, extended } from "../utils/axios/axois";
 
 const _userLoginAsync = async (payload) => {
-    const response = await extended.delete("/store/search?store=t", {
-        "Authorization" : "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuYXNzYXJkZXYiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9LHsiYXV0aG9yaXR5IjoiZmVlZGJhY2s6cmVhZCJ9LHsiYXV0aG9yaXR5IjoiZmVlZGJhY2s6d3JpdGUifSx7ImF1dGhvcml0eSI6Imxpc3Rpbmc6cmVhZCJ9LHsiYXV0aG9yaXR5IjoibGlzdGluZzp3cml0ZSJ9LHsiYXV0aG9yaXR5Ijoib3JkZXI6cmVhZCJ9LHsiYXV0aG9yaXR5Ijoib3JkZXI6d3JpdGUifSx7ImF1dGhvcml0eSI6InByb2R1Y3Q6cmVhZCJ9LHsiYXV0aG9yaXR5IjoicHJvZHVjdDp3cml0ZSJ9LHsiYXV0aG9yaXR5Ijoic3RvcmU6cmVhZCJ9LHsiYXV0aG9yaXR5Ijoic3RvcmU6d3JpdGUifSx7ImF1dGhvcml0eSI6InVzZXI6cmVhZCJ9LHsiYXV0aG9yaXR5IjoidXNlcjp3cml0ZSJ9XSwiaWF0IjoxNjU1MjA3NjcxLCJleHAiOjE2NTU3NjYwMDB9.m9QFHSrlmT2gLgN2En4bVcVn50_iELyfeXYdHuvp65X0XHAUClwb-Q1oj8G3dznkVLFCzpmbFjvXLm4wy4ZutA"
-    });
-    console.log(response);
+    try{
+        const response = await main.post("/login", payload);
+        return response?.data.token;
+    }
+    catch(ex){
+        return ex
+    }
+}
+
+const _getUserDetailAsync = async (token) => {
+    try{
+        const response = await extended.get("/user/me", {
+            headers: {
+                "Authorization": token
+            }
+        });
+        return response?.data;
+    }
+    catch(ex){
+        return ex
+    }
+}
+
+const _registerAsync = async (payload) => {
+    const response = {
+        message: "",
+        status: "",
+        user: {}
+    }
+    try{
+        
+        const result = await extended.post("/user/register", payload);
+        if(result.status === 200){
+            response.message = "You have Successfully Created a new account in shoppily"
+            response.status = "success"
+            response.user = result.data;
+        }else{
+            response.message = "username has been taken"
+            response.status = "error"
+        }
+        return response;
+    }catch(ex){
+        response.message = "username has been taken"
+        response.status = "error" 
+        return response;
+    }
+}
+
+function saveToken(token){
+    localStorage.setItem("token" , token)
+}
+
+function saveRole(role){
+    localStorage.setItem("role", role)
+}
+
+function saveAuthStatus(status){
+    localStorage.setItem("isAuthorized", status)
+}
+
+function userLogout(){
+    localStorage.removeItem("token")
+    localStorage.removeItem("role")
+    localStorage.removeItem("isAuthorized")
 }
 
 export const User = types.model("user", {
@@ -15,19 +75,31 @@ export const User = types.model("user", {
     role : types.optional(types.string, ""),
     address : types.optional(types.string, ""),
     username : types.optional(types.string, "")
-}).views(self => ({
-    get role(){
+})
+.actions(self => ({
+    setUser(newUser){
+        self.id = newUser.id;
+        self.firstname = newUser.firstname;
+        self.lastname = newUser.lastname;
+        self.address = newUser.address;
+        self.role = newUser.role;
+        self.username = newUser.username;
+    }
+}))
+.views(self => ({
+    get getRole(){
         return self.role
     },
-    get fullName(){
+    get getFullName(){
         return self.firstname + " " + self.lastname
     }
 }))
 
 export const UserStore = types.model("userStore", {
-    user: types.maybe(User),
+    user: types.maybeNull(User),
     token: types.optional(types.string, ""),
-    isAuthorized: types.optional(types.boolean, false)
+    isAuthorized: types.optional(types.boolean, false),
+    error: types.optional(types.string, "") 
 }).actions(self => ({
     setUser(newUser){
         self.user = newUser
@@ -35,15 +107,64 @@ export const UserStore = types.model("userStore", {
     setToken(newToken){
         self.token = newToken
     },
-    setAuthorized(state){
+    setIsAuthorized(state){
         self.isAuthorized = state
     },
     removeToken(){
         self.token = ""
     },
+    setError(newError){
+        self.error = newError
+    },
+    async getUserDetail(){
+        const user = await _getUserDetailAsync(self.token) 
+        return user
+    },
     async login(payload){
-        await _userLoginAsync(payload)
+        try{
+            self.setToken("Bearer " + await _userLoginAsync(payload));
+            self.setUser(await self.getUserDetail(self.token));
+            self.setIsAuthorized(true);
+            saveRole(self.user.getRole);
+            saveToken(self.token);
+            saveAuthStatus(true);
+        }catch(ex){
+            self.setIsAuthorized(false);
+            self.setError("password or username incorrect")
+            return ex
+        }
+    },
+    async register(payload){
+        const response = await _registerAsync(payload);
+        if(response.status === "success"){
+            // TODO: get Token from web Service  and prisest it to localstorage
+            self.setUser(response.user);
+            self.setIsAuthorized(true);
+            saveAuthStatus(true);
+            saveRole(self.user.getRole);
+        } 
+       return response;
+    },
+    logout(){
+        userLogout()
     }
+
+})).views(self => ({
+    get getUser(){
+        return self.user
+    },
+    get isAuthentificated(){
+        return self.isAuthorized
+    },
+    get getError(){
+        return self.error
+    },
+    get getFullName(){
+        return self.user.getFullName
+    },
+    get getRole(){
+        return self.user.getRole
+    },
 }))
 
 let _userStore
@@ -51,6 +172,7 @@ export const useUserStore = () => {
     if(!_userStore){
         _userStore = UserStore.create({
             token: "",
+            error: "",
             isAuthorized: false
         })
     }

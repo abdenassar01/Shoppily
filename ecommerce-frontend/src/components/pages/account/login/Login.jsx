@@ -18,24 +18,31 @@ const Login = () => {
 
   const user = useUserStore();
 
-  const [ message, setMessage ] = useState("Testing Message")
+  const [ message, setMessage ] = useState("")
+  const [ status, setStatus ] = useState("success")
 
   const onSubmit = async (data) => {
     const payload = {
       username: data.username_login,
       password: data.password_login
     }
+    
     user.login(payload)
-  }
+
+    if(!user.isAuthentificated){
+      setMessage(user.getError)
+      setStatus("error")
+    }
+}
 
   return (
     <Wrapper>
-      <Alert message={ message } setMessage={ setMessage } status="success" />
+      <Alert message={ message } setMessage={ setMessage } status={ status } />
         <Modal>
           <LogoWrapper>
             <Logo color={ PrimaryColors[100] }/>
           </LogoWrapper>
-          <H2 bold color={ props => props.theme.main}>Welcome Back</H2>
+          <H2 bold color={ props => props.theme.main }>Welcome Back</H2>
           <Form onSubmit={ handleSubmit(onSubmit) }>
             <Field>
               <Label htmlFor="username">Username: </Label>

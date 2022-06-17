@@ -36,6 +36,7 @@ public class Listing {
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     @JsonProperty(value = "category")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Category category;
     
     @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)

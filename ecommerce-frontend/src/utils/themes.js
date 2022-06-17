@@ -6,19 +6,21 @@ export const dark = {
     main: "#2F4858",
     neutral: "#F4FFE3",
     text: "#A9CEC2",
-    helperText: "white",
     secondary: PrimaryColors[400],
-    tertiary: PrimaryColors[300]
+    tertiary: "#2F4858",
+    helperText: "white",
+    store: "#2F4858"
 }
 
 export const light = {
     background: "#E9E5D8",
     main: PrimaryColors[100],
     neutral: "white",
+    text: "#2B3F48",
     helperText: "white",
-    text: "black",
     secondary:  PrimaryColors[400],
-    tertiary: PrimaryColors[300]
+    tertiary: "#D7FFFF",
+    store: "#E1F1EE"
 }
 
 

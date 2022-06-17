@@ -3,24 +3,24 @@ import { CardWrapper, Container, ImageWrapper,
     AddToCart
  } from './SubComponents'
 
-const ProductCard = () => {
+const ProductCard = ({ listing }) => {
 
   return (
-    <CardWrapper to={`/listing/${12}`}>
+    <CardWrapper to={`/listing/${listing.id}`}>
         <div>
             <Container>
                 <ImageWrapper>
-                    <Image src={"https://i.imgur.com/z315mrB.jpg"}/>
+                    <Image img={ listing?.products[0]?.cover }/>
                 </ImageWrapper>
-                <Title>Product - Smart Watch</Title>
+                <Title>{ listing?.title }</Title>
                 <Quantity>
-                    <Text>20 left</Text>
+                    <Text>{ listing?.products[0]?.availableQte } left</Text>
                 </Quantity>
             </Container>
             <PriceSection>
                 <div>
-                    <S>text</S>
-                    <Price>50 Dh</Price>
+                    <S>{ listing?.products[0]?.price + 10 }</S>
+                    <Price>{ listing?.products[0]?.price } Dh</Price>
                 </div>
                 <AddToCart onClick={() => alert("added To Card")}>
                     🗑

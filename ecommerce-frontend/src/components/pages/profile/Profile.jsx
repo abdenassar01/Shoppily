@@ -5,13 +5,25 @@ import { PageWrapper, CenteredContent, TopSection, MeSection, Avatar,
 
 import { useForm } from "react-hook-form";
 
+import { useUserStore } from "../../../models/user";
+
 const Profile = () => {
 
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors } , reset} = useForm();
+  
+  const user = useUserStore();
 
   const onSubmit = (data) => {
-    console.log(data)
+
+    //TODO: call the update endpoint and send data
+    console.log("data")
   } 
+
+  reset({
+    username_update: user?.user.username,
+    firstName_update: user?.user.firstname,
+    lastName_update: user?.user.lastname
+  })
 
   return (
     <PageWrapper>
@@ -20,19 +32,19 @@ const Profile = () => {
           <MeSection>
             <Avatar src="https://i.imgur.com/bnIsPVp.jpg" />
             <PersonInfoWrapper>
-              <Name>Zayna Seller</Name>
-              <Username>username: @zayna_seller</Username>
+              <Name>{ user?.getFullName }</Name>
+              <Username>username: @{user?.user.username}</Username>
             </PersonInfoWrapper>
           </MeSection>
-          <Role>SELLER</Role>
+          <Role>{ user?.getRole }</Role>
         </TopSection>
-        <Form onSubmit={ handleSubmit(onSubmit) }>
+        <Form onSubmit={ () => handleSubmit(onSubmit) }>
           <LongField>
             <Label>Usename</Label>
-            <Input type="text" placeholder="username" {...register("username_update", {
+            <Input type="text" placeholder="email" {...register("email_update", {
               required: true
             })} />
-            <ErrorAlert>{ errors.username_update?.type === "required" && "Field is required" }</ErrorAlert>
+            <ErrorAlert>{ errors.email_update?.type === "required" && "Field is required" }</ErrorAlert>
           </LongField>
           <Raw>
             <Field>
@@ -62,8 +74,6 @@ const Profile = () => {
           </LongField>
         </Form>
       </CenteredContent>
-        {/* Avatar low quality: https://i.imgur.com/bnIsPVp.jpg */}
-        {/* Avatar high quality: https://i.imgur.com/9P6nEvs.jpg*/}
     </PageWrapper>
   )
 }

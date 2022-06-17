@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { PrimaryLink } from "../../../../utils";
+
 export const HomePageWrapper = styled.main`
     padding: 10px 20px;
     width: 100%;
@@ -27,7 +29,7 @@ export const CategoriesListingsWrapper = styled.section`
     
 `
 
-export const SearchButton = styled.button`
+export const SearchButton = styled(PrimaryLink)`
     text-align: center;
     color: #363636;
     padding: 5px 40px;
@@ -59,8 +61,12 @@ export const MiddleBox = styled.div`
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    width: 100%;
+    width: 85%;
     gap: 10px;
+
+    @media screen and (max-width: 667px){
+        width: 100%;
+    }
 `
 
 export const Image = styled.img`
