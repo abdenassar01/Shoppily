@@ -32,7 +32,7 @@ public class ListingController {
         return ResponseEntity.ok().body(service.getListingByTitle(title));
     }
     
-    @GetMapping("/store/{id}/all")
+    @GetMapping("/store/{id}")
     public ResponseEntity<Page<Listing>> getPageOfStoreListings(@PathVariable Long id){
         return ResponseEntity.ok().body(service.getListingByStore(id));
     }
@@ -61,5 +61,20 @@ public class ListingController {
     @PostMapping("/{id}")
     public ResponseEntity<Listing> updateListing(@PathVariable Long id, @RequestBody Listing listing){
         return ResponseEntity.ok().body(service.updateListing(id, listing));
+    }
+    
+//    @GetMapping("/categories/{id}")
+//    public ResponseEntity<Page<Listing>> getListingByCategory(@PathVariable Long id, @RequestParam int page){
+//        return ResponseEntity.ok().body(service.getListingByCategory(id, page));
+//    }
+    
+    @GetMapping("/categories/{id}")
+    public ResponseEntity<Page<Listing>> getListingByCategory(@PathVariable Long id){
+        return ResponseEntity.ok().body(service.getListingByCategory(id));
+    }    
+    
+    @GetMapping("/categories/{id}/list")
+    public ResponseEntity<List<Listing>> getListOfListingByCategory(@PathVariable Long id){
+        return ResponseEntity.ok().body(service.getListOfListingByCategory(id));
     }
 }

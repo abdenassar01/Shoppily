@@ -1,5 +1,6 @@
 package com.api.ecommerce.repository;
 
+import com.api.ecommerce.model.Category;
 import com.api.ecommerce.model.Listing;
 import com.api.ecommerce.model.Store;
 import org.springframework.data.domain.Page;
@@ -19,4 +20,7 @@ public interface ListingRepository extends JpaRepository<Listing, Long> {
     Page<Listing> findAllByStore(Pageable pageable, Store store);
     
     Listing getAllByIdAndStore(Long id, Store store);
+    
+    Page<Listing> findAllByCategory(Pageable pageable, Category category);
+    List<Listing> findAllByCategory(Category category);
 }
