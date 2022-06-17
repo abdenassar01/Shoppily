@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ProductWrapper, Quantity, ChangeQuantityButton,
   Image, ProductInfo, ProductTitle, PriceBox, Reference
 } from "./styles/Styles";
@@ -6,27 +6,31 @@ import { ProductWrapper, Quantity, ChangeQuantityButton,
 import { ImPriceTags } from "react-icons/im";
 
 
-const Product = () => {
+const Product = ({ id, products, title }) => {
 
+  const [ product, setProduct ] = useState(products[0])
   const [ quantity, setQuantity ] = useState(1)
-  const [ price, setPrice ] = useState(110)
+
+  useEffect(() => {
+    setProduct(products?.filter(prod => prod.id === id))
+  },[id])
 
   return (
     <ProductWrapper>
-      <Image background="https://i.imgur.com/VWJadYo.png"/>
+      <Image background={ product[0]?.cover }/>
       <ProductInfo>
         <ProductTitle>
-          Baseus H1 Hybrid 40dB ANC Wireless Headphones 4-mics ENC Earphone Bluetooth 5.2 40mm Driver HiFi Over the Ear Headsets 70H Time
+          { title }
         </ProductTitle>
-        <Reference>Black</Reference>
+        <Reference>{ product[0]?.label }</Reference>
         <PriceBox>
           <ImPriceTags />
-          { price * quantity } MAD
+          { product[0]?.price * quantity } MAD
         </PriceBox>
         <Quantity>
             <ChangeQuantityButton onClick={ () => { quantity > 0 && setQuantity( quantity - 1 ) } }> - </ChangeQuantityButton>
                 <ProductTitle>{ quantity }</ProductTitle>
-            <ChangeQuantityButton onClick={ () => { setQuantity( quantity + 1 ) } }> + </ChangeQuantityButton>
+            <ChangeQuantityButton onClick={ () => { setQuantity( quantity + 1 ) } }> + </ChangeQuantityButton> 
         </Quantity>
       </ProductInfo>
     </ProductWrapper>

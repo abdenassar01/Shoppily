@@ -2,6 +2,10 @@ import styled from "styled-components";
 
 export const PageWrapper = styled.main`
     padding: 50px;
+
+    @media screen and (max-width: 667px) {
+        padding: 20px;
+    }
 `
 
 export const Reference = styled.div`
@@ -22,12 +26,20 @@ export const ChangeReferenceButton = styled.button`
     &:hover{
         box-shadow:  5px 5px 0px ${props => props.theme.main };
     }
+
+    @media screen and (max-width: 667px) {
+        font-size: .8rem;
+    }
 `
 
 export const Heading = styled.h2`
     font-size: 1.7rem;
     font-weight: 700;
     color: ${ props => props.theme.main };
+
+    @media screen and (max-width: 667px) {
+       font-size: 1.2rem;
+    }
 `
 
 export const ButtonsWrapper = styled.div`
@@ -35,6 +47,10 @@ export const ButtonsWrapper = styled.div`
     display: flex;
     justify-content: flex-start;
     gap: 20px;
+   
+    @media screen and (max-width: 667px) {
+        gap: 10px;
+    }
 `
 
 export const AddToCart = styled.div`
@@ -58,6 +74,11 @@ export const AddToCartButton = styled.button`
         color: ${ props => props.theme.main };
         border: 2px solid ${ props => props.theme.main }; 
         box-shadow:  5px 5px 0px ${props => props.theme.main };
+    }
+
+    @media screen and (max-width: 667px) {
+        margin-top: 20px;
+        font-size: .8rem;
     }
 `
 

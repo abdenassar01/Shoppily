@@ -2,20 +2,47 @@ import { PageWrapper, ChangeReferenceButton, Reference,
   Heading, ButtonsWrapper, AddToCart, AddToCartButton, 
   Description, DescriptionWrapper, CentredBox, AddFeedback,
   TextArea, Submit, FlexEnd
-} from "./styles/Styles"
+} from "./styles/Styles";
 
-import Product from "./product/Product"
+import Product from "./product/Product";
 import Feedbacks from "./feedbacks/Feedbacks";
+import Loading from "../../../utils/loading/Loading";
+
+import { Navigate, useParams } from "react-router-dom";
+import { useQuery } from "react-query";
+
+import { extended } from "../../../utils/axios/axois";
+import { useState } from "react";
 
 const Listing = () => {
+
+  const [ shownProdId, setShownProdId ] = useState(0);
+
+  const param = useParams();
+
+  const { isLoading, error, data } = useQuery("fetch Listing Data", async () => {
+    const result = await extended.get(`/listing/${ param.id }`);
+    setShownProdId(result?.data.products[0]?.id)
+    return result;
+  });
+
+  if(isLoading) return <Loading size={80} />
+  if(error) return <Navigate to="/error" replace />
+
+
   return (
     <PageWrapper>
-      <Product />
+      <Product products={ data?.data.products } id={ shownProdId } title={ data?.data.title } />
         <Reference>
           <Heading>Reference</Heading>
           <ButtonsWrapper>
-            <ChangeReferenceButton>Black</ChangeReferenceButton>
-            <ChangeReferenceButton>White</ChangeReferenceButton>
+            {
+              data?.data.products?.map(
+                prod => 
+                  <ChangeReferenceButton key={ prod.id } onClick={ () => setShownProdId(prod.id) } >
+                    { prod?.label }
+                  </ChangeReferenceButton> )
+            }
           </ButtonsWrapper>          
         </Reference>
         <AddToCart>
