@@ -32,8 +32,8 @@ const Profile = () => {
           <MeSection>
             <Avatar src="https://i.imgur.com/bnIsPVp.jpg" />
             <PersonInfoWrapper>
-              <Name>Zayna Seller</Name>
-              <Username>username: @zayna_seller</Username>
+              <Name>{ user?.getFullName }</Name>
+              <Username>username: @{user?.user.username}</Username>
             </PersonInfoWrapper>
           </MeSection>
           <Role>SELLER</Role>

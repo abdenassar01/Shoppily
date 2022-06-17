@@ -11,14 +11,13 @@ import {TextColors} from '../../utils';
 
 import { FaFacebookF, FaTwitter, FaLinkedin, FaYoutube } from 'react-icons/fa';
 
-import { useState, useEffect } from 'react';
 import Copyright from './copyright/Copyright';
+
+import { useUserStore } from "../../models/user";
 
 const Footer = () => {
 
-  const [ isLoggedIn, setIsLoggedIn ] = useState(false)
-
-  useEffect(() => { setIsLoggedIn(isLoggedIn); } , [isLoggedIn])
+  const user = useUserStore();
 
   return (
     <FooterWrapper>
@@ -76,7 +75,7 @@ const Footer = () => {
               Privacy Policy
             </RouteLink>
             <AccountDetail>
-                {isLoggedIn ? <Profile /> : <LoginLinks />}
+                { user.isAuthentificated ? <Profile /> : <LoginLinks />}
             </AccountDetail>
           </ContentBox>
         </Right>

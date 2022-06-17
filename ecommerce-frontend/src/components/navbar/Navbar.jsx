@@ -34,10 +34,19 @@ const Navbar = observer(() => {
             <FaHome size={20}/>
             <h2 >Home </h2>
           </PrimaryLink>
-          <PrimaryLink to="/sell" color={TextColors["textInverted"]}>
-            <FaShopify size={20}/>
-            <h2>Start selling </h2>
-          </PrimaryLink>
+          {
+            user?.getRole === "SELLER" 
+                  ?  
+            <PrimaryLink to="/list" color={TextColors["textInverted"]}>
+              <FaShopify size={20}/>
+              <h2>Create new listing</h2>
+            </PrimaryLink> 
+                  :
+            <PrimaryLink to="/sell" color={TextColors["textInverted"]}>
+              <FaShopify size={20}/>
+              <h2>Start selling </h2>
+            </PrimaryLink>
+          }
           <PrimaryLink to="/cart" color={TextColors["textInverted"]}>
             <FaShoppingBasket size={20}/>
             <h2>Cart </h2>

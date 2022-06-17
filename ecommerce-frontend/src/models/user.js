@@ -161,7 +161,10 @@ export const UserStore = types.model("userStore", {
     },
     get getFullName(){
         return self.user.getFullName
-    }
+    },
+    get getRole(){
+        return self.user.getRole
+    },
 }))
 
 let _userStore
