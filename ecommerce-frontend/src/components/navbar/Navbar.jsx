@@ -35,7 +35,7 @@ const Navbar = observer(() => {
             <h2 >Home </h2>
           </PrimaryLink>
           {
-            user?.getRole === "SELLER" 
+            localStorage.getItem("role") === "SELLER" 
                   ?  
             <PrimaryLink to="/list" color={TextColors["textInverted"]}>
               <FaShopify size={20}/>
@@ -57,7 +57,7 @@ const Navbar = observer(() => {
           </PrimaryLink>
         </Nav>
         {
-            user.isAuthentificated 
+            user?.isAuthentificated 
               ?  
                 <Profile name={ user } />
               :  
@@ -85,10 +85,19 @@ const Navbar = observer(() => {
                 <FaHome size={20}/>
                 <h2 >Home </h2>
               </PrimaryLink>
-              <PrimaryLink to="/sell" color={TextColors["textInverted"]} onClick={ToggleExtendedMenu}>
-                <FaShopify size={20}/>
-                <h2>Start selling </h2>
-              </PrimaryLink>
+              {
+                localStorage.getItem("role") === "SELLER" 
+                      ?  
+                <PrimaryLink to="/list" color={TextColors["textInverted"]}>
+                  <FaShopify size={20}/>
+                  <h2>Create new listing</h2>
+                </PrimaryLink> 
+                      :
+                <PrimaryLink to="/sell" color={TextColors["textInverted"]}>
+                  <FaShopify size={20}/>
+                  <h2>Start selling </h2>
+                </PrimaryLink>
+              }
               <PrimaryLink to="/cart" color={TextColors["textInverted"]} onClick={ToggleExtendedMenu}>
                 <FaShoppingBasket size={20}/>
                 <h2>Cart </h2>
@@ -98,7 +107,7 @@ const Navbar = observer(() => {
                 <h2>Account</h2>
               </PrimaryLink>
               {
-                user.isAuthentificated 
+                user?.isAuthentificated 
                   ?  
                     <Profile name={ user } />
                   :  

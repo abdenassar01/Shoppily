@@ -36,7 +36,7 @@ const Profile = () => {
               <Username>username: @{user?.user.username}</Username>
             </PersonInfoWrapper>
           </MeSection>
-          <Role>SELLER</Role>
+          <Role>{ user?.getRole }</Role>
         </TopSection>
         <Form onSubmit={ () => handleSubmit(onSubmit) }>
           <LongField>

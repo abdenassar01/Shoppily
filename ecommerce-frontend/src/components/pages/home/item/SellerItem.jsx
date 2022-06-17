@@ -1,11 +1,11 @@
 import { Container, Avatar, Title } from "./styles/Styles"
 
-const SellerItem = () => {
+const SellerItem = ({ title, avatar, id }) => {
 
   return (
-    <Container to={`store/${12}`}>
-        <Avatar src="https://i.imgur.com/hrGzPIf.png"/>
-        <Title>Seller</Title>
+    <Container to={`store/${id}`}>
+        <Avatar src={ avatar ? avatar : "https://i.imgur.com/hrGzPIf.png" }/>
+        <Title>{ title }</Title>
     </Container>
   )
 }

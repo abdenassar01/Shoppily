@@ -59,8 +59,12 @@ export const MiddleBox = styled.div`
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    width: 100%;
+    width: 85%;
     gap: 10px;
+
+    @media screen and (max-width: 667px){
+        width: 100%;
+    }
 `
 
 export const Image = styled.img`
