@@ -9,7 +9,6 @@ import SearchBar from "../../search/SearchBar"
 import Logo from "../../logo/Logo"
 import Loading from "../../../utils/loading/Loading"
 
-import { useForm } from "react-hook-form";
 import SellerItem from "./item/SellerItem";
 
 import ListingsByCategory from "./listingByCategory/ListingsByCategory";
@@ -17,24 +16,19 @@ import { withTheme } from "styled-components";
 import { extended } from "../../../utils/axios/axois";
 import { useQuery } from "react-query";
 import { Navigate } from "react-router-dom";
+import { useState } from "react";
 
 const Home = (props) => {
 
-  const { control, handleSubmit } = useForm();
+  const [ query, setQuery ] = useState("");
 
   const { isLoading, error, data } = useQuery("getStores", async () => {
       const result = await extended.get("/store/all");
       return result?.data.content;
   })
 
-  const onSubmit = (data) => {
-    <Navigate to="/search?title=t" />
-    // console.log(data)
-  }
-
   if( isLoading ) return <Loading size={ 80 } />
   if( error ) return <Navigate to="/error" replace />
-
 
   return (
     <HomePageWrapper>
@@ -42,8 +36,8 @@ const Home = (props) => {
           <LogoWrapper>
             <Logo color={ props.theme.main } size={30} />
           </LogoWrapper>
-          <SearchBar control={ control } rules={null} name="query" />
-          <SearchButton to="/search?title=2" >Search</SearchButton>
+          <SearchBar value={ query } name="query" onChange={(e) => setQuery(e.target.value) } />
+          <SearchButton to={`/search/q=${query}`} >Search</SearchButton>
         </TopSection>
         <LegendSection>
           <Category />
@@ -55,7 +49,9 @@ const Home = (props) => {
               <Heading>Our Stores</Heading>
               <SellersSlider>
                 {
-                  data?.map( store => <SellerItem key={ store.id } title={ store.name } id={ store.id } />)
+                  data?.map( store => 
+                    <SellerItem key={ store.id } title={ store.name } id={ store.id } />
+                  )
                 }
               </SellersSlider>
             </Bottom>

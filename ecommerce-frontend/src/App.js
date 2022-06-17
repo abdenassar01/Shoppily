@@ -32,6 +32,7 @@ import { useUserStore } from "./models/user";
 import { extended } from "./utils/axios/axois";
 import Store from "./components/pages/seller/store/Store";
 import Search from "./components/pages/listings/search/Search";
+import Category from "./components/pages/listings/category/Category";
 
 
 const App = observer(() => {
@@ -85,7 +86,7 @@ const App = observer(() => {
                   <Route path=":q" element={<Search />} />
                 </Route>
                 <Route path="/category">
-                  <Route path=":id" element={<Search />} />
+                  <Route path=":id" element={<Category />} />
                 </Route>
                 <Route path="/listing">
                   <Route path=":id" element={<Listing />} />
