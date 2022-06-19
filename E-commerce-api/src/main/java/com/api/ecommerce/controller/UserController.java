@@ -30,7 +30,8 @@ public class UserController {
     @GetMapping("/me")
     @PermitAll
     public User getUser(){
-        return service.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        return service.getUserByUsername(
+                SecurityContextHolder.getContext().getAuthentication().getName());
     }
     @PermitAll
     @PostMapping("/register")
@@ -42,5 +43,13 @@ public class UserController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER', 'ROLE_SELLER')")
     public User updateUser(@PathVariable Long id, User user){
         return service.updateUser(id, user);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER', 'ROLE_SELLER')")
+    @PostMapping("/me/update")
+    public User updateUser(User user){
+        String username = service.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).getUsername();
+        System.out.println(username);
+        return service.updateUser(1L, user);
     }
 }
