@@ -6,6 +6,7 @@ import { PageWrapper, CenteredContent, TopSection, MeSection, Avatar,
 import { useForm } from "react-hook-form";
 
 import { useUserStore } from "../../../models/user";
+import { extended } from "../../../utils/axios/axois";
 
 const Profile = () => {
 
@@ -13,9 +14,21 @@ const Profile = () => {
   
   const user = useUserStore();
 
-  const onSubmit = (data) => {
-
+  const onSubmit = async (data) => {
     //TODO: call the update endpoint and send data
+    //TODO: this code is not tested
+    const payload = {
+      username: data.username_update,
+      firstname: data.firstName_update,
+      lastname: data.lastName_update,
+      email: data.email,
+      address: data.address
+    }
+    const result = extended.post("/user/update", payload, {
+      headers: {
+        "Authorization": localStorage.getItem("token")
+      }
+    })
     console.log("data")
   } 
 

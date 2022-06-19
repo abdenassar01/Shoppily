@@ -40,7 +40,7 @@ const ListProduct = () => {
                     label : data.reference,
                     price : data.price,
                     availableQte : data.availableQte,
-                    cover : "https://ae01.alicdn.com/kf/HTB1qrB1XcnrK1RjSspkq6yuvXXaS/New-Arrival-Winter-High-Quality-Casual-Trench-Men-Coat-Jacket-Business-Wool-Thick-Warm-Men-s.jpg_Q90.jpg_.webp"
+                    cover : data.image
                 }
             ]
         }
@@ -68,9 +68,12 @@ const ListProduct = () => {
                 <Field>
                     <Label>Title: </Label>
                     <Input type="text" placeholder="Title " 
-                        {...register("title", { required: true })}
+                        {...register("title", { required: true, minLength: {
+                            value: 100,
+                            message: "Title should be at least 100 character long"
+                        } })}
                     />
-                    <ErrorMessage>{ (errors.title?.type === 'required') && "Title is required." }</ErrorMessage>
+                    <ErrorMessage>{ (errors.title?.type === 'required') && "Title is required." || errors.title?.message }</ErrorMessage>
                 </Field>
                 <Field>
                     <Label>Description:</Label>
@@ -82,7 +85,7 @@ const ListProduct = () => {
                     </EditorBorder>
                 </Field>
                 <Field>
-                    <Label>Title: </Label>
+                    <Label>Category: </Label>
                     <SelectCategory control={ control } name="categories" rules={ {required: true} } />
                     <ErrorMessage>{ (errors.categories?.type === 'required') && "Chosing a category is required." }</ErrorMessage>
                 </Field>
@@ -90,7 +93,6 @@ const ListProduct = () => {
                     <ProductListHeading>Add Products</ProductListHeading>
                     <ProductInfoForm 
                         register={ register } errors={ errors } 
-                        // image={ image } setImage={ setImage } 
                     />
                     <center>
                         <AddProdButton onClick={ (e) => {
