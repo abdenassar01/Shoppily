@@ -1,9 +1,25 @@
 import { Field, Label, Input, ErrorMessage, 
   ProductWrapper, HorisontalSpacer, InputWrapper,
   Currency, ImageInput
- } from "../styles/Styles"
+ } from "../styles/Styles";
+
+ import axios from "axios";
 
 const ProductInfoForm = ({ errors, register }) => {
+
+  const saveImage = async (e) => {
+    const formData = new FormData();
+    formData.append("image", e.target.files[0])
+    const image = await axios.post("https://api.imgur.com/3/image/", formData, 
+    {
+      headers: {
+        "Authorization": "Client-ID 9c1850c15c858e1",
+        "Content-Type": "multipart/form-data",
+        "Accept": "*/*"
+      }
+    })
+    console.log(image)
+  }
 
   return (
     <ProductWrapper>
@@ -49,10 +65,10 @@ const ProductInfoForm = ({ errors, register }) => {
         <Field>
           <Label>Image: </Label>
           <ImageInput type="file"
+            accept="image/*"
             placeholder="product main image"
-            {...register("image", {
-              required: true
-            })}
+            // value={ image }
+            // onChange={ (e) => saveImage(e) }
           />
           <ErrorMessage>{ (errors.image?.type === 'required') && "Image is required." }</ErrorMessage>
         </Field>

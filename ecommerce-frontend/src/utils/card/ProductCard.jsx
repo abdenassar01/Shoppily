@@ -5,6 +5,14 @@ import { CardWrapper, Container, ImageWrapper,
 
 const ProductCard = ({ listing }) => {
 
+    function truncateString(str, num) {
+        if (str.length > num) {
+          return str.slice(0, num) + "...";
+        } else {
+          return str;
+        }
+      }
+
   return (
     <CardWrapper to={`/listing/${listing.id}`}>
         <div>
@@ -12,7 +20,7 @@ const ProductCard = ({ listing }) => {
                 <ImageWrapper>
                     <Image img={ listing?.products[0]?.cover }/>
                 </ImageWrapper>
-                <Title>{ listing?.title }</Title>
+                <Title>{ truncateString(listing?.title, 100) }</Title>
                 <Quantity>
                     <Text>{ listing?.products[0]?.availableQte } left</Text>
                 </Quantity>

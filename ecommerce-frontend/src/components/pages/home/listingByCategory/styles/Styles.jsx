@@ -8,7 +8,7 @@ export const CartsWrapper = styled.div`
 
     &::-webkit-scrollbar {
         width: 7px;
-        height: 3px;
+        height: 0px;
         border-radius: 50px;
         background-color: #f3f2f2; 
     }
@@ -23,7 +23,8 @@ export const Container = styled.div`
     margin: 30px 0;
     padding: 10px;
     border-radius: 10px;
-    background-color: ${props => props.theme.neutral };
+    /* background-color: #28292B; */
+    /* background-color: ${props => props.theme.main }; */
 `
 
 export const Title = styled.h2`
