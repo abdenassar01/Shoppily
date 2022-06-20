@@ -84,6 +84,10 @@ public class Feedback {
         return user;
     }
 
+    public void setListing(Listing listing) {
+        this.listing = listing;
+    }
+
     @JsonProperty("user_id")
     public void setUser(User user) {
         this.user = user;
