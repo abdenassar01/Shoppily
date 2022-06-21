@@ -49,7 +49,7 @@ public class UserController {
     @PostMapping("/me/update")
     public User updateUser(User user){
         String username = service.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).getUsername();
-        System.out.println(username);
+        
         return service.updateUser(1L, user);
     }
 }
