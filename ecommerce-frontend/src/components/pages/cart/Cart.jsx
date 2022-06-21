@@ -1,3 +1,5 @@
+import { observer } from "mobx-react-lite";
+import { useCart } from "../../../models/cart";
 import Product from "./product/Product";
 import { PageWrapper, CentredContent, TopSection,
     MainHeading, RemoveAllButton, MainSection, Hr,
@@ -6,17 +8,60 @@ import { PageWrapper, CentredContent, TopSection,
     ElementWrapper
  } from "./styles/Styles";
 
-const Cart = () => {
+ import Loading from "../../../utils/loading/Loading"
+
+ import { extended } from "../../../utils/axios/axois"
+import { useUserStore } from "../../../models/user";
+import { useState } from "react";
+
+const Cart = observer(() => {
+
+    const cart = useCart();
+    const user = useUserStore();
+
+    const removeAll = () => {
+        cart.removeAll()
+    }
+
+    const [ loading, setLoading ] = useState(false)
+
+    const checkout = async () => {
+        setLoading(true)
+        const payload = {
+            user: {
+                id: user?.user.id,
+            },
+            address: user?.user.address,
+            order_status: "Awaiting shipping",
+            zip_code: 34000,
+            date_created: Date.now(),
+            price_x_qte: cart?.getTotal,
+            quantity: 1,
+            products: cart?.getItems
+        }
+        const result = await extended.put("/order/new", payload, {
+            headers: {
+                Authorization: localStorage.getItem("token")
+            }
+        })
+
+        cart.removeAll()
+        setLoading(false)
+    }
+
+    if(loading) return <Loading size={50} />
+
   return (
     <PageWrapper>
         <CentredContent>
             <TopSection>
                 <MainHeading>Shopping Cart</MainHeading>
-                <RemoveAllButton>Remove all</RemoveAllButton>
+                <RemoveAllButton onClick={ removeAll }>Remove all</RemoveAllButton>
             </TopSection>
             <MainSection>
-                <Product />
-                <Product />
+                {
+                    cart.getItems.map(item =>   <Product item={ item } />)
+                }   
             </MainSection>
             <Hr />
             <CheckoutWrapper>
@@ -24,16 +69,16 @@ const Cart = () => {
                     <Checkout>
                         <div>
                             <CheckoutHeading>SubTotal</CheckoutHeading>
-                            <ItemsCount>2 items</ItemsCount>
+                            <ItemsCount>{ cart.itemsCount } items</ItemsCount>
                         </div>
-                        <TotalPrice>37.00 $</TotalPrice>
+                        <TotalPrice>{ cart.getTotal } $</TotalPrice>
                     </Checkout>
-                    <CheckoutButton>Checkout</CheckoutButton>
+                    <CheckoutButton onClick={ checkout }>Checkout</CheckoutButton>
                 </ElementWrapper>   
             </CheckoutWrapper>
         </CentredContent>
     </PageWrapper>
   )
-}
+})
 
 export default Cart

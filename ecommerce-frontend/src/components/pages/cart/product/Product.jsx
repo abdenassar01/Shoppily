@@ -1,28 +1,43 @@
+import { useCart } from "../../../../models/cart"
 import { Article, ProductInfo, PriceSection, Image,
     TextWrapper, ProductInfoContent, Quantity, ChangeQuantityButton,
     Title, Type, RemoveAllButton
 } from "../styles/Styles"
 
-const Product = () => {
+const Product = ({ item }) => {
+
+    const cart = useCart();
+
+    const addQuantity = () => {
+
+    }
+    const sousQuantity = () => {
+        
+    }
+
+    const remove = () => {
+        cart.removeItem(item?.id)
+    }
+
   return (
     <Article>
         <ProductInfo>
-            <Image src="https://i.imgur.com/n68hEmb.jpg" alt="glassess" />
+            <Image src={ item?.cover } alt="glassess" />
             <ProductInfoContent>
                 <TextWrapper>
-                    <Title>Just assuming the title is very long so how it's gonna look on mobile</Title>
-                    <Type>Black</Type>
+                    <Title>{ item?.label }</Title>
+                    <Type>{ item?.reference }</Type>
                 </TextWrapper>
                 <Quantity>
-                    <ChangeQuantityButton> - </ChangeQuantityButton>
+                    <ChangeQuantityButton onClick={ sousQuantity }> - </ChangeQuantityButton>
                         <Title>1</Title>
-                    <ChangeQuantityButton> + </ChangeQuantityButton>
+                    <ChangeQuantityButton onClick={ addQuantity }> + </ChangeQuantityButton>
                 </Quantity>
             </ProductInfoContent> 
         </ProductInfo>
         <PriceSection>
-            <Title>15.00 $</Title>
-            <RemoveAllButton>Remove</RemoveAllButton>
+            <Title>{ item?.price } $</Title>
+            <RemoveAllButton onClick={ remove }>Remove</RemoveAllButton>
         </PriceSection>
     </Article>
   )
