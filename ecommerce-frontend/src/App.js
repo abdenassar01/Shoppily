@@ -33,6 +33,7 @@ import { extended } from "./utils/axios/axois";
 import Store from "./components/pages/seller/store/Store";
 import Search from "./components/pages/listings/search/Search";
 import Category from "./components/pages/listings/category/Category";
+import Order from "./components/pages/order/Order";
 
 
 const App = observer(() => {
@@ -93,6 +94,9 @@ const App = observer(() => {
                 </Route>
                 <Route 
                   path="/sell" element={ <PrivateRoute Element={ <BecomeSeller /> } /> } 
+                /> 
+                <Route 
+                  path="/order" element={ <PrivateRoute Element={ <Order /> } /> } 
                 /> 
                 <Route path="/store">
                   <Route path=":id" element={ <Store /> } />

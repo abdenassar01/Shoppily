@@ -51,6 +51,10 @@ const Navbar = observer(() => {
             <FaShoppingBasket size={20}/>
             <h2>Cart </h2>
           </PrimaryLink> 
+          <PrimaryLink to="/order" color={TextColors["textInverted"]}>
+            <FaShoppingBasket size={20}/>
+            <h2>My orders </h2>
+          </PrimaryLink> 
           <PrimaryLink to="/me" color={TextColors["textInverted"]}>
             <RiAccountPinCircleLine size={20}/>
             <h2>Account</h2>
