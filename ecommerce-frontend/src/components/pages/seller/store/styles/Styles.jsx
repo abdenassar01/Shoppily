@@ -62,6 +62,7 @@ export const HelperText = styled.p`
 
 export const MainSection = styled.section`
     margin-top: 50px;
+    padding: 20px 0;
     display: flex;
     justify-content: center;
     gap: 20px;

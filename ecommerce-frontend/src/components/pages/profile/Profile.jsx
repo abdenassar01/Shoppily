@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 
 import { useUserStore } from "../../../models/user";
 import { extended } from "../../../utils/axios/axois";
+import { useEffect } from "react";
 
 const Profile = () => {
 
@@ -15,28 +16,32 @@ const Profile = () => {
   const user = useUserStore();
 
   const onSubmit = async (data) => {
-    //TODO: call the update endpoint and send data
-    //TODO: this code is not tested
+    console.log(data)
+    
     const payload = {
-      username: data.username_update,
+      email: data.email_update,
       firstname: data.firstName_update,
       lastname: data.lastName_update,
-      email: data.email,
-      address: data.address
+      address: data.address_update
     }
+
+    // console.log(payload)
     const result = extended.post("/user/update", payload, {
       headers: {
         "Authorization": localStorage.getItem("token")
       }
     })
-    console.log("data")
+    console.log(result)
   } 
+useEffect(() => {
 
   reset({
     username_update: user?.user.username,
     firstName_update: user?.user.firstname,
     lastName_update: user?.user.lastname
   })
+
+} ,[])
 
   return (
     <PageWrapper>
@@ -51,9 +56,9 @@ const Profile = () => {
           </MeSection>
           <Role>{ user?.getRole }</Role>
         </TopSection>
-        <Form onSubmit={ () => handleSubmit(onSubmit) }>
+        <Form onSubmit={ handleSubmit(onSubmit) }>
           <LongField>
-            <Label>Usename</Label>
+            <Label>Email</Label>
             <Input type="text" placeholder="email" {...register("email_update", {
               required: true
             })} />

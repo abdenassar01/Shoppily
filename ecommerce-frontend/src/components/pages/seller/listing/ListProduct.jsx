@@ -22,6 +22,8 @@ const ListProduct = () => {
     const  [ convertedContent, setConvertedContent ] = useState(null);
     const [ message, setMessage ] = useState("")
     const [ status, setStatus ] = useState("success")
+    const [ image, setImage ] = useState("") 
+
     const { register, handleSubmit, control, formState: { errors } } = useForm();
 
     const onSubmit = async (data) => {
