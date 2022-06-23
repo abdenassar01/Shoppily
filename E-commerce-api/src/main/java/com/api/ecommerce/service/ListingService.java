@@ -110,8 +110,6 @@ public class ListingService {
                 PageRequest.of(0, 10), 
                 store
         );
-
-        listings.get().forEach(el -> System.out.println(el.getTitle()));
         return listings;
     }
 

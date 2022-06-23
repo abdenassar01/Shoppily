@@ -1,11 +1,24 @@
-import { Controller } from "react-hook-form";
 import Select from 'react-select'
+import Loading from "../../../../../utils/loading/Loading";
 
-//TODO: to be removed and called from web service
+import { Navigate } from "react-router-dom";
+import { Controller } from "react-hook-form";
+import { useQuery } from "react-query";
 
-import { categories } from "./categories"
+import { extended } from "../../../../../utils/axios/axois";
 
 const SelectCategory = ({ control, name, rules }) => {
+
+  const { isLoading, error, data } = useQuery("fetch_categories", async () => {
+    const categories = await extended.get("/categories");
+    return categories?.data
+  })
+
+  console.log()
+
+  if(isLoading) return <Loading size={ 70 } />
+  if(error) return <Navigate to="/error" />
+
 
   return (
     <Controller 
@@ -18,7 +31,7 @@ const SelectCategory = ({ control, name, rules }) => {
           }) => (
             <Select
               tabSelectsValue
-              options={ categories }
+              options={ data?.map(ele => ({ value: ele.id,  label: ele.label })) }
               onChange={ onChange } // send value to hook form
               value={ value }
               inputRef={ ref }

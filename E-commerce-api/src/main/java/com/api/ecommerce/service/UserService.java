@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -48,8 +49,9 @@ public class UserService implements UserDetailsService {
     
     public User updateUser(Long id, User newUser){
         User user = getUserById(id);
+        newUser.setPassword(user.getPassword());
         deleteUser(user);
-        return repository.save(newUser);
+        return save(newUser);
     }
     
     

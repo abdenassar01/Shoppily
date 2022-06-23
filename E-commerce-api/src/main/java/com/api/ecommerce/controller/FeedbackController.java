@@ -12,7 +12,6 @@ import java.util.Optional;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api/v1/feedback")
-@PreAuthorize(value = "hasAnyRole('ROLE_ADMIN', 'ROLE_USER', 'ROLE_SELLER')")
 public class FeedbackController {
 
     private final FeedbackService service;

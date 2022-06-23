@@ -51,6 +51,10 @@ const Navbar = observer(() => {
             <FaShoppingBasket size={20}/>
             <h2>Cart </h2>
           </PrimaryLink> 
+          <PrimaryLink to="/order" color={TextColors["textInverted"]}>
+            <FaShoppingBasket size={20}/>
+            <h2>My orders </h2>
+          </PrimaryLink> 
           <PrimaryLink to="/me" color={TextColors["textInverted"]}>
             <RiAccountPinCircleLine size={20}/>
             <h2>Account</h2>
@@ -88,12 +92,12 @@ const Navbar = observer(() => {
               {
                 localStorage.getItem("role") === "SELLER" 
                       ?  
-                <PrimaryLink to="/list" color={TextColors["textInverted"]}>
+                <PrimaryLink to="/list" color={TextColors["textInverted"]} onClick={ToggleExtendedMenu}>
                   <FaShopify size={20}/>
                   <h2>Create new listing</h2>
                 </PrimaryLink> 
                       :
-                <PrimaryLink to="/sell" color={TextColors["textInverted"]}>
+                <PrimaryLink to="/sell" color={TextColors["textInverted"]} onClick={ToggleExtendedMenu}>
                   <FaShopify size={20}/>
                   <h2>Start selling </h2>
                 </PrimaryLink>

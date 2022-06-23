@@ -97,6 +97,7 @@ public class Listing {
         this.store = store;
     }
 
+    @JsonProperty(value = "feedbacks")
     public List<Feedback> getFeedbacks() {
         return feedbacks;
     }

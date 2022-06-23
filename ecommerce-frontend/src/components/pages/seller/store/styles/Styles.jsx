@@ -18,6 +18,11 @@ export const MeSection = styled.div`
     align-items: center;
     gap: 10px;
     width: 30%;
+
+    @media screen and (max-width: 667px) {
+        width: 90%;
+        padding: 30px;
+    }
 `
 
 export const Avatar = styled.img`
@@ -57,6 +62,7 @@ export const HelperText = styled.p`
 
 export const MainSection = styled.section`
     margin-top: 50px;
+    padding: 20px 0;
     display: flex;
     justify-content: center;
     gap: 20px;
