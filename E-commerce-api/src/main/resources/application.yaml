@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://ecommercedb.c0lrqwuyarga.eu-west-3.rds.amazonaws.com:3306/E_COMMERCE?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/E_COMMERCE?createDatabaseIfNotExist=true
     username: root
-    password: nassardev
+    password: 27701
   jpa:
     hibernate.ddl-auto: update
     generate-ddl: true
