@@ -39,7 +39,7 @@ public class Listing {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Category category;
     
-    @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "listing")
     @JsonProperty(value = "feedbacks")
     private List<Feedback> feedbacks;
     
