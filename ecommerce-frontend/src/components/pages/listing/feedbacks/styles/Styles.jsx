@@ -34,7 +34,7 @@ export const User = styled.p`
 `
 
 export const FeedbackContent = styled.p`
-    
+    font-size: 12px;   
 `
 
 export const Heading = styled.h2`

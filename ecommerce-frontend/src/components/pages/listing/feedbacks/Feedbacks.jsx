@@ -3,6 +3,7 @@ import { FeedbacksWrapper, CentredBox, FeedbacksList,
  } from "./styles/Styles";
 
 const Feedbacks = ({ feedbacks }) => {
+    console.log("feedbacks: " + feedbacks)
   return (
     <Wrapper>
         <FeedbacksWrapper>
@@ -12,13 +13,10 @@ const Feedbacks = ({ feedbacks }) => {
                 {
                     //TODO: complete fetching feeedbacks for each listing
                     feedbacks.map(feedback =>(
-                        <FeedBackItem>
-                            <User>Name</User>
+                        <FeedBackItem key={ feedback?.id }>
+                            <User>{ feedback?.content }</User>
                             <FeedbackContent>
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                                Ipsam pariatur dicta, iusto reprehenderit similique ex quisquam! 
-                                Assumenda, debitis atque obcaecati quasi consequuntur vitae,
-                                quae dolore ratione explicabo pariatur error ullam!
+                                { feedback?.date_created }
                             </FeedbackContent>
                         </FeedBackItem> 
                     ))

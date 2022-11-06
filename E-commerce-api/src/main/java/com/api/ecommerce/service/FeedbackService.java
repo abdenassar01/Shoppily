@@ -6,7 +6,7 @@ import com.api.ecommerce.model.User;
 import com.api.ecommerce.repository.FeedbackRepository;
 import com.api.ecommerce.repository.ListingRepository;
 import com.api.ecommerce.repository.UserRepository;
-import org.jetbrains.annotations.NotNull;
+// import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,59 +21,60 @@ import java.util.Optional;
 
 @Service
 public class FeedbackService {
-    
+
     private final FeedbackRepository repository;
     private final UserRepository userRepository;
     private final ListingRepository listingRepository;
-    
+
     @Autowired
-    public FeedbackService(FeedbackRepository repository, UserRepository userRepository, ListingRepository listingRepository) {
+    public FeedbackService(FeedbackRepository repository, UserRepository userRepository,
+            ListingRepository listingRepository) {
         this.repository = repository;
         this.userRepository = userRepository;
         this.listingRepository = listingRepository;
     }
-    
-    public Feedback createFeedback(@NotNull Feedback feedback){
+
+    public Feedback createFeedback(Feedback feedback) {
         Feedback newFeedback = new Feedback();
         newFeedback.setDateCreated(new Date());
         newFeedback.setContent(feedback.getContent());
-        newFeedback.setUser(userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
+        newFeedback.setUser(
+                userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
         newFeedback.setListing(Optional.ofNullable(feedback.getListing()));
         return repository.save(newFeedback);
     }
-    
-    public boolean deleteFeedback(@NotNull Feedback feedback){
-        if (repository.findById(feedback.getId()).isPresent()){
+
+    public boolean deleteFeedback(Feedback feedback) {
+        if (repository.findById(feedback.getId()).isPresent()) {
             repository.delete(feedback);
             return true;
         }
-            return false;
+        return false;
     }
-    
-    public boolean deleteById(Long id){
-        if (repository.findById(id).isPresent()){
+
+    public boolean deleteById(Long id) {
+        if (repository.findById(id).isPresent()) {
             repository.deleteById(id);
             return true;
         }
         return false;
     }
-    
-    public Feedback updateFeedback(Long id, Feedback newFeedback){
+
+    public Feedback updateFeedback(Long id, Feedback newFeedback) {
         repository.deleteById(id);
-        return createFeedback(newFeedback); 
+        return createFeedback(newFeedback);
     }
-    
-    public List<Feedback> getListingFeedBack(Long id){
+
+    public List<Feedback> getListingFeedBack(Long id) {
         Listing lst = listingRepository.getById(id);
         return repository.findAllByListing(lst);
     }
-    
-    public Feedback getFeedbackById(Long id){
+
+    public Feedback getFeedbackById(Long id) {
         return repository
                 .findById(id)
-                .orElseThrow( 
+                .orElseThrow(
                         () -> new IllegalStateException(
-                                String.format("there is no feedback with the specified id: " + id))
-                );
+                                String.format("there is no feedback with the specified id: " + id)));
     }
 }

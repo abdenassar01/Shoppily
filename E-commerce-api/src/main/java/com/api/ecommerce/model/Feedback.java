@@ -78,8 +78,8 @@ public class Feedback {
         this.dateCreated = dateCreated;
     }
 
-    @JsonIdentityReference(alwaysAsId = true)
-    @JsonProperty("user_id")
+//    @JsonIdentityReference(alwaysAsId = true)
+    @JsonProperty("user")
     public User getUser() {
         return user;
     }
