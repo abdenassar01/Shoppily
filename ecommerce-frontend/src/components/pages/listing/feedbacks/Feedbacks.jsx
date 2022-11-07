@@ -1,5 +1,5 @@
 import { FeedbacksWrapper, CentredBox, FeedbacksList,
-    FeedBackItem, User, FeedbackContent, Heading, Wrapper
+    FeedBackItem, User, FeedbackContent, Heading, Wrapper, DateCreated
  } from "./styles/Styles";
 
 const Feedbacks = ({ feedbacks }) => {
@@ -10,16 +10,13 @@ const Feedbacks = ({ feedbacks }) => {
             <CentredBox> 
                 <FeedbacksList>
                 {
-                    //TODO: complete fetching feeedbacks for each listing
                     feedbacks.map(feedback =>(
-                        <FeedBackItem>
-                            <User>Name</User>
+                        <FeedBackItem key={ feedback?.id }>
+                            <User>{ feedback?.user.firstname  + " " + feedback?.user.lastname }</User>
                             <FeedbackContent>
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                                Ipsam pariatur dicta, iusto reprehenderit similique ex quisquam! 
-                                Assumenda, debitis atque obcaecati quasi consequuntur vitae,
-                                quae dolore ratione explicabo pariatur error ullam!
+                                { feedback?.content }
                             </FeedbackContent>
+                            <DateCreated>{ new Date(feedback?.date_created).toLocaleDateString() }</DateCreated>
                         </FeedBackItem> 
                     ))
                 }        

@@ -29,16 +29,21 @@ export const FeedBackItem = styled.li`
 
 export const User = styled.p`
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin-bottom: 5px; 
 `
 
 export const FeedbackContent = styled.p`
-    
+    font-size: .9rem;   
 `
 
 export const Heading = styled.h2`
     font-size: 1.7rem;
     font-weight: 700;
     color: ${ props => props.theme.main };
+`
+
+export const DateCreated = styled.p`
+    text-align: right;
+    font-size: .7rem;
 `

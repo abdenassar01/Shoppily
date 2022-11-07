@@ -7,7 +7,7 @@ import com.api.ecommerce.model.Store;
 import com.api.ecommerce.repository.ListingRepository;
 import com.api.ecommerce.repository.ProductRepository;
 import com.api.ecommerce.repository.StoreRepository;
-import org.jetbrains.annotations.NotNull;
+// import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,10 +25,12 @@ public class ListingService {
 
     private final ListingRepository repository;
     private final StoreRepository storeRepository;
-    private final CategoryService categoryService; 
+    private final CategoryService categoryService;
     private final ProductRepository productRepository;
+
     @Autowired
-    public ListingService(ListingRepository repository, StoreRepository storeRepository, CategoryService categoryService, ProductRepository productRepository) {
+    public ListingService(ListingRepository repository, StoreRepository storeRepository,
+            CategoryService categoryService, ProductRepository productRepository) {
         this.repository = repository;
         this.storeRepository = storeRepository;
         this.categoryService = categoryService;
@@ -37,23 +39,22 @@ public class ListingService {
 
     public Listing getListingById(Long id) {
         return repository.findById(id).orElseThrow(
-                () -> new IllegalStateException("there is no listing with the specified id: " + id)
-        );
+                () -> new IllegalStateException("there is no listing with the specified id: " + id));
     }
 
     public Page<Listing> getPageOfListingByTitle(String title) {
         Pageable pageable = PageRequest.of(0, 10, Sort.by("title"));
         return repository.searchAllByTitle(pageable, title);
     }
-    
-    public Listing addListing(@NotNull Listing listing) {
+
+    public Listing addListing(Listing listing) {
         ArrayList<Product> products = new ArrayList<>();
-        
-        for(Product p : listing.getProducts() ) {
+
+        for (Product p : listing.getProducts()) {
             productRepository.save(p);
             products.add(productRepository.getById(p.getId()));
         }
-        
+
         Listing lst = new Listing();
         lst.setDiscription(listing.getDiscription());
         lst.setRating(listing.getRating());
@@ -61,23 +62,22 @@ public class ListingService {
         lst.setStore(
                 storeRepository
                         .getById(
-                                listing.getStore().getId()
-                        ));
+                                listing.getStore().getId()));
         lst.setTitle(listing.getTitle());
         lst.setCategory(listing.getCategory());
         lst.setFeedbacks(listing.getFeedbacks());
         lst.setProducts(products);
-        
+
         return repository.save(lst);
     }
-    
-    public Page<Listing> getListingByCategory(Long categoryId){
+
+    public Page<Listing> getListingByCategory(Long categoryId) {
         Category category = categoryService.getCategoryById(categoryId);
         Pageable page = PageRequest.of(0, 10);
         return repository.findAllByCategory(page, category);
-    } 
-    
-    public List<Listing> getListOfListingByCategory(Long categoryId){
+    }
+
+    public List<Listing> getListOfListingByCategory(Long categoryId) {
         Category category = categoryService.getCategoryById(categoryId);
         return repository.findAllByCategory(category);
     }
@@ -85,8 +85,7 @@ public class ListingService {
     public Listing updateListing(Long id, Listing listing) {
         repository.delete(
                 repository.findById(id).orElseThrow(
-                        () -> new IllegalStateException("there is no listing with the specified id: " + id))
-        );
+                        () -> new IllegalStateException("there is no listing with the specified id: " + id)));
         return addListing(listing);
     }
 
@@ -97,31 +96,29 @@ public class ListingService {
 
     public Listing deleteListing(Long id) {
         Listing lst = repository.findById(id).orElseThrow(
-                () -> new IllegalStateException("there is no listing with the specified id: " + id)
-        );
+                () -> new IllegalStateException("there is no listing with the specified id: " + id));
         repository.deleteById(id);
         return lst;
     }
 
     public Page<Listing> getListingByStore(Long storeId) {
         Store store = storeRepository.getById(storeId);
-        
-        Page<Listing> listings =  repository.findAllByStore(
-                PageRequest.of(0, 10), 
-                store
-        );
+
+        Page<Listing> listings = repository.findAllByStore(
+                PageRequest.of(0, 10),
+                store);
         return listings;
     }
 
     public Listing getListingByStore(Long storeId, Long listingId) {
         Store store = storeRepository.getById(storeId);
-//        List<Listing> listings = repository.findAllByStore(
-//                PageRequest.of(1, 10, Sort.by("title")),
-//                store
-//        ).stream()
-//                .filter((listing) -> Objects.equals(listing.getId(), listingId))
-//                .collect(Collectors.toList());
-//        return listings.get(0);
+        // List<Listing> listings = repository.findAllByStore(
+        // PageRequest.of(1, 10, Sort.by("title")),
+        // store
+        // ).stream()
+        // .filter((listing) -> Objects.equals(listing.getId(), listingId))
+        // .collect(Collectors.toList());
+        // return listings.get(0);
         return repository.getAllByIdAndStore(listingId, store);
     }
 
